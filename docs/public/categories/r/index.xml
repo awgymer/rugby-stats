@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>R on Rugby Analysis</title>
+    <link>/categories/r/</link>
+    <description>Recent content in R on Rugby Analysis</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <copyright>Copyright (c) 2019 - , Arthur Gymer; all rights reserved.</copyright>
+    <lastBuildDate>Tue, 10 Sep 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/categories/r/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>World Cup Squads</title>
+      <link>/post/world_cup_squads/</link>
+      <pubDate>Tue, 10 Sep 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/world_cup_squads/</guid>
+      <description>A Brief History It took 116 years from the first test match but in 1987 the inaugural Rugby World Cup kicked off in the storied Eden Park; New Zealand dismantling Italy in front of 20,000 fans. Making up the invitation-only field were 16 teams of totally amateur players, almost all of whom played their club rugby on home soil.
+summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.</description>
+    </item>
+    
+  </channel>
+</rss>

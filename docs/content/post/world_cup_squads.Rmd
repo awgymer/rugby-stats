@@ -1,0 +1,71 @@
+---
+title: "World Cup Squads"
+author: "Arthur Gymer"
+date: "2019-09-10"
+categories: ["Rugby", "World Cup", "R"]
+tags: ["World Cup"]
+output: html_document
+---
+
+```{r setup, include=FALSE}
+data_root <- '../../../data/'
+knitr::opts_knit$set(root.dir = data_root)
+knitr::opts_chunk$set(echo = TRUE)
+library(data.table)
+library(kableExtra)
+```
+
+## A (very) Brief History
+
+It took 116 years from the first test match but in 1987 the inaugural Rugby World Cup kicked off in the storied Eden Park; New Zealand dismantling Italy in front of 20,000 fans. Making up the invitation-only field were 16 teams of totally amateur players, almost all of whom played their club rugby on home soil.
+
+In the intervening 32 years rugby has seen massive and rapid change; the advent of professionalism in 1995 sending shockwaves through the sport, from which some would argue it has never recovered.
+
+But the genie is out of the bottle and there is no looking back. With more money flowing into the game year-on-year, and players seemingly ever-increasing in size, the demands of the game have changed.
+
+So, inspired by [this reddit post](https://www.reddit.com/r/rugbyunion/comments/d0268r/ruwc_2019_teams_with_average_age_and_total_caps/?ref=share&ref_source=link) I decided to take a look at every squad ever sent to the World Cup and how they have changed in 3 decades.
+
+
+## The Data
+
+The bulk of the squad data were scraped from Wikipedia pages for Rugby World Cup Squads found at `https://en.wikipedia.org/wiki/YYYY_Rugby_World_Cup_squads`. 
+
+Some missing caps data and all test match data were scraped from ESPN Scrum's [Statsguru](http://stats.espnscrum.com/statsguru/rugby/stats/index.html)
+
+All scraping was done in `python` using `pandas` and `beautifulsoup`.
+
+```{r "data-prep", echo = F}
+sqds <- fread('wc_squads_processed.csv')
+tests <- fread('all_matches_83_19.csv')
+
+sqds[flag == 'Georgia (country)', flag := 'Georgia']
+sqds[club == '', club := 'unknown']
+sqds[club == 'Unattached', club := 'none']
+
+tier_1 <- c(
+  "Argentina", "Australia", "England", "France", "Ireland", "Italy",
+  "New Zealand", "Scotland", "South Africa", "Wales"
+)
+tier_2 <- c(
+  "Canada", "Fiji", "Georgia", "Japan", "Namibia", "Portugal",
+  "Romania", "Russia", "Samoa", "Spain", "Tonga", "United States", "Uruguay"
+)
+
+tests[team %in% tier_1, tier := 1]
+tests[team %in% tier_2, tier := 2]
+tests[is.na(tier), tier := 3]
+
+```
+
+## Including Plots
+
+
+```{r "overview", echo=FALSE}
+played <- table(unique(sqds[, .(country, year)]))
+played <- played[order(-rowSums(played)),]
+played[,] <- cell_spec(played[,], "html", background = ifelse(played[,] == 1, "#00a503", "#BBBBBB"), escape=F, background_as_tile = F)
+kable(played , format= 'html') %>%
+  kable_styling(full_width = T)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
