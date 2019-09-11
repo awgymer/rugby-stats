@@ -41,8 +41,12 @@ All scraping was done in `python` using `pandas` and `beautifulsoup`.
 sqds <- fread('wc_squads_processed.csv')
 tests <- fread('test_scores.csv')
 cap_crrct <- fread('wc_cap_corrections.csv')
+club_crrct <- fread('club_corrections.csv')
 sqds[cap_crrct, caps:=i.caps, on=c('year', 'player', 'country')]
+sqds[club_crrct, flag:=i.Flag, on=c('club')]
+sqds[flag == '', flag := ifelse(club == 'none', 'No Club', 'Club Unknown')]
 rm(cap_crrct)
+rm(club_crrct)
 
 #Limit to 10 years prior to RWC
 tests <- tests[year >= 1977,]
@@ -242,8 +246,8 @@ So with that caveat in mind, let's take a look at the proportion of players plyi
 ```{r "overseas-percs", fig.cap = "Where Do RWC Players Make Their Money?"}
 percs <- melt(sqds[,.(
                 homegrown=sum(flag==country)/.N,
-                overseas=(.N - sum(flag==country, flag==''))/.N,
-                unknown=sum(flag=='')/.N), 
+                overseas=(.N - sum(flag==country) - sum(flag %in% c('Club Unknown', 'No Club')))/.N,
+                unknown=sum(flag=='Club Unknown')/.N), 
               by='year'], 
 id.var = 'year', value.name = 'perc', variable.name = 'status')
 
@@ -264,15 +268,15 @@ overseas_percs <- (
 suppressWarnings(overseas_percs)
 ```
 
-It is quite clear then, from Figure \@ref(fig:overseas-percs), that the percentage of players playing their club rugby abroad has greatly increased. The increase is quite evident between 1995-'99 when the game went "open", and although it appears that the number of overseas players in squads may be falling the number of unknowns has increased and makes it hard to draw any significant conclusions about recent union directives, such as the "Giteau Rule" implemented by Australia, which keep all but the mos senior members of squads from representing their home country whilst playing abroad the rest of the time. 
+It is quite clear then, from Figure \@ref(fig:overseas-percs), that the percentage of players playing their club rugby abroad has greatly increased. The increase is quite evident between 1995-'99 when the game went "open", although it appears that the number of overseas players in squads may be falling - possibly a result of recent union directives, such as the "Giteau Rule" implemented by Australia, which keep all but the most senior members of squads from representing their home country whilst playing abroad the rest of the time. 
 
 The story is not yet over though, accusations of poaching abound, with the big-money leagues of France particularly maligned. Can the World Cup squad data add any weight to the emotion?
 
 ```{r "poaching-percs", fig.cap = "Poaching? Moi? Non."}
 poach_percs <- melt(sqds[,.(
                 homegrown=sum(flag==country)/.N, 
-                overseas=(.N - sum(flag==country, flag==''))/.N,
-                unknown=sum(flag=='')/.N),
+                overseas=(.N - sum(flag==country) - sum(flag %in% c('Club Unknown', 'No Club')))/.N,
+                unknown=sum(flag=='Club Unknown')/.N),
               by='year,tier'], 
 id.vars = c('year', 'tier'), value.name = 'perc', variable.name = 'status')
 
@@ -295,18 +299,18 @@ poach_plot <- (
 suppressWarnings(poach_plot)
 ```
 
-So Figure \@ref(fig:poaching-percs) would make it look like the leagues in the Tier 1 nations have been increasingly luring away the Tier 2 stars with bigger pay packets; again expounding on this discussion is for another day. 
+So Figure \@ref(fig:poaching-percs) would make it look like the leagues in the Tier 1 nations have been increasingly luring away the Tier 2 stars with bigger pay packets; again expounding on the merits or otherwise of this is a discussion for another day. 
 
-It is also clear that data for Tier 3 players is hard to come by, or at the very least, those clubs are not big enough to merit a Wikipedia entry!
+It is also clear that data for Tier 3 players is harder to come by, or at the very least, those clubs are not big enough to merit a Wikipedia entry!
 
 So where are these overseas players making their money?
 
 ```{r "sankey"}
 all_nats <- unique(c(sqds[,flag], sqds[,country]))
 all_nats <- all_nats[order(all_nats)]
-mut_cols <- c('country', 'flag')
 
 plot_club_country_flow <- function(yr){
+  mut_cols <- c('country', 'flag')
   club_country <- sqds[year==yr, .N, by='country,flag']
   club_country[, (mut_cols) := lapply(.SD, factor, levels=all_nats), .SDcols=mut_cols]
   club_country[,cntry_lvl := as.numeric(country)]
