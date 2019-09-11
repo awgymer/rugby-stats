@@ -280,6 +280,10 @@ all_squads = all_squads[all_squads.country != 'none']
 
 all_squads['dob'] = all_squads['dob'].str.split('(', expand=True)[0].str.strip()
 all_squads['dob_dt'] = pd.to_datetime(all_squads['dob'], format="%d %B %Y", errors='coerce')
+mask = all_squads.dob_dt.isnull()
+all_squads.loc[mask, 'dob_dt'] = pd.to_datetime(
+    all_squads[mask]['dob'], format='%B %d, %Y', errors='coerce'
+)
 all_squads['days_old'] = (all_squads['start_date'] - all_squads['dob_dt']).apply(lambda x: x.days)
 all_squads.replace(
     {
