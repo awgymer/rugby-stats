@@ -300,3 +300,32 @@ So Figure \@ref(fig:poaching-percs) would make it look like the leagues in the T
 It is also clear that data for Tier 3 players is hard to come by, or at the very least, those clubs are not big enough to merit a Wikipedia entry!
 
 So where are these overseas players making their money?
+
+```{r "sankey"}
+all_nats <- unique(c(sqds[,flag], sqds[,country]))
+all_nats <- all_nats[order(all_nats)]
+mut_cols <- c('country', 'flag')
+club_country <- sqds[, .N, by='country,flag']
+club_country[, (mut_cols) := lapply(.SD, factor, levels=all_nats), .SDcols=mut_cols]
+club_country[,cntry_lvl := as.numeric(country)]
+club_country[,club_lvl := as.numeric(flag)+length(levels(flag))]
+node_labs <- c(all_nats, all_nats)
+
+plot_ly(
+  type = 'sankey',
+  valueformat = 'd',
+  arrangement = 'fixed',
+  node = list(
+    pad = 10, 
+    label = node_labs, 
+    thickness = 50,
+    hovertemplate = "<b>%{label}</b><br><b>Leagues Fed: %{sourceLinks.length:,}</b><br><b>Nations in League: %{targetLinks.length:,}</b>"
+  ),
+  link = list(
+    value = club_country[flag != '', N], 
+    source = club_country[flag != '', cntry_lvl] -1, 
+    target = club_country[flag != '', club_lvl] -1,
+    hovertemplate = "<b>Country:</b> %{source.label}<br><b>Club League:</b> %{target.label}"
+  )
+)
+```
