@@ -1,0 +1,1323 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Arthur Gymer" />
+
+<meta name="date" content="2019-09-10" />
+
+<title>World Cup Squads</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<script src="site_libs/htmlwidgets-1.3/htmlwidgets.js"></script>
+<script src="site_libs/plotly-binding-4.9.0/plotly.js"></script>
+<script src="site_libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="site_libs/crosstalk-1.0.0/css/crosstalk.css" rel="stylesheet" />
+<script src="site_libs/crosstalk-1.0.0/js/crosstalk.min.js"></script>
+<link href="site_libs/plotly-htmlwidgets-css-1.46.1/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="site_libs/plotly-main-1.46.1/plotly-latest.min.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Rugby Analysis</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">World Cup Squads</h1>
+<h4 class="author">Arthur Gymer</h4>
+<h4 class="date">2019-09-10</h4>
+
+</div>
+
+
+<div id="a-very-brief-history" class="section level2">
+<h2>A (very) Brief History</h2>
+<p>It took 116 years from the first test match but in 1987 the inaugural Rugby World Cup kicked off in the storied Eden Park; New Zealand dismantling Italy in front of 20,000 fans. Making up the invitation-only field were 16 teams of totally amateur players, almost all of whom played their club rugby on home soil.</p>
+<p>In the intervening 32 years rugby has seen massive and rapid change; the advent of professionalism in 1995 sending shockwaves through the sport, from which some would argue it has never recovered.</p>
+<p>But the genie is out of the bottle and there is no looking back. With more money flowing into the game year-on-year, and players seemingly ever-increasing in size, the demands of the game have changed.</p>
+<p>So, inspired by <a href="https://www.reddit.com/r/rugbyunion/comments/d0268r/ruwc_2019_teams_with_average_age_and_total_caps/?ref=share&amp;ref_source=link">this reddit post</a> I decided to take a look at every squad ever sent to the World Cup and how they have changed in 3 decades.</p>
+</div>
+<div id="the-data" class="section level2">
+<h2>The Data</h2>
+<p>The bulk of the squad data were scraped from Wikipedia pages for Rugby World Cup Squads found at <code>https://en.wikipedia.org/wiki/YYYY_Rugby_World_Cup_squads</code>.</p>
+<p>Some missing caps data (Namibia ’07 &amp; Scotland ’07) and all test match data were scraped from ESPN Scrum’s <a href="http://stats.espnscrum.com/statsguru/rugby/stats/index.html">Statsguru</a></p>
+<p>All scraping was done in <code>python</code> using <code>pandas</code> and <code>beautifulsoup</code>.</p>
+<p>There are still 63 entries without birthdays, almost all (50) from the 1987 competition. They are excluded entirely from any age analysis.</p>
+</div>
+<div id="the-teams" class="section level2">
+<h2>The Teams</h2>
+<p>Since that first game 25 nations have competed in at least 1 World Cup. 11 of those teams have turned out for every iteration; South Africa the biggest name missing from the list, with anti-apartheid sporting boycotts keeping them away from the ’87 and ’91 events. Samoa (or Western Samoa as they were then) can feel hard-done by to not make the cut, having been snubbed from the invite-only 1987 showpiece.</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Country
+</th>
+<th style="text-align:left;">
+1987
+</th>
+<th style="text-align:left;">
+1991
+</th>
+<th style="text-align:left;">
+1995
+</th>
+<th style="text-align:left;">
+1999
+</th>
+<th style="text-align:left;">
+2003
+</th>
+<th style="text-align:left;">
+2007
+</th>
+<th style="text-align:left;">
+2011
+</th>
+<th style="text-align:left;">
+2015
+</th>
+<th style="text-align:left;">
+2019
+</th>
+<th style="text-align:right;">
+Total
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;background-color: #95c292 !important;">
+Australia
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:right;background-color: #95c292 !important;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #95c292 !important;">
+England
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:right;background-color: #95c292 !important;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #95c292 !important;">
+Wales
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:right;background-color: #95c292 !important;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #95c292 !important;">
+Ireland
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:right;background-color: #95c292 !important;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #95c292 !important;">
+New Zealand
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:right;background-color: #95c292 !important;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #95c292 !important;">
+Italy
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:right;background-color: #95c292 !important;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #95c292 !important;">
+Argentina
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:right;background-color: #95c292 !important;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #95c292 !important;">
+France
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:right;background-color: #95c292 !important;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #95c292 !important;">
+Scotland
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:right;background-color: #95c292 !important;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #9295c2 !important;">
+Japan
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:right;background-color: #9295c2 !important;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #9295c2 !important;">
+Canada
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:right;background-color: #9295c2 !important;">
+9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #9295c2 !important;">
+Romania
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:right;background-color: #9295c2 !important;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #9295c2 !important;">
+United States
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:right;background-color: #9295c2 !important;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #9295c2 !important;">
+Fiji
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:right;background-color: #9295c2 !important;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #9295c2 !important;">
+Tonga
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:right;background-color: #9295c2 !important;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #9295c2 !important;">
+Samoa
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:right;background-color: #9295c2 !important;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #95c292 !important;">
+South Africa
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #95c292 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:right;background-color: #95c292 !important;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #9295c2 !important;">
+Namibia
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:right;background-color: #9295c2 !important;">
+6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #9295c2 !important;">
+Georgia
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:right;background-color: #9295c2 !important;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #9295c2 !important;">
+Uruguay
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:right;background-color: #9295c2 !important;">
+4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #c29295 !important;">
+Zimbabwe
+</td>
+<td style="text-align:left;background-color: #c29295 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #c29295 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #c29295 !important;">
+</td>
+<td style="text-align:left;background-color: #c29295 !important;">
+</td>
+<td style="text-align:left;background-color: #c29295 !important;">
+</td>
+<td style="text-align:left;background-color: #c29295 !important;">
+</td>
+<td style="text-align:left;background-color: #c29295 !important;">
+</td>
+<td style="text-align:left;background-color: #c29295 !important;">
+</td>
+<td style="text-align:left;background-color: #c29295 !important;">
+</td>
+<td style="text-align:right;background-color: #c29295 !important;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #9295c2 !important;">
+Russia
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:right;background-color: #9295c2 !important;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #c29295 !important;">
+Ivory Coast
+</td>
+<td style="text-align:left;background-color: #c29295 !important;">
+</td>
+<td style="text-align:left;background-color: #c29295 !important;">
+</td>
+<td style="text-align:left;background-color: #c29295 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #c29295 !important;">
+</td>
+<td style="text-align:left;background-color: #c29295 !important;">
+</td>
+<td style="text-align:left;background-color: #c29295 !important;">
+</td>
+<td style="text-align:left;background-color: #c29295 !important;">
+</td>
+<td style="text-align:left;background-color: #c29295 !important;">
+</td>
+<td style="text-align:left;background-color: #c29295 !important;">
+</td>
+<td style="text-align:right;background-color: #c29295 !important;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #9295c2 !important;">
+Spain
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:right;background-color: #9295c2 !important;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #9295c2 !important;">
+Portugal
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+<span class="glyphicon glyphicon-ok"></span>
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:left;background-color: #9295c2 !important;">
+</td>
+<td style="text-align:right;background-color: #9295c2 !important;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="background: #95c292">
+Tier 1
+</th>
+<th style="background: #9295c2">
+Tier 2
+</th>
+<th style="background: #c29295">
+Tier 3
+</th>
+</tr>
+</thead>
+</table>
+<p>Whilst there was representation from Zimbabwe and Ivory Coast at the early editions, it’s notable that since the dawn of professionalism - even with the field growing from 16 to 20 teams - no Tier 3 team has taken part.</p>
+</div>
+<div id="caps" class="section level2">
+<h2>Caps</h2>
+<p>Since we were inspired by a simple look at the average number of caps and age, let’s start there.</p>
+<p>Figure @ref(fig:cap-box) shows that there is a clear trend towards players with more caps in World Cup squads. The median caps rose steadily from 1987 before starting to level off between 2015-19, whilst there was a noticeable bump in the upper bound of the interquartile range from 2007. This suggests that even though the outliers, the McCaw’s and O’Driscoll’s, are reaching cap numbers nearly double the highest in 1987, they are not the only reason for the average increase; the average player is also becoming more capped.</p>
+<div class="figure" style="text-align: center">
+<img src="wc-squads_files/figure-html/cap-box-1.png" alt="Caps per World Cup" width="672" />
+<p class="caption">
+Caps per World Cup
+</p>
+</div>
+<p>So what is the cause of this increase? A pressing issue in World Rugby lately has been player welfare, with many leading players pushing for fewer games amid ever-more crowded international and domestic calendars. Is the average World Cup attendee more capped simply because there are more tests played in 2019?</p>
+<p>Figure @ref(fig:number-tests) shows the number of tests per year played by every nation from the decade before the inaugural World Cup until the end of 2018. Points are sized by the number of teams playing that many tests and have been jittered to make it easier to distinguish.</p>
+<div class="figure" style="text-align: center">
+<img src="wc-squads_files/figure-html/number-tests-1.png" alt="Tests Played by Nation" width="672" />
+<p class="caption">
+Tests Played by Nation
+</p>
+</div>
+<p>It is very clear that there has been a marked incread in the number of Tier 1 test matches played per country. There is also a less pronounced increase in the number contested by Tier 2 teams, with litte change in the overall average or the average Tier 3 number. The overall average is probably kept suppressed by the fact there are so many more Tier 3 nations than Tier 1/2 (Figure @ref(fig:n-tiers)).</p>
+<div class="figure" style="text-align: center">
+<img src="wc-squads_files/figure-html/n-tiers-1.png" alt="Nations Playing Tests" width="672" />
+<p class="caption">
+Nations Playing Tests
+</p>
+</div>
+<p>What Figure @ref(fig:number-tests) also shows us is that there is clearly a growing divide between the haves and the have-nots. The small-circle of 23 Tier 1 and 2 nations, who have all competed in at least 1 World Cup are the ones increasing the number of lucrative and exposure-granting test-matches they play; further digression on this point is for another day however.</p>
+<p>Figure @ref(fig:cap-diffs) shows that when you compare the change in median caps available per World Cup cycle to the change in median caps per World Cup squad member there is reasonable correlation; <strong>the increase in caps per player can be attributed to the increase in available caps.</strong></p>
+<div class="figure" style="text-align: center">
+<img src="wc-squads_files/figure-html/cap-diffs-1.png" alt="Caps Available v Squad Caps at the RWC" width="672" />
+<p class="caption">
+Caps Available v Squad Caps at the RWC
+</p>
+</div>
+</div>
+<div id="age" class="section level2">
+<h2>Age</h2>
+<p>So there are more caps to be won, specifically for the regular World Cup contenders, which it seems largely explains the increasing average cap count of the squads but is there anything else to be gleaned from the data?</p>
+<div class="figure" style="text-align: center">
+<img src="wc-squads_files/figure-html/age-plot-1.png" alt="Ages at the RWC" width="672" />
+<p class="caption">
+Ages at the RWC
+</p>
+</div>
+<p>Although there is a slight increase in the average age of RWC squad members Figure @ref(fig:age-plot) shows that it is not significant in any way (points are jittered).</p>
+</div>
+<div id="clubs" class="section level2">
+<h2>Clubs</h2>
+<p>The Wikipedia datasets also contain information about which clubs each squad member is associated with. However a cursory inspection of this data shows that there is much cleaning required to reconcile subtle differences between the 952 different clubs listed; many clubs appear with different formats e.g. <code>RFC</code> v <code>R.F.C</code></p>
+<p>So with that caveat in mind, let’s take a look at the proportion of players plying their trade overseas at each World Cup.</p>
+<div class="figure" style="text-align: center">
+<img src="wc-squads_files/figure-html/overseas-percs-1.png" alt="Where Do RWC Players Make Their Money?" width="672" />
+<p class="caption">
+Where Do RWC Players Make Their Money?
+</p>
+</div>
+<p>It is quite clear then, from Figure @ref(fig:overseas-percs), that the percentage of players playing their club rugby abroad has greatly increased. The increase is quite evident between 1995-’99 when the game went “open”, although it appears that the number of overseas players in squads may be falling - possibly a result of recent union directives, such as the “Giteau Rule” implemented by Australia, which keep all but the most senior members of squads from representing their home country whilst playing abroad the rest of the time.</p>
+<p>The story is not yet over though, accusations of poaching abound, with the big-money leagues of France particularly maligned. Can the World Cup squad data add any weight to the emotion?</p>
+<div class="figure" style="text-align: center">
+<img src="wc-squads_files/figure-html/poaching-percs-1.png" alt="Poaching? Moi? Non." width="672" />
+<p class="caption">
+Poaching? Moi? Non.
+</p>
+</div>
+<p>So Figure @ref(fig:poaching-percs) would make it look like the leagues in the Tier 1 nations have been increasingly luring away the Tier 2 stars with bigger pay packets; again expounding on the merits or otherwise of this is a discussion for another day.</p>
+<p>It is also clear that data for Tier 3 players is harder to come by, or at the very least, those clubs are not big enough to merit a Wikipedia entry!</p>
+<p>So where are these overseas players making their money? (National team on the left, club league on the right)</p>
+<div align="center">
+<div id="htmlwidget-4347f4907150095ae870" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4347f4907150095ae870">{"x":{"visdat":{"163cfe350739":["function () ","plotlyVisDat"]},"cur_data":"163cfe350739","attrs":{"163cfe350739":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"sankey","visible":true,"valueformat":"d","arrangement":"fixed","link":{"value":[257,159,3,258,255,242,155,238,22,41,16,262,96,11,21,213,1,184,258,169,62,141,14,74,41,7,33,65,76,7,6,29,10,6,5,16,51,5,3,8,21,20,2,35,2,3,31,20,89,13,34,1,4,1,179,13,14,5,23,53,39,36,1,18,3,31,1,2,3,1,4,33,14,11,2,1,5,26,5,52,1,103,12,30,4,8,79,8,9,2,2,21,21,1,2,1,13,12,1,24,6,18,2,5,11,16,11,1,2,2,1,6,2,3,2,2,20,3,1,5,5,12,2,2,6,2,1,1,4,28,3,1,3,1,1,1,1,5,1,2,3,1,1,4,3,2,1,1,1,1,1,1,1,1,2,1],"source":[1,25,25,4,11,27,2,8,24,24,24,14,5,5,5,9,9,0,6,20,20,17,17,17,28,28,19,19,19,19,19,19,19,19,20,20,18,18,18,2,2,2,2,2,2,9,9,9,13,13,13,13,13,13,22,22,22,22,0,0,24,24,24,24,24,24,24,24,24,24,25,25,25,25,25,1,5,5,5,5,7,7,7,7,7,26,26,26,26,26,26,27,8,28,2,2,10,10,10,23,23,24,24,5,5,13,2,27,19,11,8,25,25,8,0,17,13,20,5,4,19,26,26,7,27,24,4,2,5,16,16,0,6,7,13,11,24,0,4,17,1,18,25,22,5,11,11,19,20,25,7,13,13,13,2,9],"target":[30,54,49,33,40,56,31,37,32,53,30,43,34,30,43,38,29,29,35,49,33,46,32,35,32,57,35,33,43,32,30,48,40,56,56,35,47,33,35,54,35,32,43,33,49,32,35,33,42,35,51,41,46,56,51,33,35,40,33,35,43,35,50,56,49,33,54,48,38,52,30,33,35,32,51,33,49,33,32,35,40,35,32,36,47,29,55,54,35,33,31,33,33,51,40,51,35,39,32,52,35,40,51,56,40,33,56,30,38,35,35,56,43,56,37,38,32,37,37,35,49,32,38,38,35,44,32,38,38,45,35,38,33,46,30,33,37,32,40,33,35,30,40,37,46,43,30,51,32,46,33,40,37,43,30,49],"hovertemplate":"<b>Country:<\/b> %{source.label}<br><b>Club League:<\/b> %{target.label}"},"node":{"pad":10,"label":["Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe","Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe"],"color":["rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)","rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)"],"thickness":50,"hovertemplate":"<b>%{label}<\/b><br><b>Leagues Fed: %{sourceLinks.length:,}<\/b><br><b>Nations in League: %{targetLinks.length:,}<\/b>"},"inherit":true},"163cfe350739.1":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"sankey","visible":false,"valueformat":"d","arrangement":"fixed","link":{"value":[27,27,1,27,26,31,24,27,17,8,1,25,27,1,1,26,1,27,27,24,1,22,3,2,22,2],"source":[1,25,25,4,11,27,2,8,24,24,24,14,5,5,5,9,9,0,6,20,20,17,17,17,28,28],"target":[30,54,49,33,40,56,31,37,32,53,30,43,34,30,43,38,29,29,35,49,33,46,32,35,32,57],"hovertemplate":"<b>Country:<\/b> %{source.label}<br><b>Club League:<\/b> %{target.label}"},"node":{"pad":10,"label":["Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe","Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe"],"color":["rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)","rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)"],"thickness":50,"hovertemplate":"<b>%{label}<\/b><br><b>Leagues Fed: %{sourceLinks.length:,}<\/b><br><b>Nations in League: %{targetLinks.length:,}<\/b>"},"inherit":true},"163cfe350739.2":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"sankey","visible":false,"valueformat":"d","arrangement":"fixed","link":{"value":[24,26,26,25,1,19,5,26,18,4,19,5,1,26,24,26,8,14,2,25,25,1,24,11,12,3],"source":[4,9,14,25,25,8,8,11,20,20,28,28,28,0,1,27,19,19,19,2,5,5,6,17,17,17],"target":[33,38,43,54,49,37,33,40,49,33,32,57,51,29,30,56,48,43,30,31,34,30,35,32,46,35],"hovertemplate":"<b>Country:<\/b> %{source.label}<br><b>Club League:<\/b> %{target.label}"},"node":{"pad":10,"label":["Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe","Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe"],"color":["rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)","rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)"],"thickness":50,"hovertemplate":"<b>%{label}<\/b><br><b>Leagues Fed: %{sourceLinks.length:,}<\/b><br><b>Nations in League: %{targetLinks.length:,}<\/b>"},"inherit":true},"163cfe350739.3":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"sankey","visible":false,"valueformat":"d","arrangement":"fixed","link":{"value":[27,24,1,1,22,4,29,30,26,31,18,9,23,3,26,26,26,27,13,12,1,17,7,1,5,12,10],"source":[1,2,2,2,17,17,22,0,4,9,19,19,8,8,11,14,27,6,10,10,10,20,20,20,24,24,24],"target":[30,31,40,51,46,35,51,29,33,38,43,48,37,33,40,43,56,35,35,39,32,49,33,35,30,53,43],"hovertemplate":"<b>Country:<\/b> %{source.label}<br><b>Club League:<\/b> %{target.label}"},"node":{"pad":10,"label":["Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe","Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe"],"color":["rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)","rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)"],"thickness":50,"hovertemplate":"<b>%{label}<\/b><br><b>Leagues Fed: %{sourceLinks.length:,}<\/b><br><b>Nations in League: %{targetLinks.length:,}<\/b>"},"inherit":true},"163cfe350739.4":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"sankey","visible":false,"valueformat":"d","arrangement":"fixed","link":{"value":[15,12,3,30,24,6,28,1,1,32,23,6,1,30,9,9,4,6,1,2,5,13,2,4,4,2,24,6,29,15,1,8,4,1,1,28,2,1,25,3,2,11,18,2,1,29,1,22,7,1,2,19,5,1,1,1,30,17,13],"source":[20,20,20,22,23,23,26,26,26,4,9,9,9,14,24,24,24,24,24,24,5,5,5,5,5,5,13,13,6,2,2,2,2,2,2,27,27,27,0,0,0,19,19,19,19,11,11,8,8,8,25,25,25,25,25,25,1,17,17],"target":[49,33,35,51,52,35,55,29,33,33,38,35,33,43,56,53,43,40,51,33,43,34,56,30,40,35,42,33,35,31,43,33,56,35,40,56,33,30,29,33,35,33,43,48,38,40,35,37,33,35,56,54,33,30,43,35,30,46,35],"hovertemplate":"<b>Country:<\/b> %{source.label}<br><b>Club League:<\/b> %{target.label}"},"node":{"pad":10,"label":["Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe","Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe"],"color":["rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)","rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)"],"thickness":50,"hovertemplate":"<b>%{label}<\/b><br><b>Leagues Fed: %{sourceLinks.length:,}<\/b><br><b>Nations in League: %{targetLinks.length:,}<\/b>"},"inherit":true},"163cfe350739.5":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"sankey","visible":false,"valueformat":"d","arrangement":"fixed","link":{"value":[29,28,1,2,13,14,2,1,15,15,2,19,3,7,1,30,18,10,1,1,10,9,2,1,4,1,2,2,23,2,4,1,29,1,30,1,29,1,16,1,4,6,2,2,1,12,3,13,1,2,16,10,2,30,28,1,1,25,4,1,15,3,7,3,2,2,11,4,2,1,4,2,3,1],"source":[1,8,8,8,0,0,0,0,17,17,17,13,13,13,13,6,20,20,20,20,5,5,5,5,5,5,5,5,25,25,25,25,11,11,4,4,22,22,19,19,19,19,19,19,26,26,26,26,26,7,7,7,7,14,27,27,27,9,9,9,2,2,2,2,2,24,24,24,24,24,24,24,24,24],"target":[30,37,56,33,35,29,33,37,35,46,38,32,33,42,51,35,49,33,37,35,34,43,30,56,40,37,33,35,54,32,33,56,40,35,33,35,51,33,43,35,40,33,48,49,29,32,35,55,38,38,35,32,36,43,56,35,33,38,35,33,32,56,33,35,31,33,43,30,44,38,40,56,53,35],"hovertemplate":"<b>Country:<\/b> %{source.label}<br><b>Club League:<\/b> %{target.label}"},"node":{"pad":10,"label":["Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe","Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe"],"color":["rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)","rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)"],"thickness":50,"hovertemplate":"<b>%{label}<\/b><br><b>Leagues Fed: %{sourceLinks.length:,}<\/b><br><b>Nations in League: %{targetLinks.length:,}<\/b>"},"inherit":true},"163cfe350739.6":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"sankey","visible":false,"valueformat":"d","arrangement":"fixed","link":{"value":[30,1,1,14,1,1,8,4,2,2,1,2,27,3,4,10,3,7,2,4,1,24,3,3,1,30,17,10,1,3,9,1,10,3,5,2,31,27,3,14,4,12,30,28,3,18,12,15,8,4,2,1,16,7,6,1,1,3,27,28,1,1,1,27,1,2,12,15,1,1,1],"source":[4,4,4,19,19,19,19,19,19,19,19,22,22,22,24,24,24,24,24,24,24,25,25,25,25,1,2,2,2,2,5,5,5,5,5,5,11,27,27,9,9,9,14,16,16,17,17,20,20,20,20,20,0,0,0,0,0,6,6,7,7,7,7,8,8,8,13,13,13,13,13],"target":[33,35,32,33,56,43,35,48,49,40,32,33,51,35,33,35,56,53,43,40,51,54,33,35,56,30,31,35,38,33,34,43,35,40,33,38,40,56,33,38,33,35,43,45,35,35,46,49,33,35,56,37,35,29,33,38,37,33,35,35,36,46,47,37,56,33,51,42,33,35,30],"hovertemplate":"<b>Country:<\/b> %{source.label}<br><b>Club League:<\/b> %{target.label}"},"node":{"pad":10,"label":["Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe","Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe"],"color":["rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)","rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)"],"thickness":50,"hovertemplate":"<b>%{label}<\/b><br><b>Leagues Fed: %{sourceLinks.length:,}<\/b><br><b>Nations in League: %{targetLinks.length:,}<\/b>"},"inherit":true},"163cfe350739.7":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"sankey","visible":false,"valueformat":"d","arrangement":"fixed","link":{"value":[18,2,8,1,1,31,29,1,31,5,6,9,3,1,3,1,1,1,18,5,2,5,26,3,1,7,23,9,20,1,15,9,3,2,1,29,1,27,2,1,24,1,5,4,22,1,2,8,9,5,5,1,1,1,9,4,6,2,1,5,1,1,1,1,12,7,4,4,2,7,4,14,2,1,1,1,21,2,3,2,3,25,2,3],"source":[2,2,2,2,2,6,11,11,14,24,24,24,24,24,24,24,24,24,0,0,0,0,4,4,4,7,7,17,17,17,20,20,20,20,20,1,1,8,8,8,9,9,9,18,18,18,18,25,25,25,25,25,25,25,5,5,5,5,5,5,5,5,5,13,13,13,13,13,13,19,19,19,19,19,19,19,22,22,22,22,22,27,27,27],"target":[31,35,33,56,49,35,40,33,43,33,43,35,56,38,40,53,30,37,35,33,32,29,33,35,40,36,35,35,46,33,49,33,35,56,37,30,35,37,33,56,38,33,35,33,47,30,35,33,54,35,32,40,51,43,35,43,34,30,56,33,49,38,32,32,42,51,33,35,46,35,43,33,56,30,40,49,51,33,35,37,40,56,33,35],"hovertemplate":"<b>Country:<\/b> %{source.label}<br><b>Club League:<\/b> %{target.label}"},"node":{"pad":10,"label":["Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe","Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe"],"color":["rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)","rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)"],"thickness":50,"hovertemplate":"<b>%{label}<\/b><br><b>Leagues Fed: %{sourceLinks.length:,}<\/b><br><b>Nations in League: %{targetLinks.length:,}<\/b>"},"inherit":true},"163cfe350739.8":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"sankey","visible":false,"valueformat":"d","arrangement":"fixed","link":{"value":[31,2,32,16,6,2,1,3,1,1,1,1,1,23,4,3,1,24,9,2,28,2,1,9,1,3,11,1,2,2,1,1,25,5,2,1,3,6,20,1,2,19,5,3,2,1,1,22,6,3,2,11,1,19,1,10,11,4,1,2,1,1,1,33,10,10,2,4,2,1,1,1,19,8,2,1,3,32,34,9,19,2,3,1,21,10,1],"source":[1,1,4,5,5,5,5,5,5,5,5,5,5,26,26,26,26,27,27,27,11,11,11,19,19,19,19,19,19,19,19,19,20,20,20,20,22,22,22,22,22,25,25,25,25,25,25,0,0,0,0,7,7,7,7,13,13,13,13,13,13,13,13,14,24,24,24,24,24,24,24,24,2,2,2,2,2,6,8,9,9,9,9,9,17,17,17],"target":[30,35,33,35,33,34,38,46,49,32,56,30,43,55,29,35,38,56,33,35,40,43,30,35,43,48,33,38,32,40,56,51,49,33,35,32,33,35,51,40,37,54,33,35,56,49,46,29,33,32,35,36,33,35,47,51,42,35,40,33,46,37,43,43,33,35,49,32,30,43,53,40,31,33,30,35,56,35,37,33,38,32,35,49,46,35,33],"hovertemplate":"<b>Country:<\/b> %{source.label}<br><b>Club League:<\/b> %{target.label}"},"node":{"pad":10,"label":["Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe","Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe"],"color":["rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)","rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)"],"thickness":50,"hovertemplate":"<b>%{label}<\/b><br><b>Leagues Fed: %{sourceLinks.length:,}<\/b><br><b>Nations in League: %{targetLinks.length:,}<\/b>"},"inherit":true},"163cfe350739.9":{"alpha_stroke":1,"sizes":[10,100],"spans":[1,20],"type":"sankey","visible":false,"valueformat":"d","arrangement":"fixed","link":{"value":[31,31,8,9,4,4,3,1,1,2,22,6,1,2,29,1,1,8,4,11,5,1,1,1,25,1,1,4,20,4,4,1,1,1,31,23,5,2,1,28,1,2,31,31,5,6,1,1,3,1,8,1,2,1,1,1,13,3,8,2,4,1,30,1,3,8,4,3,13,1,17,2,9,2,2,15,8,3,1,2,27,4],"source":[8,11,19,19,19,19,19,19,19,19,20,20,20,20,18,18,18,2,2,2,2,2,2,2,9,9,9,9,13,13,13,13,13,13,14,22,22,22,22,0,0,0,4,6,24,24,24,24,24,24,24,24,24,24,24,24,25,25,25,25,25,25,1,1,5,5,5,5,5,7,7,7,7,7,26,26,26,26,26,26,27,27],"target":[37,40,35,33,43,32,30,48,40,56,49,33,56,35,47,33,35,54,35,31,32,43,33,49,38,32,35,33,42,35,51,41,46,56,43,51,33,35,40,29,33,35,33,35,43,35,50,56,30,49,33,54,48,38,52,32,54,30,33,35,32,51,30,33,49,33,34,32,35,40,35,32,36,47,29,55,54,35,33,31,56,33],"hovertemplate":"<b>Country:<\/b> %{source.label}<br><b>Club League:<\/b> %{target.label}"},"node":{"pad":10,"label":["Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe","Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe"],"color":["rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)","rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)"],"thickness":50,"hovertemplate":"<b>%{label}<\/b><br><b>Leagues Fed: %{sourceLinks.length:,}<\/b><br><b>Nations in League: %{targetLinks.length:,}<\/b>"},"inherit":true}},"layout":{"margin":{"b":40,"l":60,"t":25,"r":10},"title":"Where in the World Do RWC Stars Play Their Club Rugby","sliders":[{"pad":{"t":50},"steps":[{"args":["visible",[true,false,false,false,false,false,false,false,false,false]],"label":"All RWC","method":"restyle"},{"args":["visible",[false,true,false,false,false,false,false,false,false,false]],"label":1987,"method":"restyle"},{"args":["visible",[false,false,true,false,false,false,false,false,false,false]],"label":1991,"method":"restyle"},{"args":["visible",[false,false,false,true,false,false,false,false,false,false]],"label":1995,"method":"restyle"},{"args":["visible",[false,false,false,false,true,false,false,false,false,false]],"label":1999,"method":"restyle"},{"args":["visible",[false,false,false,false,false,true,false,false,false,false]],"label":2003,"method":"restyle"},{"args":["visible",[false,false,false,false,false,false,true,false,false,false]],"label":2007,"method":"restyle"},{"args":["visible",[false,false,false,false,false,false,false,true,false,false]],"label":2011,"method":"restyle"},{"args":["visible",[false,false,false,false,false,false,false,false,true,false]],"label":2015,"method":"restyle"},{"args":["visible",[false,false,false,false,false,false,false,false,false,true]],"label":2019,"method":"restyle"}],"active":0}],"hovermode":"closest","showlegend":true},"source":"A","config":{"showSendToCloud":false},"data":[{"type":"sankey","visible":true,"valueformat":"d","arrangement":"fixed","link":{"value":[257,159,3,258,255,242,155,238,22,41,16,262,96,11,21,213,1,184,258,169,62,141,14,74,41,7,33,65,76,7,6,29,10,6,5,16,51,5,3,8,21,20,2,35,2,3,31,20,89,13,34,1,4,1,179,13,14,5,23,53,39,36,1,18,3,31,1,2,3,1,4,33,14,11,2,1,5,26,5,52,1,103,12,30,4,8,79,8,9,2,2,21,21,1,2,1,13,12,1,24,6,18,2,5,11,16,11,1,2,2,1,6,2,3,2,2,20,3,1,5,5,12,2,2,6,2,1,1,4,28,3,1,3,1,1,1,1,5,1,2,3,1,1,4,3,2,1,1,1,1,1,1,1,1,2,1],"source":[1,25,25,4,11,27,2,8,24,24,24,14,5,5,5,9,9,0,6,20,20,17,17,17,28,28,19,19,19,19,19,19,19,19,20,20,18,18,18,2,2,2,2,2,2,9,9,9,13,13,13,13,13,13,22,22,22,22,0,0,24,24,24,24,24,24,24,24,24,24,25,25,25,25,25,1,5,5,5,5,7,7,7,7,7,26,26,26,26,26,26,27,8,28,2,2,10,10,10,23,23,24,24,5,5,13,2,27,19,11,8,25,25,8,0,17,13,20,5,4,19,26,26,7,27,24,4,2,5,16,16,0,6,7,13,11,24,0,4,17,1,18,25,22,5,11,11,19,20,25,7,13,13,13,2,9],"target":[30,54,49,33,40,56,31,37,32,53,30,43,34,30,43,38,29,29,35,49,33,46,32,35,32,57,35,33,43,32,30,48,40,56,56,35,47,33,35,54,35,32,43,33,49,32,35,33,42,35,51,41,46,56,51,33,35,40,33,35,43,35,50,56,49,33,54,48,38,52,30,33,35,32,51,33,49,33,32,35,40,35,32,36,47,29,55,54,35,33,31,33,33,51,40,51,35,39,32,52,35,40,51,56,40,33,56,30,38,35,35,56,43,56,37,38,32,37,37,35,49,32,38,38,35,44,32,38,38,45,35,38,33,46,30,33,37,32,40,33,35,30,40,37,46,43,30,51,32,46,33,40,37,43,30,49],"hovertemplate":"<b>Country:<\/b> %{source.label}<br><b>Club League:<\/b> %{target.label}"},"node":{"pad":10,"label":["Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe","Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe"],"color":["rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)","rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)"],"thickness":50,"hovertemplate":"<b>%{label}<\/b><br><b>Leagues Fed: %{sourceLinks.length:,}<\/b><br><b>Nations in League: %{targetLinks.length:,}<\/b>"},"frame":null},{"type":"sankey","visible":false,"valueformat":"d","arrangement":"fixed","link":{"value":[27,27,1,27,26,31,24,27,17,8,1,25,27,1,1,26,1,27,27,24,1,22,3,2,22,2],"source":[1,25,25,4,11,27,2,8,24,24,24,14,5,5,5,9,9,0,6,20,20,17,17,17,28,28],"target":[30,54,49,33,40,56,31,37,32,53,30,43,34,30,43,38,29,29,35,49,33,46,32,35,32,57],"hovertemplate":"<b>Country:<\/b> %{source.label}<br><b>Club League:<\/b> %{target.label}"},"node":{"pad":10,"label":["Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe","Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe"],"color":["rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)","rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)"],"thickness":50,"hovertemplate":"<b>%{label}<\/b><br><b>Leagues Fed: %{sourceLinks.length:,}<\/b><br><b>Nations in League: %{targetLinks.length:,}<\/b>"},"frame":null},{"type":"sankey","visible":false,"valueformat":"d","arrangement":"fixed","link":{"value":[24,26,26,25,1,19,5,26,18,4,19,5,1,26,24,26,8,14,2,25,25,1,24,11,12,3],"source":[4,9,14,25,25,8,8,11,20,20,28,28,28,0,1,27,19,19,19,2,5,5,6,17,17,17],"target":[33,38,43,54,49,37,33,40,49,33,32,57,51,29,30,56,48,43,30,31,34,30,35,32,46,35],"hovertemplate":"<b>Country:<\/b> %{source.label}<br><b>Club League:<\/b> %{target.label}"},"node":{"pad":10,"label":["Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe","Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe"],"color":["rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)","rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)"],"thickness":50,"hovertemplate":"<b>%{label}<\/b><br><b>Leagues Fed: %{sourceLinks.length:,}<\/b><br><b>Nations in League: %{targetLinks.length:,}<\/b>"},"frame":null},{"type":"sankey","visible":false,"valueformat":"d","arrangement":"fixed","link":{"value":[27,24,1,1,22,4,29,30,26,31,18,9,23,3,26,26,26,27,13,12,1,17,7,1,5,12,10],"source":[1,2,2,2,17,17,22,0,4,9,19,19,8,8,11,14,27,6,10,10,10,20,20,20,24,24,24],"target":[30,31,40,51,46,35,51,29,33,38,43,48,37,33,40,43,56,35,35,39,32,49,33,35,30,53,43],"hovertemplate":"<b>Country:<\/b> %{source.label}<br><b>Club League:<\/b> %{target.label}"},"node":{"pad":10,"label":["Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe","Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe"],"color":["rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)","rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)"],"thickness":50,"hovertemplate":"<b>%{label}<\/b><br><b>Leagues Fed: %{sourceLinks.length:,}<\/b><br><b>Nations in League: %{targetLinks.length:,}<\/b>"},"frame":null},{"type":"sankey","visible":false,"valueformat":"d","arrangement":"fixed","link":{"value":[15,12,3,30,24,6,28,1,1,32,23,6,1,30,9,9,4,6,1,2,5,13,2,4,4,2,24,6,29,15,1,8,4,1,1,28,2,1,25,3,2,11,18,2,1,29,1,22,7,1,2,19,5,1,1,1,30,17,13],"source":[20,20,20,22,23,23,26,26,26,4,9,9,9,14,24,24,24,24,24,24,5,5,5,5,5,5,13,13,6,2,2,2,2,2,2,27,27,27,0,0,0,19,19,19,19,11,11,8,8,8,25,25,25,25,25,25,1,17,17],"target":[49,33,35,51,52,35,55,29,33,33,38,35,33,43,56,53,43,40,51,33,43,34,56,30,40,35,42,33,35,31,43,33,56,35,40,56,33,30,29,33,35,33,43,48,38,40,35,37,33,35,56,54,33,30,43,35,30,46,35],"hovertemplate":"<b>Country:<\/b> %{source.label}<br><b>Club League:<\/b> %{target.label}"},"node":{"pad":10,"label":["Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe","Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe"],"color":["rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)","rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)"],"thickness":50,"hovertemplate":"<b>%{label}<\/b><br><b>Leagues Fed: %{sourceLinks.length:,}<\/b><br><b>Nations in League: %{targetLinks.length:,}<\/b>"},"frame":null},{"type":"sankey","visible":false,"valueformat":"d","arrangement":"fixed","link":{"value":[29,28,1,2,13,14,2,1,15,15,2,19,3,7,1,30,18,10,1,1,10,9,2,1,4,1,2,2,23,2,4,1,29,1,30,1,29,1,16,1,4,6,2,2,1,12,3,13,1,2,16,10,2,30,28,1,1,25,4,1,15,3,7,3,2,2,11,4,2,1,4,2,3,1],"source":[1,8,8,8,0,0,0,0,17,17,17,13,13,13,13,6,20,20,20,20,5,5,5,5,5,5,5,5,25,25,25,25,11,11,4,4,22,22,19,19,19,19,19,19,26,26,26,26,26,7,7,7,7,14,27,27,27,9,9,9,2,2,2,2,2,24,24,24,24,24,24,24,24,24],"target":[30,37,56,33,35,29,33,37,35,46,38,32,33,42,51,35,49,33,37,35,34,43,30,56,40,37,33,35,54,32,33,56,40,35,33,35,51,33,43,35,40,33,48,49,29,32,35,55,38,38,35,32,36,43,56,35,33,38,35,33,32,56,33,35,31,33,43,30,44,38,40,56,53,35],"hovertemplate":"<b>Country:<\/b> %{source.label}<br><b>Club League:<\/b> %{target.label}"},"node":{"pad":10,"label":["Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe","Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe"],"color":["rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)","rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)"],"thickness":50,"hovertemplate":"<b>%{label}<\/b><br><b>Leagues Fed: %{sourceLinks.length:,}<\/b><br><b>Nations in League: %{targetLinks.length:,}<\/b>"},"frame":null},{"type":"sankey","visible":false,"valueformat":"d","arrangement":"fixed","link":{"value":[30,1,1,14,1,1,8,4,2,2,1,2,27,3,4,10,3,7,2,4,1,24,3,3,1,30,17,10,1,3,9,1,10,3,5,2,31,27,3,14,4,12,30,28,3,18,12,15,8,4,2,1,16,7,6,1,1,3,27,28,1,1,1,27,1,2,12,15,1,1,1],"source":[4,4,4,19,19,19,19,19,19,19,19,22,22,22,24,24,24,24,24,24,24,25,25,25,25,1,2,2,2,2,5,5,5,5,5,5,11,27,27,9,9,9,14,16,16,17,17,20,20,20,20,20,0,0,0,0,0,6,6,7,7,7,7,8,8,8,13,13,13,13,13],"target":[33,35,32,33,56,43,35,48,49,40,32,33,51,35,33,35,56,53,43,40,51,54,33,35,56,30,31,35,38,33,34,43,35,40,33,38,40,56,33,38,33,35,43,45,35,35,46,49,33,35,56,37,35,29,33,38,37,33,35,35,36,46,47,37,56,33,51,42,33,35,30],"hovertemplate":"<b>Country:<\/b> %{source.label}<br><b>Club League:<\/b> %{target.label}"},"node":{"pad":10,"label":["Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe","Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe"],"color":["rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)","rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)"],"thickness":50,"hovertemplate":"<b>%{label}<\/b><br><b>Leagues Fed: %{sourceLinks.length:,}<\/b><br><b>Nations in League: %{targetLinks.length:,}<\/b>"},"frame":null},{"type":"sankey","visible":false,"valueformat":"d","arrangement":"fixed","link":{"value":[18,2,8,1,1,31,29,1,31,5,6,9,3,1,3,1,1,1,18,5,2,5,26,3,1,7,23,9,20,1,15,9,3,2,1,29,1,27,2,1,24,1,5,4,22,1,2,8,9,5,5,1,1,1,9,4,6,2,1,5,1,1,1,1,12,7,4,4,2,7,4,14,2,1,1,1,21,2,3,2,3,25,2,3],"source":[2,2,2,2,2,6,11,11,14,24,24,24,24,24,24,24,24,24,0,0,0,0,4,4,4,7,7,17,17,17,20,20,20,20,20,1,1,8,8,8,9,9,9,18,18,18,18,25,25,25,25,25,25,25,5,5,5,5,5,5,5,5,5,13,13,13,13,13,13,19,19,19,19,19,19,19,22,22,22,22,22,27,27,27],"target":[31,35,33,56,49,35,40,33,43,33,43,35,56,38,40,53,30,37,35,33,32,29,33,35,40,36,35,35,46,33,49,33,35,56,37,30,35,37,33,56,38,33,35,33,47,30,35,33,54,35,32,40,51,43,35,43,34,30,56,33,49,38,32,32,42,51,33,35,46,35,43,33,56,30,40,49,51,33,35,37,40,56,33,35],"hovertemplate":"<b>Country:<\/b> %{source.label}<br><b>Club League:<\/b> %{target.label}"},"node":{"pad":10,"label":["Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe","Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe"],"color":["rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)","rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)"],"thickness":50,"hovertemplate":"<b>%{label}<\/b><br><b>Leagues Fed: %{sourceLinks.length:,}<\/b><br><b>Nations in League: %{targetLinks.length:,}<\/b>"},"frame":null},{"type":"sankey","visible":false,"valueformat":"d","arrangement":"fixed","link":{"value":[31,2,32,16,6,2,1,3,1,1,1,1,1,23,4,3,1,24,9,2,28,2,1,9,1,3,11,1,2,2,1,1,25,5,2,1,3,6,20,1,2,19,5,3,2,1,1,22,6,3,2,11,1,19,1,10,11,4,1,2,1,1,1,33,10,10,2,4,2,1,1,1,19,8,2,1,3,32,34,9,19,2,3,1,21,10,1],"source":[1,1,4,5,5,5,5,5,5,5,5,5,5,26,26,26,26,27,27,27,11,11,11,19,19,19,19,19,19,19,19,19,20,20,20,20,22,22,22,22,22,25,25,25,25,25,25,0,0,0,0,7,7,7,7,13,13,13,13,13,13,13,13,14,24,24,24,24,24,24,24,24,2,2,2,2,2,6,8,9,9,9,9,9,17,17,17],"target":[30,35,33,35,33,34,38,46,49,32,56,30,43,55,29,35,38,56,33,35,40,43,30,35,43,48,33,38,32,40,56,51,49,33,35,32,33,35,51,40,37,54,33,35,56,49,46,29,33,32,35,36,33,35,47,51,42,35,40,33,46,37,43,43,33,35,49,32,30,43,53,40,31,33,30,35,56,35,37,33,38,32,35,49,46,35,33],"hovertemplate":"<b>Country:<\/b> %{source.label}<br><b>Club League:<\/b> %{target.label}"},"node":{"pad":10,"label":["Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe","Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe"],"color":["rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)","rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)"],"thickness":50,"hovertemplate":"<b>%{label}<\/b><br><b>Leagues Fed: %{sourceLinks.length:,}<\/b><br><b>Nations in League: %{targetLinks.length:,}<\/b>"},"frame":null},{"type":"sankey","visible":false,"valueformat":"d","arrangement":"fixed","link":{"value":[31,31,8,9,4,4,3,1,1,2,22,6,1,2,29,1,1,8,4,11,5,1,1,1,25,1,1,4,20,4,4,1,1,1,31,23,5,2,1,28,1,2,31,31,5,6,1,1,3,1,8,1,2,1,1,1,13,3,8,2,4,1,30,1,3,8,4,3,13,1,17,2,9,2,2,15,8,3,1,2,27,4],"source":[8,11,19,19,19,19,19,19,19,19,20,20,20,20,18,18,18,2,2,2,2,2,2,2,9,9,9,9,13,13,13,13,13,13,14,22,22,22,22,0,0,0,4,6,24,24,24,24,24,24,24,24,24,24,24,24,25,25,25,25,25,25,1,1,5,5,5,5,5,7,7,7,7,7,26,26,26,26,26,26,27,27],"target":[37,40,35,33,43,32,30,48,40,56,49,33,56,35,47,33,35,54,35,31,32,43,33,49,38,32,35,33,42,35,51,41,46,56,43,51,33,35,40,29,33,35,33,35,43,35,50,56,30,49,33,54,48,38,52,32,54,30,33,35,32,51,30,33,49,33,34,32,35,40,35,32,36,47,29,55,54,35,33,31,56,33],"hovertemplate":"<b>Country:<\/b> %{source.label}<br><b>Club League:<\/b> %{target.label}"},"node":{"pad":10,"label":["Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe","Argentina","Australia","Canada","Club Unknown","England","Fiji","France","Georgia","Ireland","Italy","Ivory Coast","Japan","Jersey","Namibia","New Zealand","No Club","Portugal","Romania","Russia","Samoa","Scotland","Singapore","South Africa","Spain","Tonga","United States","Uruguay","Wales","Zimbabwe"],"color":["rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)","rgba(117,170,219,0.4)","rgba(255,205,0,0.4)","rgba(196,12,12,0.4)","rgba(178,178,178,0.4)","rgba(207,20,43,0.4)","rgba(102,102,102,0.4)","rgba(0,114,187,0.4)","rgba(118,31,60,0.4)","rgba(0,105,70,0.4)","rgba(12,84,180,0.4)","rgba(226,99,19,0.4)","rgba(212,61,57,0.4)","rgba(178,102,178,0.4)","rgba(62,110,205,0.4)","rgba(0,0,0,0.4)","rgba(178,178,178,0.4)","rgba(255,0,0,0.4)","rgba(255,211,22,0.4)","rgba(218,41,28,0.4)","rgba(16,104,234,0.4)","rgba(58,52,80,0.4)","rgba(178,102,178,0.4)","rgba(27,56,56,0.4)","rgba(254,221,4,0.4)","rgba(201,35,52,0.4)","rgba(42,56,92,0.4)","rgba(54,146,233,0.4)","rgba(243,55,40,0.4)","rgba(34,104,37,0.4)"],"thickness":50,"hovertemplate":"<b>%{label}<\/b><br><b>Leagues Fed: %{sourceLinks.length:,}<\/b><br><b>Nations in League: %{targetLinks.length:,}<\/b>"},"frame":null}],"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+</div>
+<p>Here you can step through each iteration of the tournament and also see a cumulative dataset. It is very apparent that between 1995 and 1999 the move to professionalism resulted in an explosion of overseas players in club leagues. As time has progressed and money has started to be put into growing the game, there has been an increase in the number of countries club leagues represented. However it seems evident that the French and English leagues, flush with TV money, continue to hoover up talent from abroad.</p>
+</div>
+<div id="thanks-for-reading" class="section level2">
+<h2>Thanks for reading!</h2>
+<p>If you made it this far, then thank you! I hope you enjoyed the graphs and maybe learned something you didn’t know already!</p>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

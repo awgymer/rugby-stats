@@ -1,0 +1,9 @@
+---
+title: "Rugby Analysis by AWGymer"
+---
+
+This is my R-Markdown based website where I host short reports I create about rugby.
+
+#### Analyses
+
+1. [World Cup Squads](wc-squads.html)

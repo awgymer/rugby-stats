@@ -1,0 +1,7 @@
+name: "rugby-analysis"
+output_dir: ../docs
+navbar:
+  title: "Rugby Analysis"
+  left:
+    - text: "Home"
+      href: index.html

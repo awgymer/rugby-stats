@@ -4,7 +4,7 @@ author: "Arthur Gymer"
 date: "2019-09-10"
 categories: ["Rugby", "World Cup", "R"]
 tags: ["World Cup"]
-output: bookdown::html_document2
+output: html_document
 ---
 
 ```{r setup, include=FALSE}
@@ -13,7 +13,7 @@ knitr::opts_knit$set(root.dir = data_root)
 knitr::opts_chunk$set(echo = F, warning = F, fig.align = 'center')
 library(data.table)
 library(ggplot2)
-library(ggalluvial)
+library(plotly)
 library(kableExtra)
 legend_bottom <- theme(legend.position = "bottom")
 ```
@@ -40,6 +40,7 @@ All scraping was done in `python` using `pandas` and `beautifulsoup`.
 ```{r "data-prep"}
 sqds <- fread('wc_squads_processed.csv')
 tests <- fread('test_scores.csv')
+rgb_cols <- fread('wc_rgb_codes.csv')
 cap_crrct <- fread('wc_cap_corrections.csv')
 club_crrct <- fread('club_corrections.csv')
 sqds[cap_crrct, caps:=i.caps, on=c('year', 'player', 'country')]
@@ -237,9 +238,7 @@ Although there is a slight increase in the average age of RWC squad members Figu
 
 ## Clubs
 
-The Wikipedia datasets also contain information about which clubs each squad member is associated with. However a cursory inspection of this data shows that there is much cleaning required to reconcile subtle differences between the `r length(unique(sqds[, club]))` different clubs listed.
-
-Of the `r nrow(sqds)` players listed across all World Cups, `r sqds[club != 'none' & club != 'unknown' & flag == '', .N]` players with listed clubs do not identify the country of the club, although `r sqds[club != 'none' & club != 'unknown' & year == 2019 & flag == '', .N]` are from the 2019 edition.
+The Wikipedia datasets also contain information about which clubs each squad member is associated with. However a cursory inspection of this data shows that there is much cleaning required to reconcile subtle differences between the `r length(unique(sqds[, club]))` different clubs listed; many clubs appear with different formats e.g. `RFC` v `R.F.C` 
 
 So with that caveat in mind, let's take a look at the proportion of players plying their trade overseas at each World Cup.
 
@@ -303,36 +302,126 @@ So Figure \@ref(fig:poaching-percs) would make it look like the leagues in the T
 
 It is also clear that data for Tier 3 players is harder to come by, or at the very least, those clubs are not big enough to merit a Wikipedia entry!
 
-So where are these overseas players making their money?
+So where are these overseas players making their money? (National team on the left, club league on the right)
 
-```{r "sankey"}
+```{r "build-sankey"}
 all_nats <- unique(c(sqds[,flag], sqds[,country]))
 all_nats <- all_nats[order(all_nats)]
+nat_cols <- data.table(all_nats)[rgb_cols, on = c(all_nats='country')][,rgbcode]
 
-plot_club_country_flow <- function(yr){
+get_club_country_flow_trace <- function(yr){
   mut_cols <- c('country', 'flag')
   club_country <- sqds[year==yr, .N, by='country,flag']
   club_country[, (mut_cols) := lapply(.SD, factor, levels=all_nats), .SDcols=mut_cols]
   club_country[,cntry_lvl := as.numeric(country)]
   club_country[,club_lvl := as.numeric(flag)+length(levels(flag))]
+  club_country[rgb_cols, cntry_col := i.rgbcode, on=c('country')]
   node_labs <- c(all_nats, all_nats)
+  node_cols <- c(nat_cols, nat_cols)
   
-  plot_ly(
-    type = 'sankey',
-    valueformat = 'd',
-    arrangement = 'fixed',
+  return(list(
     node = list(
       pad = 10, 
-      label = node_labs, 
+      label = node_labs,
+      color = node_cols,
       thickness = 50,
       hovertemplate = "<b>%{label}</b><br><b>Leagues Fed: %{sourceLinks.length:,}</b><br><b>Nations in League: %{targetLinks.length:,}</b>"
     ),
     link = list(
-      value = club_country[flag != '', N], 
-      source = club_country[flag != '', cntry_lvl] -1, 
-      target = club_country[flag != '', club_lvl] -1,
+      value = club_country[, N],
+      source = club_country[, cntry_lvl] -1, 
+      target = club_country[, club_lvl] -1,
       hovertemplate = "<b>Country:</b> %{source.label}<br><b>Club League:</b> %{target.label}"
     )
-  )
+))
 }
+
+get_all_club_country_trace <- function(){
+  mut_cols <- c('country', 'flag')
+  club_country <- sqds[, .N, by='country,flag']
+  club_country[, (mut_cols) := lapply(.SD, factor, levels=all_nats), .SDcols=mut_cols]
+  club_country[,cntry_lvl := as.numeric(country)]
+  club_country[,club_lvl := as.numeric(flag)+length(levels(flag))]
+  club_country[rgb_cols, cntry_col := i.rgbcode, on=c('country')]
+  node_labs <- c(all_nats, all_nats)
+  node_cols <- c(nat_cols, nat_cols)
+  
+  return(list(
+    node = list(
+      pad = 10, 
+      label = node_labs,
+      color = node_cols,
+      thickness = 50,
+      hovertemplate = "<b>%{label}</b><br><b>Leagues Fed: %{sourceLinks.length:,}</b><br><b>Nations in League: %{targetLinks.length:,}</b>"
+    ),
+    link = list(
+      value = club_country[, N],
+      source = club_country[, cntry_lvl] -1, 
+      target = club_country[, club_lvl] -1,
+      hovertemplate = "<b>Country:</b> %{source.label}<br><b>Club League:</b> %{target.label}"
+    )
+))
+}
+
+sankey_diag <- plot_ly()
+all_trace <- get_all_club_country_trace()
+sankey_diag <- add_trace(
+                  sankey_diag, 
+                  type = 'sankey', 
+                  visible = T, 
+                  valueformat = 'd', 
+                  arrangement = 'fixed',
+                  link = all_trace$link,
+                  node = all_trace$node
+                )
+for(i in wc_years){
+  yr_trace <- get_club_country_flow_trace(i)
+  sankey_diag <- add_trace(
+                    sankey_diag,
+                    type = 'sankey',
+                    visible = F,
+                    valueformat = 'd', 
+                    arrangement = 'fixed',
+                    link = yr_trace$link,
+                    node = yr_trace$node
+                 )
+}
+yr_steps <- list(
+  list(
+    args = list("visible", c(TRUE, FALSE == wc_years)), 
+    label = "All RWC", 
+    method = "restyle"
+  )
+)
+j <- 2
+for(i in wc_years){
+  yr_steps[[j]]<- list(
+    args = list("visible", c(FALSE, i == wc_years)), 
+    label = i, 
+    method = "restyle"
+  )
+  j <-j+1
+}
+yr_sliders <- list(
+  list(
+    pad = list(t = 50),
+    steps = yr_steps,
+    active = 0
+  )
+)
+sankey_diag <- layout(sankey_diag, title='Where in the World Do RWC Stars Play Their Club Rugby', sliders = yr_sliders)
 ```
+
+<div align="center">
+```{r "plot-sankey"}
+sankey_diag
+```
+</div>
+
+Here you can step through each iteration of the tournament and also see a cumulative dataset. It is very apparent that between 1995 and 1999 the move to professionalism resulted in an explosion of overseas players in club leagues. As time has progressed and money has started to be put into growing the game, there has been an increase in the number of countries club leagues represented. However it seems evident that the French and English leagues, flush with TV money, continue to hoover up talent from abroad. 
+
+
+## Thanks for reading!
+
+If you made it this far, then thank you! I hope you enjoyed the graphs and maybe learned something you didn't know already! 
+
