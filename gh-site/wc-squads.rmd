@@ -128,9 +128,9 @@ Whilst there was representation from Zimbabwe and Ivory Coast at the early editi
 
 Since we were inspired by a simple look at the average number of caps and age, let's start there.
 
-Figure \@ref(fig:cap-box) shows that there is a clear trend towards players with more caps in World Cup squads. The median caps rose steadily from 1987 before starting to level off between 2015-19, whilst there was a noticeable bump in the upper bound of the interquartile range from 2007. This suggests that even though the outliers, the McCaw's and O'Driscoll's, are reaching cap numbers nearly double the highest in 1987, they are not the only reason for the average increase; the average player is also becoming more capped.
+Figure 1 shows that there is a clear trend towards players with more caps in World Cup squads. The median caps rose steadily from 1987 before starting to level off between 2015-19, whilst there was a noticeable bump in the upper bound of the interquartile range from 2007. This suggests that even though the outliers, the McCaw's and O'Driscoll's, are reaching cap numbers nearly double the highest in 1987, they are not the only reason for the average increase; the average player is also becoming more capped.
 
-```{r "cap-box", fig.cap="Caps per World Cup"}
+```{r "cap-box", fig.cap="Fig. 1: Caps per World Cup"}
 cap_bplot <- (
   ggplot(sqds, aes(x=as.factor(year), y=caps)) + 
     geom_boxplot() +
@@ -145,9 +145,9 @@ suppressWarnings(cap_bplot)
 
 So what is the cause of this increase? A pressing issue in World Rugby lately has been player welfare, with many leading players pushing for fewer games amid ever-more crowded international and domestic calendars. Is the average World Cup attendee more capped simply because there are more tests played in 2019?
 
-Figure \@ref(fig:number-tests) shows the number of tests per year played by every nation from the decade before the inaugural World Cup until the end of 2018. Points are sized by the number of teams playing that many tests and have been jittered to make it easier to distinguish.
+Figure 2 shows the number of tests per year played by every nation from the decade before the inaugural World Cup until the end of 2018. Points are sized by the number of teams playing that many tests and have been jittered to make it easier to distinguish.
 
-```{r "number-tests", fig.cap = "Tests Played by Nation"}
+```{r "number-tests", fig.cap = "Fig. 2: Tests Played by Nation"}
 wc_years <- c(1987, 1991, 1995, 1999, 2003, 2007, 2011, 2015, 2019)
 n_tests_jitt <- (
   ggplot(all_tests, aes(x=year, y=total, colour=as.factor(tier))) + 
@@ -168,9 +168,9 @@ n_tests_jitt <- (
 suppressWarnings(n_tests_jitt)
 ```
 
-It is very clear that there has been a marked incread in the number of Tier 1 test matches played per country. There is also a less pronounced increase in the number contested by Tier 2 teams, with litte change in the overall average or the average Tier 3 number. The overall average is probably kept suppressed by the fact there are so many more Tier 3 nations than Tier 1/2 (Figure \@ref(fig:n-tiers)). 
+It is very clear that there has been a marked incread in the number of Tier 1 test matches played per country. There is also a less pronounced increase in the number contested by Tier 2 teams, with litte change in the overall average or the average Tier 3 number. The overall average is probably kept suppressed by the fact there are so many more Tier 3 nations than Tier 1/2 (Figure 3). 
 
-```{r "n-tiers", fig.cap = "Nations Playing Tests"}
+```{r "n-tiers", fig.cap = "Fig. 3: Nations Playing Tests"}
 tiers_by_year <- (
   ggplot(all_tests, aes(x=year, fill=as.factor(tier))) + 
     geom_bar(position='dodge') + 
@@ -185,11 +185,11 @@ tiers_by_year <- (
 suppressWarnings(tiers_by_year)
 ```
 
-What Figure \@ref(fig:number-tests) also shows us is that there is clearly a growing divide between the haves and the have-nots. The small-circle of `r sum(length(tier_1) + length(tier_2))` Tier 1 and 2 nations, who have all competed in at least 1 World Cup are the ones increasing the number of lucrative and exposure-granting test-matches they play; further digression on this point is for another day however.
+What Figure 2 also shows us is that there is clearly a growing divide between the haves and the have-nots. The small-circle of `r sum(length(tier_1) + length(tier_2))` Tier 1 and 2 nations, who have all competed in at least 1 World Cup are the ones increasing the number of lucrative and exposure-granting test-matches they play; further digression on this point is for another day however.
 
-Figure \@ref(fig:cap-diffs) shows that when you compare the change in median caps available per World Cup cycle to the change in median caps per World Cup squad member there is reasonable correlation; **the increase in caps per player can be attributed to the increase in available caps.**
+Figure 4 shows that when you compare the change in median caps available per World Cup cycle to the change in median caps per World Cup squad member there is reasonable correlation; **the increase in caps per player can be attributed to the increase in available caps.**
 
-```{r "cap-diffs", fig.cap = "Caps Available v Squad Caps at the RWC"}
+```{r "cap-diffs", fig.cap = "Fig. 4: Caps Available v Squad Caps at the RWC"}
 all_tests[year > 1982 & year < 2019 & tier < 3, cycle := wc_years[findInterval(year, seq(1983, 2019, 4))]]
 caps_per_cycle <- all_tests[cycle >= 1987 & tier < 3,.(per_cyc = sum(total)), by='country,cycle']
 
@@ -217,7 +217,7 @@ suppressWarnings(cc_plot)
 
 So there are more caps to be won, specifically for the regular World Cup contenders, which it seems largely explains the increasing average cap count of the squads but is there anything else to be gleaned from the data?
 
-```{r "age-plot", fig.cap = "Ages at the RWC"}
+```{r "age-plot", fig.cap = "Fig. 5: Ages at the RWC"}
 age_plot <- (
   ggplot(sqds[tier!=3], aes(x = year, y = days_old/365, colour = as.factor(tier))) +
     geom_point(position='jitter') + 
@@ -242,7 +242,7 @@ The Wikipedia datasets also contain information about which clubs each squad mem
 
 So with that caveat in mind, let's take a look at the proportion of players plying their trade overseas at each World Cup.
 
-```{r "overseas-percs", fig.cap = "Where Do RWC Players Make Their Money?"}
+```{r "overseas-percs", fig.cap = "Fig. 7: Where Do RWC Players Make Their Money?"}
 percs <- melt(sqds[,.(
                 homegrown=sum(flag==country)/.N,
                 overseas=(.N - sum(flag==country) - sum(flag %in% c('Club Unknown', 'No Club')))/.N,
@@ -267,11 +267,11 @@ overseas_percs <- (
 suppressWarnings(overseas_percs)
 ```
 
-It is quite clear then, from Figure \@ref(fig:overseas-percs), that the percentage of players playing their club rugby abroad has greatly increased. The increase is quite evident between 1995-'99 when the game went "open", although it appears that the number of overseas players in squads may be falling - possibly a result of recent union directives, such as the "Giteau Rule" implemented by Australia, which keep all but the most senior members of squads from representing their home country whilst playing abroad the rest of the time. 
+It is quite clear then, from Figure 7, that the percentage of players playing their club rugby abroad has greatly increased. The increase is quite evident between 1995-'99 when the game went "open", although it appears that the number of overseas players in squads may be falling - possibly a result of recent union directives, such as the "Giteau Rule" implemented by Australia, which keep all but the most senior members of squads from representing their home country whilst playing abroad the rest of the time. 
 
 The story is not yet over though, accusations of poaching abound, with the big-money leagues of France particularly maligned. Can the World Cup squad data add any weight to the emotion?
 
-```{r "poaching-percs", fig.cap = "Poaching? Moi? Non."}
+```{r "poaching-percs", fig.cap = "Fig. 8: Poaching? Moi? Non."}
 poach_percs <- melt(sqds[,.(
                 homegrown=sum(flag==country)/.N, 
                 overseas=(.N - sum(flag==country) - sum(flag %in% c('Club Unknown', 'No Club')))/.N,
@@ -298,7 +298,7 @@ poach_plot <- (
 suppressWarnings(poach_plot)
 ```
 
-So Figure \@ref(fig:poaching-percs) would make it look like the leagues in the Tier 1 nations have been increasingly luring away the Tier 2 stars with bigger pay packets; again expounding on the merits or otherwise of this is a discussion for another day. 
+So Figure 8 would make it look like the leagues in the Tier 1 nations have been increasingly luring away the Tier 2 stars with bigger pay packets; again expounding on the merits or otherwise of this is a discussion for another day. 
 
 It is also clear that data for Tier 3 players is harder to come by, or at the very least, those clubs are not big enough to merit a Wikipedia entry!
 
@@ -411,7 +411,7 @@ yr_sliders <- list(
 )
 sankey_diag <- layout(sankey_diag, title='Where in the World Do RWC Stars Play Their Club Rugby', sliders = yr_sliders)
 ```
-
+<br>
 <div align="center">
 ```{r "plot-sankey"}
 sankey_diag
