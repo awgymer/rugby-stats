@@ -1,0 +1,571 @@
+---
+title: "What's in a Captain?"
+author: "Arthur Gymer"
+date: "2019-09-18"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+data_root <- '../data/'
+knitr::opts_knit$set(root.dir = data_root)
+knitr::opts_chunk$set(echo = F, warning = F, fig.align = 'center')
+library(data.table)
+library(ggplot2)
+library(ggalt)
+library(kableExtra)
+library(plotly)
+
+# Bottom legend for ggplot
+legend_bottom <- theme(legend.position = "bottom")
+```
+
+```{r "data-prep"}
+sqds <- fread('wc_squads_updated.csv')
+rgb_cols <- fread('wc_rgb_codes.csv')
+cap_crrct <- fread('wc_cap_corrections.csv')
+club_crrct <- fread('club_corrections.csv')
+team_cols <- fread('wc_team_colors.csv')
+sqds[cap_crrct, caps:=i.caps, on=c('year', 'player', 'country')]
+sqds[club_crrct, flag:=i.Flag, on=c('club')]
+sqds[flag == '', flag := ifelse(club == 'none', 'No Club', 'Club Unknown')]
+rm(cap_crrct)
+rm(club_crrct)
+
+tier_1 <- c(
+  "Argentina", "Australia", "England", "France", "Ireland", "Italy",
+  "New Zealand", "Scotland", "South Africa", "Wales"
+)
+tier_2 <- c(
+  "Canada", "Fiji", "Georgia", "Japan", "Namibia", "Portugal",
+  "Romania", "Russia", "Samoa", "Spain", "Tonga", "United States", "Uruguay"
+)
+
+tier_cols <- list(
+  muted = list("#95c292", "#9295c2", "#c29295"),
+  dark = list("#2c8626", "#262c86", "#86262c"),
+  brewer = list("#1b9e77", "#7570b3", "#d95f02")
+)
+
+# Clean countries and unknown clubs
+sqds[country == 'Western Samoa', country := 'Samoa']
+sqds[flag == 'Georgia (country)', flag := 'Georgia']
+sqds[club == '', club := 'unknown']
+sqds[club == 'Unattached', club := 'none']
+
+# Add tiers
+sqds[country %in% tier_2, tier := 2]
+sqds[country %in% tier_1, tier := 1]
+sqds[is.na(tier), tier := 3]
+
+# Set captain status and clean names
+sqds[player %like% '\\(c\\)', captain := T]
+sqds[is.na(captain), captain := F]
+sqds[, player := gsub(' \\(c\\)', '', player)]
+sqds[, player := gsub('\\s*\\d+\\s*', '', player)]
+
+# Fix Samoa Captains 99/03 manually
+sqds[year==1999 & country == 'Samoa' & player=='Pat Lam', captain := T]
+sqds[year==2003 & country == 'Samoa' & player=='Semo Sititi', captain := T]
+
+# Position levels
+pos_levels <- c('Prop', 'Hooker', 'Lock', 'Back row', 
+                'Scrum-half', 'Fly-half', 'Centre', 'Wing', 'Fullback')
+sqds[, position := factor(position, pos_levels)]
+
+wc_countries <- sqds[,.(n_wc=length(unique(year))), by=country]
+wc_years <- unique(sqds[,year][order(sqds[,year])])
+```
+
+Being the man to lead your country is an honour. Being the man who does so in a World Cup makes you a member of a very select club; one of `r sqds[captain==T, .N, by=player][, .N]` as of 2019. Using data gathered from Wikipedia, I decided to take a look at what goes into being a Rugby World Cup captain.
+<br><br>
+
+### The Outliers
+
+First up let's look at the milestone men. {Cap totals do not include B&I Lions}
+
+```{r "capt-tab-func"}
+capt_tab <- function(tab){
+  cols_to_show <- c('player', 'year', 'country', 'caps', 'days_old', 'position')
+  col_names <- c('Name', 'RWC', 'Country', 'Caps', 'Age', 'Position')
+  kable(
+    tab[,..cols_to_show][, days_old:=paste0(floor(days_old/365), 'y ', days_old %% 365, 'd')],
+    format = 'html', 
+    escape = FALSE, 
+    col.names = col_names, 
+    align=c('l', rep('c', 5))
+  ) %>%
+    kable_styling(full_width = T) 
+}
+```
+
+
+##### Father Time - oldest
+```{r "oldest-capt"}
+oldest <- sqds[captain == T,][days_old == max(days_old, na.rm=T),]
+capt_tab(oldest)
+```
+
+##### The Stalwart - most capped
+```{r "stalwart-capt"}
+stalwart <- sqds[captain == T,][caps == max(caps, na.rm=T),]
+capt_tab(stalwart)
+```
+
+##### Young Gun - youngest
+```{r "youngest-capt"}
+youngest <- sqds[captain == T,][days_old == min(days_old, na.rm=T),]
+capt_tab(youngest)
+```
+
+##### The Newbie - least capped
+```{r "newbie-capt"}
+newbie <- sqds[captain == T,][caps == min(caps, na.rm=T),]
+capt_tab(newbie)
+```
+
+Wait. Something seems up here. The two Zimbabwe captains really made their debuts, as captains, in Rugby World Cups? There are a couple of factors at play here:
+
+1. Zimbabwe only played their first test match in 1981/82, prior to this they competed as sides of colonial Rhodesia 
+2. Their two appearances were in '87 and '91, when the game was amateur and the record keeping - particularly for smaller nations - was sparse
+
+A little digging suggests that Jellicoe may indeed have made his debut at the 1987 event, and ESPN Scrum suggests Currin won his sole 3 caps in 1991. However, taking a closer look at the ESPN Scrum pages shows that although they record Zimbabwe as having played over 45 tests between 1981 and 1991, many of these have no team-sheet for Zimbabwe. Therefore it is likely that both players had accrued caps at the time of their captaincy, but that these are not on public record. 
+
+If we exclude the Zimbabweans then we find the next least-capped RWC captain hails from the Pacific. 
+
+```{r "almost-new"}
+newbie2 <- sqds[captain == T & caps != 0,][caps == min(caps, na.rm=T),]
+capt_tab(newbie2)
+```
+
+A check of ESPN Scrum reveals that the record keeping for Tonga in the 91-95 era covered team sheets, and the cap count for Mana 'Otai appears accurate.
+<br><br>
+
+##### So Good They Named Them Twice
+
+World Cup Captains are a select bunch but a very few players have shouldered the responsibilty on multiple occasions. Two men, Richie McCaw and Sergio Parisse, titans of the game and revered by rugby fans across the globe, have taken the armband 3 times on the biggest stage. Just 17 more have held the position twice.
+
+```{r "double-capts"}
+two_timers <- sqds[captain == T, .(years = paste(sort(year), collapse=', '), appearances = .N, max_year=max(year)), by='player,country'][appearances > 1][order(-appearances, -max_year)][,-c('max_year')]
+col_names <- c('Name', 'Country', 'RWCs', 'Times Captain')
+kable(two_timers, format = 'html', escape = FALSE, col.names = col_names, align=c('l', rep('c', 3))) %>%
+    kable_styling(full_width = T, bootstrap_options = c("striped", "hover"))
+```
+
+There are a couple of takeaways from this list:
+
+1. No captain from the inaugural tournament made lead a return. 
+2. Only two players captained at non-consecutive tournaments
+    - Nili Latu, who led Tonga in '07 and '15 was not picked for 2011
+    - Raphaël Ibañez who took France to a final in '99 and took charge again on home soil in '07 was in the team in 2003 but the squad was led by Fabien Galthié
+
+
+### Caps
+
+From [previous analysis](../wc-squads.html) we know that the number of caps available has increased, and as a result the average player is more capped in 2019 than in 1987. However, does this hold true for captains?
+
+```{r "cap-trends"}
+cap_trend_plt <- (
+  ggplot(sqds, aes(x=year, y=caps, colour=captain)) + 
+    geom_jitter(aes(alpha=captain)) + 
+    geom_smooth(method='loess') +  
+    labs(
+      title = 'Caps for Squad Players v Captains at the RWC',
+      x = 'Year', y = 'Caps', colour = ''
+    ) + 
+    scale_color_manual(
+      values=c(tier_cols$dark[[1]], tier_cols$dark[[2]]), 
+      labels=c('Squad', 'Captain')
+    ) + 
+    scale_alpha_manual(values = c(0.4, 1)) +
+    scale_x_continuous(breaks = wc_years) + 
+    guides(alpha = F) +
+    theme_bw() +
+    legend_bottom
+)
+suppressWarnings(cap_trend_plt)
+```
+It appears that the rate of cap increase for captains actually exceeds that for the average squad player. However this may simply be selection bias; captains are likely to be experienced players, and it's the experienced players that are increasing their cap count the most. There is also more variance in the captain cap counts.
+
+
+
+### Age
+
+[Previous analysis](../wc-squads.html) also showed that there has been little if no change in the average player age. Again let's look at whether this holds true for captains.
+
+```{r "age-trends"}
+age_trend_plt <- (
+  ggplot(sqds, aes(x=year, y=days_old/365, colour=captain)) + 
+    geom_jitter(aes(alpha=captain)) + 
+    geom_smooth(method='loess') +  
+    labs(
+      title = 'Ages for Squad Players v Captains at the RWC',
+      x = 'Year', y = 'Age', colour = ''
+    ) + 
+    scale_color_manual(
+      values=c(tier_cols$dark[[1]], tier_cols$dark[[2]]), 
+      labels=c('Squad', 'Captain')
+    ) + 
+    scale_alpha_manual(values = c(0.4, 1)) +
+    scale_x_continuous(breaks = wc_years) + 
+    guides(alpha = F) +
+    theme_bw() +
+    legend_bottom
+)
+suppressWarnings(age_trend_plt)
+```
+
+So the answer is yes. Although captains are generally older than the average squad player, the difference has held steady across the years, and captains in 2019 are no older on average than those of 1987.
+
+
+### Positions
+
+We also have data on the position of each squad member, although it is not highly granular; there is no distinction between tight-head and loose-head for example. 
+
+First let's take a look at how which positions supplied the most leaders. **N.B.** Captains who appeared more than once are counted here more than once. 
+
+```{r "pos-capts"}
+pos_capt_tots <- (
+  ggplot(sqds[captain==T,], aes(x=position)) +
+    geom_bar(fill=tier_cols$dark[[2]]) +
+    labs(
+      title = 'Captain Positions', 
+      x = 'Position',
+      y = 'Number of Captains'
+    ) +
+    theme_bw()
+)
+suppressWarnings(pos_capt_tots)
+```
+
+Ok, it looks like the back row looms large when it comes to producing captains, but there are more back-row (6,7,8) on the field than any other position. Perhaps this is simply a function of that. A blunt way of controlling for this is to look at what proportion of selected players were captains at each position. 
+
+```{r "pos-capts-perc"}
+pos_capt_percs <- (
+  ggplot(
+    sqds[, .N, by='player,position,captain'][, .(capt_prop=sum(captain)/.N*100), by=position], 
+    aes(x=position, y=capt_prop)
+  ) +
+  geom_bar(stat='identity', fill=tier_cols$dark[[1]]) +
+    labs(
+      title = 'Captain Positions', 
+      x = 'Position',
+      y = 'Percentage Captains'
+    ) +
+    theme_bw()
+)
+suppressWarnings(pos_capt_percs)
+```
+Now we see that the back-row supremacy is not quite as pronounced as it seems, with hookers notably rising in terms of captains supplied per-player at positon.
+
+```{r "scatter-plot"}
+button_list_yr <- list(list(
+       method = "restyle",
+       args = list("transforms[0].value", list(wc_years)),
+       label = 'All Years'
+  )
+)
+j <- 2
+for(yr in sort(wc_years)){
+  button_list_yr[[j]] <- list(
+       method = "restyle",
+       args = list("transforms[0].value", yr),
+       label = yr
+  )
+  j <- j+1
+}
+button_list_nat <- list(list(
+       method = "restyle",
+       args = list("transforms[1].value", list(wc_countries[,country])),
+       label = 'All Countries'
+  )
+)
+j <- 2
+for(nat in sort(wc_countries[, country])){
+  button_list_nat[[j]] <- list(
+       method = "restyle",
+       args = list("transforms[1].value", nat),
+       label = nat
+  )
+  j <- j+1
+}
+
+ddown_buttons_yr <- list(
+      list(
+        type = 'dropdown',
+        active = 0,
+        buttons = button_list_yr,
+        xanchor = 'left',
+        x = 1,
+        y = 0.9
+      )
+    )
+ddown_buttons_country <- list(
+      list(
+        type = 'dropdown',
+        active = 0,
+        buttons = button_list_nat,
+        xanchor = 'left',
+        x = 1,
+        y = 0.8
+      )
+    )
+
+age_caps_scatter <- plot_ly() %>%
+  add_trace(
+    name = 'Squad',
+    data = sqds[!is.na(days_old) & captain == F,],
+    type = 'scatter',
+    mode = 'markers', 
+    x = ~days_old/365, 
+    y = ~caps, 
+    marker = list(
+      color = 'rgb(44,134,38)',
+      opacity = 0.3
+    ),
+    text = ~paste0(
+      '<b>', player, 
+      '</b><br>', country, 
+      '<br>Age: ', floor(days_old/365), 'y ', 
+      days_old %% 365, 'd'
+    ),
+    customdata = ~year,
+    hovertemplate = '%{text}<br>Caps: %{y}<extra>%{customdata}</extra>',
+    transforms = list(
+      list(
+        type = 'filter',
+        target = ~year,
+        operation = '{}',
+        value = unique(sqds[,year])
+      ),
+      list(
+        type = 'filter',
+        target = ~country,
+        operation = '{}',
+        value = unique(sqds[,country])
+      )
+    )
+  ) %>%
+  add_trace(
+    name = 'Captain',
+    data = sqds[!is.na(days_old) & captain == T,],
+    type = 'scatter',
+    mode = 'markers', 
+    x = ~days_old/365, 
+    y = ~caps,
+    marker = list(
+      color = 'rgb(134,38,44)',
+      line = list(color = 'rgb(134,38,44)', width = 1)
+    ),
+    opacity = 1,
+    text = ~paste0(
+      '<b>', player, 
+      '</b><br>', country, 
+      '<br>Age: ', floor(days_old/365), 'y ', 
+      days_old %% 365, 'd'
+    ),
+    customdata = ~year,
+    hovertemplate = '%{text}<br>Caps: %{y}<extra>%{customdata}</extra>',
+    transforms = list(
+      list(
+        type = 'filter',
+        target = ~year,
+        operation = '{}',
+        value = unique(sqds[,year])
+      ),
+      list(
+        type = 'filter',
+        target = ~country,
+        operation = '{}',
+        value = unique(sqds[,country])
+      )
+    )
+  ) %>%
+  layout(
+    title = "Age and Caps of All Players at the Rugby World Cup",
+    xaxis = list(title = "Age (in years)"), 
+    yaxis = list(title = "Caps"),
+    margin = list(l = 65),
+    updatemenus = c(ddown_buttons_yr, ddown_buttons_country)  
+  )
+
+age_caps_scatter
+ 
+```
+
+```{r "jitter-plot", eval = F}
+jitter_buttons <- list()
+j <- 1
+for(yr in sort(wc_years)){
+  jitter_buttons[[j]] <- list(
+       method = "restyle",
+       args = list("transforms[0].value", yr),
+       label = yr
+  )
+  j <- j+1
+}
+jitter_ddown <- list(
+      list(
+        type = 'dropdown',
+        active = length(wc_years),
+        showactive = T,
+        buttons = jitter_buttons,
+        xanchor = 'left',
+        x = 1,
+        y = 0.9
+      )
+    )
+plot_ly() %>%
+  add_trace(
+    name = 'Squad',
+    data = sqds[captain == F,],
+    type = 'scatter',
+    mode = 'markers',
+    symbol = 'circle',
+    x = ~country, 
+    y = ~caps, 
+    color = I('black'),
+    opacity = 0.4,
+    text = ~player,
+    customdata = ~days_old/365,
+    hovertemplate = '<b>%{text}</b><br>%{x}<br>Age: %{customdata}<br>Caps: %{y}<extra></extra>',
+    transforms = list(
+      list(
+        type = 'filter',
+        target = ~year,
+        operation = '=',
+        value = 2019
+      )
+    )
+  ) %>%
+  add_trace(
+    name = 'Captains',
+    data = sqds[captain == T,],
+    type = 'scatter',
+    mode = 'markers',
+    symbol = 'triangle',
+    size = 2,
+    x = ~country, 
+    y = ~caps, 
+    color = I('red'),
+    text = ~player,
+    customdata = ~days_old/365,
+    hovertemplate = '<b>%{text}</b><br>%{x}<br>Age: %{customdata}<br>Caps: %{y}<extra></extra>',
+    transforms = list(
+      list(
+        type = 'filter',
+        target = ~year,
+        operation = '=',
+        value = 2019
+      )
+    )
+  ) %>%
+  layout(
+    title = "Caps of All Players at the Rugby World Cup",
+    xaxis = list(title = "Age (in years)"), 
+    yaxis = list(title = "Caps"),
+    margin = list(l = 65),
+    updatemenus = jitter_ddown
+  )
+
+
+```
+
+```{r "dumbbell-plot", eval = F}
+
+sqds[,.(age=median(days_old, na.rm=T)/365), by='year,country,captain']
+
+capt_ages <- dcast(sqds[,.(age=median(days_old, na.rm=T)/365), by='year,country,captain'], year + country ~ captain, value.var = 'age')
+
+setnames(capt_ages, c('year', 'country', 'squad', 'captain'))
+
+ggplot(capt_ages, aes(y = country, x=squad, xend=captain, color = captain > squad)) + 
+  geom_dumbbell(
+    colour_xend = 'red', 
+    colour_x = 'blue') + 
+  labs(
+    title = "Captain Age vs Median Squad Age at the Rugby World Cup",
+    y = "Country", x = "Age"
+  ) +
+  theme_bw()
+
+
+plot_ly(data = capt_ages[year %in% c(1987, 1991)]) %>%
+  add_markers(x = ~captain, y = ~country, name = "Capt", color = I("red")) %>%
+  add_markers(x = ~squad, y = ~country, name = "Squad", color = I("blue")) %>%
+  add_segments(x = ~captain, xend = ~squad, y = ~country, yend = ~country, showlegend=F) %>%
+  layout(
+    title = "Captain Age vs Median Squad Age at the Rugby World Cup",
+    xaxis = list(title = "Age (in years)"), 
+    yaxis = list(title = ""),
+    margin = list(l = 65)
+  )
+
+df <- data.frame(
+  category=c('a', 'b', 'c', 'd', 'a', 'b', 'c', 'd'),
+  year=c(2000, 2000, 2000, 2000, 2001, 2001, 2001, 2001),
+  val_a=c(1,2,2,1,2,5,6,8),
+  val_b=c(3,5,4,7,1,9,2,12),
+  seg_1=c(1,2,3,4,5,6,7,8),
+  seg_2=c(1.1,2.1,3.1,4.1,5.1,6.1,7.1,8.1)
+)
+
+melted_df <- melt(df, id.vars = c('category', 'year'), measure.vars=c('val_a', 'val_b'), variable.name = 'ctype', value.name = 'val')
+plot_ly(data = df, frame = ~year) %>%
+  add_markers(x = ~val_a, y = ~category, name = "Val_A", color = I("red")) %>%
+  add_markers(x = ~val_b, y = ~category, name = "Val_B", color = I("blue")) %>%
+  add_paths(x = ~val_a, xend = ~val_b, y = ~category, color = I("gray80"), showlegend=F) %>%
+  layout(
+    title = "Val A v Val B",
+    xaxis = list(title = "Value"), 
+    yaxis = list(title = ""),
+    margin = list(l = 65)
+)
+
+ggplot(sqds, aes(x=days_old/365, y=caps, colour=captain)) + 
+  geom_point(aes(alpha = captain)) + 
+  scale_alpha_manual(values = c(0.2, 1.0)) + 
+  scale_colour_manual(values=c("#666666", "#FF0000")) +
+  theme_bw()
+
+ggplot(sqds[captain==T,], aes(x=position)) +
+  geom_bar(fill=tier_cols$dark[[1]]) +
+  theme_bw()
+
+ggplot(sqds[,{
+  capt_club = .SD[captain==T, club]
+  .SD[,.(sum(club==capt_club), .N)]
+  }, by='country,year'], aes(x=year, y=V1/N)) + 
+  geom_jitter(height=0) +
+  scale_x_continuous(breaks = wc_years) +
+  theme_bw()
+
+range01 <- function(x){(x-min(x))/(length(x)-min(x))}
+sqds[, age_rank := frank(days_old, ties.method = 'min'), by='country,year']
+sqds[, norm_age_rank := range01(age_rank), by='country,year']
+
+capt_club_percs <- sqds[,{
+  capt_club = .SD[captain==T, club]
+  .SD[,.(teammates = sum(club==capt_club), squad = .N, cclub = capt_club)]
+  }, by='country,year']
+
+
+plot_ly() %>%
+  add_trace(
+    data = capt_club_percs[, j_year := jitter(year, 1, 1)][order(country)],
+    type = 'scatter',
+    mode = 'markers',
+    hoverinfo = 'text',
+    color = ~country,
+    colors = capt_club_percs[order(country)][,primcol[1],by=country][,V1],
+    text = ~paste0(country, '<br>Club: ', cclub, '<br>', teammates, '/', squad),
+    x = ~j_year,
+    y = ~teammates/squad
+  ) %>%
+  layout(
+   xaxis = list( 
+      tickvals = wc_years,
+      tickmode = "array"
+   )
+  )
+
+```

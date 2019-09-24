@@ -19,9 +19,9 @@ team_choices = {
     2019: [
         "Ireland",
         "Japan",
+        "Russia",
         "Samoa",
         "Scotland",
-        "Russia",
         "Canada",
         "Italy",
         "Namibia",
