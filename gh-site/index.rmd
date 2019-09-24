@@ -7,3 +7,4 @@ This is my R-Markdown based website where I host short reports I create about ru
 #### Analyses
 
 1. [World Cup Squads](wc-squads.html)
+2. [World Cup Captains](wc-capts.html)
