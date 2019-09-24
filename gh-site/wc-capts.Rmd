@@ -406,7 +406,7 @@ capt_perc_plt <- plot_ly() %>%
 capt_perc_plt
 ```
 </div>
-
+It does not appear that there is any correlation between captains and how many teammate's play their club rugby with them, however there is perhaps a slight downward trend over the years with fewer players being concentrated in 1 club; the Argentine national team being a notable exception with the Jaguares. 
 
 <br><br>
 
