@@ -406,6 +406,16 @@ capt_perc_plt <- plot_ly() %>%
 capt_perc_plt
 ```
 </div>
+
+
+<br><br>
+
+### Conclusion
+
+So what makes a World Cup captain? Well it seems like there is no hard and fast rule, but if you are a older and more-capped than your teammates and play in the back-row you probably help your odds. And I leave you with one final graph, that will let you explore every player to be selected for a World Cup, by nationality, year, and whether they were the man with a C by their name on the teamsheet.
+
+**Thanks for reading!**
+<br>
 <div align="center">
 ```{r "scatter-plot"}
 button_list_yr <- list(list(
