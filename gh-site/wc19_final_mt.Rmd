@@ -1,0 +1,563 @@
+---
+title: "2019 RWC Final: Reddit has their say"
+author: "Arthur Gymer"
+date: "2020-05-12"
+output: html_document
+---
+
+```{r "setup", include=FALSE}
+data_root <- '../data/'
+knitr::opts_knit$set(root.dir = data_root)
+knitr::opts_chunk$set(echo = F, warning = F, message = F, fig.align = 'center')
+library(data.table)
+library(ggplot2)
+library(ggrepel)
+library(glue)
+library(kableExtra)
+library(emo)
+source('../r-code/rugby_plots.R')
+```
+
+
+```{r "data-prep"}
+mt_comms <- fread('wc_mt_google.csv', encoding = 'UTF-8')
+timeline <- fread('wc_final_timeline.csv')
+score_events <- c("T5", "C2", "P3")
+
+# Add R POSIXct type datetime columns
+mt_comms[,posix_dt := as.POSIXct(created_utc, origin='1970-01-01', tz='UTC')]
+timeline[,posix_dt := as.POSIXct((millis/1000)+(gmt_offset*60*60), origin='1970-01-01', tz='UTC')]
+timeline[team_id == 39, event_team:='South Africa']
+timeline[team_id == 34, event_team:='England']
+timeline[is.na(event_team), event_team:='']
+timeline[,graph_lab := glue_data(.SD, '{sprintf("%02d", match_time%/%60)}:{sprintf("%02d", match_time%%60)} | {manual_label} {event_team} | {score0} - {score1}')]
+combodt <- rbindlist(list(mt_comms, timeline), fill = T)
+setorder(combodt, posix_dt)
+combodt[is.na(score_praw), score_praw:=0]
+combodt[is.na(score), score:=0]
+combodt[is.na(vader_score), vader_score:=0]
+combodt[is.na(google_score), google_score:=0]
+combodt[is.na(google_magnitude), google_magnitude:=0]
+combodt[,allegiance := ifelse(flair_country %in% c('South Africa', 'England'), tolower(flair_country), 'neutral')]
+combodt[,ref:=grepl('( ref|Garces|garces|jerome|Jerome|Jérôme|Garcès|jérôme|garcès)', plaintext)]
+combodt[, c("cum_google", "cum_vader") := .(cumsum(google_score), cumsum(vader_score))]
+combodt[, c("cum_google_ref", "cum_vader_ref") := .(cumsum(google_score), cumsum(vader_score)), by=ref]
+combodt[, c("pre_2", "pre_5", "end") := .(posix_dt - 2*60, posix_dt - 5*60, posix_dt)]
+
+# Add rolling mean columns
+combodt[, c("rm_2mins_google", "rm_2mins_vader") := 
+          .SD[.SD, on=.(posix_dt>=pre_2, posix_dt<=end), 
+              by=.EACHI, lapply(.SD, mean), .SDcols=c("google_score", "vader_score")
+              ][,(1L:2L) := NULL]
+]
+combodt[, c("rm_2mins_google_flair", "rm_2mins_vader_flair") := 
+          .SD[.SD, on=.(posix_dt>=pre_2, posix_dt<=end), 
+              by=.EACHI, lapply(.SD, mean), .SDcols=c("google_score", "vader_score")
+              ][,(1L:2L) := NULL],
+        by=allegiance
+]
+combodt[, c("rm_2mins_google_ref", "rm_2mins_vader_ref") := 
+          .SD[.SD, on=.(posix_dt>=pre_2, posix_dt<=end), 
+              by=.EACHI, lapply(.SD, mean), .SDcols=c("google_score", "vader_score")
+              ][,(1L:2L) := NULL],
+        by=ref
+]
+combodt[, c("rm_5mins_google", "rm_5mins_vader") := 
+          .SD[.SD, on=.(posix_dt>=pre_5, posix_dt<=end), 
+              by=.EACHI, lapply(.SD, mean), .SDcols=c("google_score", "vader_score")
+              ][,(1L:2L) := NULL]
+]
+combodt[, c("rm_5mins_google_flair", "rm_5mins_vader_flair") := 
+          .SD[.SD, on=.(posix_dt>=pre_5, posix_dt<=end), 
+              by=.EACHI, lapply(.SD, mean), .SDcols=c("google_score", "vader_score")
+              ][,(1L:2L) := NULL],
+        by=allegiance
+]
+combodt[, c("rm_5mins_google_ref", "rm_5mins_vader_ref") := 
+          .SD[.SD, on=.(posix_dt>=pre_5, posix_dt<=end), 
+              by=.EACHI, lapply(.SD, mean), .SDcols=c("google_score", "vader_score")
+              ][,(1L:2L) := NULL],
+        by=ref
+]
+
+# Add team colors
+team_cols <- fread('wc_team_colors.csv')
+combodt[
+  team_cols, 
+  c("flaircol1", "flaircol2") := list(i.primary, i.secondary),
+  on=c(allegiance="country")
+]
+```
+
+With the 2019/20 novel coronavirus outbreak wreaking havoc on sport across the world I had been trying to come up with something new to look at with rugby data. Then along came the NFL Draft and I got inspiration from a [really cool project by Caio Brighenti](https://github.com/CaioBrighenti/nfl-draft-sentiment) that involved using sentiment analysis on Reddit comments to track the mood of fans.
+
+Whilst [`/r/nfl`](https://www.reddit.com/r/nfl) boasts over 1.9 million subscribers [`/r/rugbyunion`](https://www.reddit.com/r/rugbyunion) counts only ~130,000 so I was concerned that I may not be able to get the volume of comments necessary to do any interesting analysis. Luckily the oft-maligned "Match Threads" are as popular as they are notorious, with several topping the 10,000 comment mark. With most of those coming shortly before and during the match that's an average of 60+ comments per minute - plenty to work with!
+
+So where better to start than the most commented Match Thread - the one for the 2019 Rugby World Cup Final between England and South Africa!
+
+
+If you are not interested in *how* I did the analysis you can [skip to the results](#the-results).    
+
+
+## Collecting the Data
+
+#### Comment Data
+
+There are two main sources for Reddit data - [pushshift.io](https://pushshift.io/) and the [official Reddit API](https://www.reddit.com/dev/api) - and there are use cases for both. Pushshift collects and stores comments as they are posted almost in real-time so (with a few exceptions) you can retrieve the original content of a comment even if it is later deleted. The Reddit API returns the current state of the comment allowing you to get an accurate score for the post and also to see whether a comment was deleted or removed.
+
+For this project I decided to use both sources in combination. I used `Python` to fetch and pre-process the data from both, utilising the [`PRAW`](https://praw.readthedocs.io/en/latest/) library to interact with the official API.
+
+The retrieved comment text contains markdown elements which might cause issues with sentiment analysis and so the `markdown` and `BeautifulSoup` packages were used to convert comment text to plaintext.
+
+#### Comment Flair
+
+I wanted to classify comments using their flair and Pushshift allowed me to access the flair the user had set at the time of posting, however the Reddit flair system seems to be somewhat convoluted and combined with the fact that `/r/rugbyunion` allows users to customise their flair text it turned out to be a little more convoluted process than expected.
+
+Using `PRAW` and introspecting the flairs available in browser I compiled a list of possible "flair identifiers" which allow easy and reliable determination of the "base" flair the user has selected. This id value is the css-class if the flair has one otherwise it defaults to the "emoji" text.
+
+For each flair id I classified the country, league, and club where possible. For example a "Harlequins" flair is classified as "England", "Premiership", "Harlequins". In this way I hope to be able to classify a large number of comments by country, although this is obviously imperfect as some people have flairs for club teams from countries other than their own. Often people use custom flair text to highlight their support i.e. `Ospreys/Wales` and it may be possible to better classify people's supported country by analysing that text, however it comes with more issues such as spelling mistakes, foreign spellings, slang etc.
+
+N.B. As an aside this process made me realise that the `/r/rugbyunion` flair system is a mess and that some of the flairs even appear to be broken!
+
+#### Timeline Data
+
+All match timeline data was scraped from the official Rugby World Cup website using Python and then curated by hand to decide what to plot.
+
+#### Sentiment Analysis
+
+For his NFL Draft analysis Caio used [VADER](https://github.com/cjhutto/vaderSentiment) for sentiment analysis. This free and open source tool is supposed to be specifically geared towards social media texts and is easy to set up and use with Python so it seemed like a good place to start. It works by scoring the percentage of the given text that is positive, neutral, and negative and providing a "compound" score of `positive - negative` which will range between `-1` (extreme negative) and `1` (extreme positive). After cleaning up the comment data from pushshift I ran every comment through VADER, which is a relatively quick process, and decided to check out the most extreme comments by sentiment.
+
+```{r "vader-sent-tab"}
+col_names <- c('VADER Sentiment', 'Comment')
+kable(
+    mt_comms[order(-vader_score)][,.(vader_score, gsub('""""', '"', plaintext))][-6:-(.N-5)],
+    format = 'html',
+    escape = FALSE,
+    col.names = col_names
+  ) %>%
+    kable_styling(full_width = T, bootstrap_options = "striped") %>%
+    row_spec(1:5, background = "#d6e9c6") %>%
+    row_spec(6:10, background = "#ebccd1")
+```
+
+Hmmm. Some of this looks reasonable, certainly the "negative" comments all seem pretty negative however looking at "positive" comments I am a little unconvinced. Is a comment that expresses frustration at the way England played (albeit alongside congratulations for South Africa) really the third most positive comment from a thread in which one team just won the sport's showpiece event? 
+
+One reason for this could be that VADER is optimised for tweet-like social media content i.e. limited to a relatively low number of characters, whereas Reddit comments can be much longer than this even if most of the ones in the quickfire match threads are short. Therefore one solution might be to split up each comment into sentences and gather the scores on a per-sentence basis. Although generating these scores would be simple enough I could not decide on what would be the best way to handle sentence level sentiment in relation to the overall analysis - for example should I recombine the sentences of a comment and generate an average score with some weighting? If so how should I determine the weighting? Instead I decided to look for a different option for sentiment analysis. 
+
+Natural Language Processing (NLP) is something the big tech giants have a keen interest in (more for deciding what they want to sell you than for telling people who the most toxic rugby fans on Reddit are) and the major cloud services (Google Cloud Platform, Amazon Web Service, Microsoft Azure) all have sentiment analysis offerings. Obviously they have a wealth of data and plenty of machine learning wizardry at their disposal, but unlike VADER that comes at cost. It was at this point I remembered I had £250 in Google Cloud credits!
+
+The Python client libraries made it easy to knock together some code to make API requests for each comment and fetch the sentiment score, although there is no batch method and making ~12,000 calls synchronously took a little over 90 minutes. The code could be optimised to use multiple threads but for now I was not overly concerned with the wait time and it kept the code nice and simple.
+
+Unlike VADER Google returns two numbers for sentiment analysis; like VADER a score of the sentiment ranging from `-1` to `1` but also a "magnitude" value ranging from `0` to `inf` which indicates how much text was considered emotive. It should be noted that it is not about proportion of the text that is emotive so shorter comments can have lower scores than longer ones even if they are considered 100% emotive, something we can see if plot the magnitudes against the number of characters in the comment.
+
+```{r "mag-v-len"}
+mag_len_plt <- (
+  ggplot(
+    mt_comms, 
+    aes(x=google_magnitude, y=nchar(plaintext))
+  ) + 
+  geom_jitter(alpha=0.1, colour=tier_cols$dark[[1]]) + 
+  geom_smooth(method="loess", colour=tier_cols$dark[[2]]) + 
+  labs(
+    title = 'Comment Length v Google NLP Sentiment Magnitude',
+    subtitle = 'N.B. Jitter applied to all points',
+    x = 'Sentiment Magnitude', y = 'Number of Characters'
+  ) +
+  theme_bw()
+)
+suppressWarnings(mag_len_plt)
+```
+
+
+Effectively this allows us to tell if a comment with a sentiment score of `0` is truly neutral or actually a result of mixed sentiments within the comment. For example a comment such as "This was a really fun match but the referee was bad" might have an overall sentiment of `0` but a magnitude > `1` which would indicate there is emotional content in the comment. This isn't possible with VADER as a score of `0` could be the result of `0` positive and negative or `0.5` positive and negative cancelling each other out. For more detail on these numbers you can visit [the docs](https://cloud.google.com/natural-language/docs/basics#interpreting_sentiment_analysis_values).
+
+So how do the most positive and negative comments look with the Google classification? (I sorted first by the score and then the magnitude - so a sentiment of -0.9 with a magnitude of 1 is considered more negative than of -0.8 with a magnitude of 1.5)
+
+```{r "google-sent-tab"}
+col_names <- c('Google Sentiment', 'Google Magnitude', 'Comment')
+top_goog <- mt_comms[order(-google_score,-google_magnitude)][
+  ,.(google_score, google_magnitude, plaintext)][1:5]
+bottom_goog <- mt_comms[order(-google_score,google_magnitude)][
+  ,.(google_score, google_magnitude, gsub('""""', '"', plaintext))][-1:-(.N-5)]
+kable(
+    rbindlist(list(top_goog, bottom_goog)),
+    format = 'html',
+    escape = FALSE,
+    col.names = col_names
+  ) %>%
+    kable_styling(full_width = T, bootstrap_options = "striped") %>%
+    row_spec(1:5, background = "#d6e9c6") %>%
+    row_spec(6:10, background = "#ebccd1")
+```
+
+Although we are talking about small sample sizes here - 10 comments out of 12,000+ - and there is a level of subjectivity to what is considered positive or negative I feel that these positive comments seem much more fitting of being the most positive than the ones selected by VADER. I particularly enjoy
+
+<blockquote>
+Wonderful. Wonderfully wonderful.  
+<span style="display: block; text-align: right;"> */u/Open-Collar* </span>
+</blockquote>
+
+How about we look at the comments which VADER and Google scored the most differently?
+
+```{r "google-vader-tab"}
+col_names <- c('Difference', 'Google Sentiment', 'Vader Sentiment', 'Comment')
+kable(
+    mt_comms[order(google_score-vader_score)][
+      ,.(google_score-vader_score, google_score, vader_score, gsub('""""', '"', plaintext))][-6:-(.N-5)],
+    format = 'html',
+    escape = FALSE,
+    col.names = col_names
+  ) %>%
+    kable_styling(full_width = T, bootstrap_options = "striped") %>%
+    row_spec(6:10, background = "#d6e9c6") %>%
+    row_spec(1:5, background = "#ebccd1")
+```
+
+Again this is somewhat subjective but I feel comfortable in saying that comments Google has scored much more negatively than VADER (negative difference) are more negative in reality. However when we look at the comments that google scored more positively I think that it is less clear. Perhaps most perplexing is the comment "My five year old nephew is learning bad habits", which VADER scored `-0.54` and Google scored `0.8`; I would personally regard the comment as more neutral than either of those scores and certainly not significantly positive as Google did.
+
+Although we have just looked at the extremes in detail we can get an idea of how much VADER and Google NLP differed by comparing their sentiment scores for every comment.
+
+```{r "vader-v-google"}
+quad_labs <- mt_comms[(google_score != 0 & vader_score != 0) ,.N,by=list(google_score>=0,vader_score>=0)]
+quad_labs[,google_score := ifelse(google_score, 1, -1)]
+quad_labs[,vader_score := ifelse(vader_score, 0.95, -0.95)]
+
+quad_labs[, label := glue_data(.SD, '{ifelse(
+  google_score > 0, 
+  ifelse(vader_score > 0, "Both +ve", "Google +ve/VADER -ve"), 
+  ifelse(vader_score > 0, "Google -ve/VADER +ve", "Both -ve")
+  )}: {N}')
+]
+
+vader_google_plt <- (
+  ggplot(
+    mt_comms, 
+    aes(x=google_score, y=vader_score, colour=(abs(google_score-vader_score) > 0.25))
+  ) + 
+  geom_jitter(alpha=0.2) + 
+  scale_colour_manual(
+    values = c('TRUE'=tier_cols$dark[[3]], 'FALSE'=tier_cols$dark[[2]]),
+    labels = c(
+      'TRUE'=glue('Differing Sentiment (N={mt_comms[abs(google_score - vader_score)>0.25, .N]})'),      
+      'FALSE'=glue('Similar Sentiment (N={mt_comms[abs(google_score - vader_score)<0.25, .N]})'))
+  ) +
+  labs(
+    title = 'VADER v Google NLP Sentiment Scores',
+    subtitle = 'Sentiment similarity defined as difference ±0.25 / Jitter applied to all points',
+    x = 'Google Score', y = 'VADER Score'
+  ) +
+  guides(
+    colour=guide_legend(title = '', override.aes = list(alpha = 1))
+  ) +
+  theme_bw() +
+  legend_bottom
+)
+suppressWarnings(vader_google_plt)
+```
+
+About half of all comments are classified similarly (scores ±0.25) by both VADER and Google and only `r mt_comms[(google_score <= -0.25 | google_score >= 0.25 ) & (vader_score <= -0.25 | vader_score >= 0.25) ,.N,by=abs(google_score-vader_score)>0.25][abs==TRUE, N]` comments which were strongly strongly emotive by both Google and VADER (`score >= 0.25` or `score <= -0.25` ) were classified as having differing sentiment. This graph also clearly shows the difference between the granularity of scoring between VADER and Google, with Google NLP returning only `r length(unique(mt_comms[['google_score']]))` unique scores roughly steps of `0.1` between `-1`and `1` whilst VADER returned `r length(unique(mt_comms[['vader_score']]))` unqiue scores. 
+
+For this project I decided to proceed using the Google NLP scores.
+
+## The Results
+
+*__N.B.__ If you haven't read the section on the data, sentiment scores are generated using the Google Natural Language API document sentiment analysis.* 
+
+Ok, let's start by looking at how the number of comments submitted fluctuated during the match.
+
+```{r "all-comms-hist"}
+all_comms_hist <- (
+  ggplot(mt_comms, aes(x=posix_dt)) +
+    geom_histogram(binwidth=60, fill=tier_cols$dark[[2]]) + #Binwidth 60 = every minute
+    labs(
+      title="Comments Submitted Per Minute",
+      x="Time (UTC)", y="Number of Comments"
+    ) +
+    theme_bw()
+)
+suppressWarnings(all_comms_hist)
+```
+
+Oh dear, it seems the match thread received some comments more than a week after the game finished, which really skews the data on a datetime scale. Let's try limiting to comments from 30 minutes before kickoff to 30 minutes after the final whistle - roughly 8.30am - 11.30am 2 Nov 2019 in UTC time.
+
+```{r "match-comms-hist"}
+match_comms_hist <- (
+  ggplot(
+    mt_comms[
+      posix_dt > as.POSIXct("2019-11-02 08:30:00", tz="UTC") & 
+      posix_dt < as.POSIXct("2019-11-02 11:30:00", tz="UTC")
+    ], 
+    aes(x=posix_dt)
+  ) +
+    geom_histogram(binwidth=60, alpha=1, fill=tier_cols$dark[[2]]) + #Binwidth 60 = every minute
+    labs(
+      title="Comments Submitted Per Minute",
+      subtitle="Limited to comments between 8:30-11:30 AM 2 Nov 2019 UTC",
+      x="Time (UTC)", y="Number of Comments"
+    ) +
+    theme_bw()
+)
+suppressWarnings(match_comms_hist)
+```
+
+Ah, that's much better! There is a fairly steady flow of comments throughout the match with a slight increase towards the final whistle. There are two noticeable dips midway through the match but it is not apparent that there is any particular reason for them; the second one aligns reasonably with the kickoff of the second half, but the first is less aligned to any particular event. All following graphs will be limited to this time range. 
+
+Let's take a look at how the overall sentiment of the thread progressed through the course of the match. 
+
+```{r "cumsum-sentiment"}
+cumsum_sent_plt <- (
+  ggplot(combodt[
+      posix_dt > as.POSIXct("2019-11-02 08:30:00", tz="UTC") & 
+      posix_dt < as.POSIXct("2019-11-02 11:30:00", tz="UTC") & 
+      (is.na(event) | (plot))
+    ], 
+    aes(x=posix_dt, y=cum_google)
+  ) +
+    geom_line(colour=tier_cols$dark[[2]]) +
+    geom_label_repel(data=combodt[(plot) & event != "P3"],
+      aes(label=graph_lab),
+      seed=42,
+      force_pull=0,
+      force=5,
+      box.padding = 0.5,
+      min.segment.length = 0,
+      size=2.5
+    ) +
+    labs(
+      title="Cumulative Sentiment Score During Match",
+      x = "Time (UTC)", y = "Cumulative Sentiment Score"
+    ) +
+    theme_bw() 
+)
+suppressWarnings(cumsum_sent_plt)
+```
+
+Wow. So during the build up to the game the thread was actually reasonably positive but that quickly turned after kickoff, roughly coinciding with Kyle Sinckler departing the field after a serious head-knock. The overall sentiment continued getting progressively more negative throughout the course of the game before slight bumps in positivity when South Africa scored their tries and after the final whistle. This would seem to reaffirm the common wisdom that match threads are not exactly pleasant places. 
+
+Whilst total sentiment is an easy measure to understand it might not be the best at actually capturing the mood; a heavily negative total could be the result of very negative comments but it may also be the result of a very large number of only slightly negative comments.  
+
+```{r "cummean-sentiment"}
+cummean_sent_plt <- (
+  ggplot(combodt[
+      posix_dt > as.POSIXct("2019-11-02 08:30:00", tz="UTC") & 
+      posix_dt < as.POSIXct("2019-11-02 11:30:00", tz="UTC") & 
+      (is.na(event) | (plot))
+    ], 
+    aes(x=posix_dt, y=dplyr::cummean(google_score))
+  ) +
+    geom_line(colour=tier_cols$dark[[2]]) +
+    geom_label_repel(
+      aes(label=graph_lab),
+      seed = 42,
+      hjust = 0,
+      nudge_y = 0.1,
+      nudge_x = 1200
+    ) +
+    labs(
+      title="Average Sentiment Score Progression During Match",
+      x = "Time (UTC)", y = "Average Sentiment Score"
+    ) +
+    theme_bw() 
+)
+suppressWarnings(cummean_sent_plt)
+```
+
+The average obviously takes a little while to accrue enough comments to become stable but once it does it mirrors what we saw with the totals - a slight upwards trend before kickoff followed by a sharp decline roughly coinciding with the Sinckler injury and another large drop after South Africa kicked their first points. It is worth noting that outside the initial large variability caused by a low comment count the average never gets outside ±0.1. 
+
+Can we improve at all on using the average? Match Threads are fast flowing posts in which people are reacting to a live event that often contains many ups and downs for fans on either side, as well as lulls in the action so do comments from before kickoff really bear relevance to comments made in the throes of a second half comeback? What if we were to look at a rolling average of the sentiment, considering only comments made in the previous 2 minutes?
+
+```{r "rollmean-2min-sentiment"}
+rollmean_2min_plt <- (
+  ggplot(combodt[
+      posix_dt > as.POSIXct("2019-11-02 08:30:00", tz="UTC") & 
+      posix_dt < as.POSIXct("2019-11-02 11:30:00", tz="UTC") & 
+      is.na(event)
+    ], 
+    aes(x=posix_dt, y=rm_2mins_google)
+  ) +
+    geom_area(colour=tier_cols$dark[[1]], fill=tier_cols$dark[[1]], alpha=0.7, position = 'identity') +
+    geom_label_repel(dat = combodt[event %in% score_events,],
+      aes(label = graph_lab),
+      colour = tier_cols$dark[[2]],
+      segment.color = tier_cols$dark[[2]],
+      nudge_y = c(.2, -.01, -.11, .2, -.12, -.1, 0.2, 0.2, 0.2, -.15, -.15, 0.2, 0.2, 0.2),
+      seed = 42,
+      size=2.5
+    ) +
+    labs(
+      title="2 Minute Rolling Average Sentiment Score",
+      x = "Time (UTC)", y = "Average Sentiment Score"
+    ) +
+    theme_bw() 
+)
+suppressWarnings(rollmean_2min_plt)
+```
+
+This plot is a little more up and down with less smooth trends however we can see clear upward spikes in sentiment following the two South Africa tries as well as a fairly big rise in positivity after England drew level at 3-3, followed by another drop as South Africa quickly regained a lead. 
+
+But what if the Match Thread is mostly English fans? Obviously the overall sentiment and even the average the would likely be negative, considering the result. 
+
+Perhaps we can use the Reddit user flair system to help allocate comments to supporters of one nation or another? Now there are some caveats to this data, which you can find in the [comment flair](#comment-flair) section about the data above, but essentially anyone with a club or country flair is deemed a supporter of the respective nation. First let's take a look at which supporters submitted most comments in the Match Thread.
+
+```{r "flair-tab"}
+col_names <- c('Country', 'Number of Comments')
+kable(
+    mt_comms[, .N, by=flair_country][,flair_country:=ifelse(flair_country!='', flair_country, 'Unknown')][order(-N)],
+    format = 'html',
+    escape = FALSE,
+    col.names = col_names
+  ) %>%
+    kable_styling(full_width = F, bootstrap_options = "striped")
+```
+Unfortunately flair is not mandatory and the match threads tend to attract a lot of more casual users who are less likely to have set their flair, so it is not entirely surprising to see that around 1 in 3 comments cannot be attributed to any nation. England supporters do indeed make up the bulk of the flaired comments, whilst South Africa lags behind with the 6th most. 
+
+If we consider anyone not supporting England or South Africa as neutral (but let's be honest we all know that real neutrals are few and far between) then do we see any difference in the sentiment across the match?
+
+```{r "rollmean-2min-flair-sentiment"}
+rollmean_flair_plt <- (
+  ggplot(
+     combodt[
+         posix_dt > as.POSIXct("2019-11-02 08:30:00", tz="UTC") & 
+         posix_dt < as.POSIXct("2019-11-02 11:30:00", tz="UTC") & 
+         is.na(event),
+      ][order(posix_dt)], 
+     aes(x=posix_dt)
+  ) + 
+  geom_area(
+    aes(
+      y=rm_2mins_google_flair, 
+      colour=ifelse(flaircol1=="#ffffff", flaircol2, flaircol1), 
+      fill=ifelse(flaircol1=="#ffffff", flaircol2, flaircol1)
+    ), 
+    alpha=0.5, position='identity'
+  ) +
+  geom_vline(data=timeline[event %in% score_events], aes(xintercept=posix_dt), linetype=2) +
+  geom_text(
+    data=timeline[event %in% score_events],
+    aes(x=posix_dt, y=-0.8, label=glue('ENG {score0} - {score1} SA')), 
+    angle=90, size=2, nudge_x = 90, hjust = 0
+  ) +
+  scale_fill_identity() +
+  scale_colour_identity() +
+  guides(colour = F, fill = F) +
+  labs(
+    title="2 Minute Rolling Average Sentiment Score",
+    x = "Time (UTC)", y = "Average Sentiment Score"
+  ) +
+  theme_bw() +
+  facet_grid(allegiance~., labeller = as_labeller(titleize))
+)
+suppressWarnings(rollmean_flair_plt)
+```
+
+There are definitely differences between the fanbases; South African fans understandably were far more positive as they closed out the game with two tries in the last 10 minutes, whilst England fans positivity rose as they pulled the game back to 15-9 early in the second half. Interestingly though it is clear that partisans and neutrals alike were generally negative during the course of the match, with more positivity coming through following the final whistle. 
+
+If you frequent `/r/rugbyunion` you will know that despite the stereotype of referees being respected in rugby they come in for much criticism and abuse, perhaps nowhere more than in match threads. The referee for the 2019 showpiece event was Jérôme Garcès, a 9 year international level veteran with more than 50 tests under his belt. He was also the first frenchman to take charge of a World Cup Final and in recent years he and his fellow french referees have come under a lot of fire from fans of certain other nations for perceived differences in the way they referee games. So how did the match thread feel about the man with the whistle?
+
+```{r "ref-sentiment"}
+ref_sent_plt <- (
+  ggplot(
+    combodt[
+      posix_dt > as.POSIXct("2019-11-02 08:30:00", tz="UTC") & 
+        posix_dt < as.POSIXct("2019-11-02 11:30:00", tz="UTC") & 
+        is.na(event),
+      ][order(posix_dt)], 
+    aes(x=posix_dt, y=rm_5mins_google_ref)
+  ) + 
+    geom_line(aes(colour=ref)) +
+    geom_vline(data=timeline[event %in% score_events], aes(xintercept=posix_dt), linetype=2) +
+    geom_text(
+      data=timeline[event %in% score_events],
+      aes(x=posix_dt, y=-0.8, label=glue('ENG {score0} - {score1} SA')), 
+      angle=90, size=2.5, hjust = 0, nudge_x = 90
+    ) +
+    scale_colour_manual(
+    values = c('TRUE'=tier_cols$dark[[1]], 'FALSE'=tier_cols$dark[[2]]),
+    labels = c('TRUE'='Relates to referee', 'FALSE'='Unrelated to ref')
+    ) +
+    labs(
+      title = "2 Minute Rolling Average Sentiment Score",
+      subtitle = "Comment deemed related to ref if containing Jérôme Garcès/referee or variations of those words",
+      x = "Time (UTC)", y="Average Sentiment Score"      
+    ) +
+    guides(colour = guide_legend(title = NULL)) +
+    theme_bw() + legend_bottom
+)
+suppressWarnings(ref_sent_plt)
+```
+
+Poor old Jérôme. Once the whistle went and comments started flowing in, the average of those related to the referee was almost always more negative than the average of other comments. There are two brief spikes where Garcès receives more positivity than the average comment which seem to somewhat align with England's last success on the scoreboard when the game was pulled to within a converted try but it is not entirely clear if it is anything more than random coincidence. 
+
+Intersestingly if we look at the average sentiment of comments relating to the referee by the allegiance of the commentor we see that neutrals were less negative than those with a horse in the race. Perhaps the referee is really just an easy target for frustrated fans?
+
+``` {r "ref-mean-tab"}
+cols <- col_names <- c('Country', 'Average Sentiment')
+kable(
+    combodt[
+      ref == T, 
+      .(mean(google_score)), 
+      by=allegiance
+    ][,allegiance:=titleize(allegiance)][order(V1)],
+    format = 'html',
+    escape = FALSE,
+    col.names = col_names
+  ) %>%
+    kable_styling(full_width = F, bootstrap_options = "striped")
+```
+
+#### Standout Users
+
+The data also allows us to take a look at the comments by user. So let's start by seeing who the most active users were.
+
+``` {r "users-tot-tab"}
+cols <- col_names <- c('User', 'Total Comments')
+kable(
+    mt_comms[,.(tot_comments=.N),by=author][order(-tot_comments)][1:11],
+    format = 'html',
+    escape = FALSE,
+    col.names = col_names
+  ) %>%
+    kable_styling(full_width = F, bootstrap_options = "striped")
+```
+
+So the top user is... `[deleted]`. Obviously that is not just one user, any comments which are moderator removed will show up with that user. So congratulations <code>/u/`r mt_comms[,.(tot_comments=.N),by=author][order(-tot_comments)][2, author]`</code>! But who were the most extreme commentors on the day?
+
+``` {r "users-mean-tab"}
+cols <- col_names <- c('User', 'Average Sentiment', 'Comments')
+kable(
+    mt_comms[,
+      .(avg_sent=mean(google_score), tot_comments=.N)
+      ,by=author
+    ][tot_comments>10][order(-avg_sent)][-6:-(.N-5)],
+    format = 'html',
+    escape = FALSE,
+    col.names = col_names
+  ) %>%
+    kable_styling(full_width = F, bootstrap_options = "striped") %>%
+    row_spec(1:5, background = "#d6e9c6") %>%
+    row_spec(6:10, background = "#ebccd1") %>% 
+    footnote(general = "Minimum 10 comments")
+```
+There were at least some users who bucked the overall trend of the thread and had reasonably positive averages of `0.2` or more, but at the negative end commentors were even more extreme, reaching averages of below `-0.3`.
+
+#### Emojis
+
+Finally, we can take a look at which emojis were the most used in the match thread. This comes with a small caveat that I find working working with unicode in R a pain in the backside and I am still not entirely sure I have got it 100% correct.
+
+```{r "emoji-tab"}
+emojis <- unlist(sapply(mt_comms[['plaintext']], ji_extract_all, USE.NAMES = F))
+emojis <- data.table(table(emojis))
+setorder(emojis, -N)
+col_names <- c("Emoji", "Count")
+kable(
+    emojis[1:10],
+    format = 'html',
+    escape = FALSE,
+    col.names = col_names
+  ) %>%
+    kable_styling(full_width = F, bootstrap_options = "striped")
+```
+There were `r emojis[,.N]` unique emojis used a total of `r emojis[,sum(N)]` times. Looking at the top 10 shows that they most commonly appear to be used for positive emotions - laughing, smiling, a love heart, thumbs up - with the South African flag also getting heavy usage. The outlier is perhaps the salt shaker emoji which is most likely used to indicate that someone else is ["salty"](https://www.urbandictionary.com/define.php?term=salty).
+
+**Thanks for reading!** 
+

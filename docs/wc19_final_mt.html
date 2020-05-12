@@ -1,0 +1,1425 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Arthur Gymer" />
+
+<meta name="date" content="2020-05-12" />
+
+<title>2019 RWC Final: Reddit has their say</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/bootstrap.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 51px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h2 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h3 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h4 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h5 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.section h6 {
+  padding-top: 56px;
+  margin-top: -56px;
+}
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #ffffff;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Rugby Analysis</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">2019 RWC Final: Reddit has their say</h1>
+<h4 class="author">Arthur Gymer</h4>
+<h4 class="date">2020-05-12</h4>
+
+</div>
+
+
+<p>With the 2019/20 novel coronavirus outbreak wreaking havoc on sport across the world I had been trying to come up with something new to look at with rugby data. Then along came the NFL Draft and I got inspiration from a <a href="https://github.com/CaioBrighenti/nfl-draft-sentiment">really cool project by Caio Brighenti</a> that involved using sentiment analysis on Reddit comments to track the mood of fans.</p>
+<p>Whilst <a href="https://www.reddit.com/r/nfl"><code>/r/nfl</code></a> boasts over 1.9 million subscribers <a href="https://www.reddit.com/r/rugbyunion"><code>/r/rugbyunion</code></a> counts only ~130,000 so I was concerned that I may not be able to get the volume of comments necessary to do any interesting analysis. Luckily the oft-maligned “Match Threads” are as popular as they are notorious, with several topping the 10,000 comment mark. With most of those coming shortly before and during the match that’s an average of 60+ comments per minute - plenty to work with!</p>
+<p>So where better to start than the most commented Match Thread - the one for the 2019 Rugby World Cup Final between England and South Africa!</p>
+<p>If you are not interested in <em>how</em> I did the analysis you can <a href="#the-results">skip to the results</a>.</p>
+<div id="collecting-the-data" class="section level2">
+<h2>Collecting the Data</h2>
+<div id="comment-data" class="section level4">
+<h4>Comment Data</h4>
+<p>There are two main sources for Reddit data - <a href="https://pushshift.io/">pushshift.io</a> and the <a href="https://www.reddit.com/dev/api">official Reddit API</a> - and there are use cases for both. Pushshift collects and stores comments as they are posted almost in real-time so (with a few exceptions) you can retrieve the original content of a comment even if it is later deleted. The Reddit API returns the current state of the comment allowing you to get an accurate score for the post and also to see whether a comment was deleted or removed.</p>
+<p>For this project I decided to use both sources in combination. I used <code>Python</code> to fetch and pre-process the data from both, utilising the <a href="https://praw.readthedocs.io/en/latest/"><code>PRAW</code></a> library to interact with the official API.</p>
+<p>The retrieved comment text contains markdown elements which might cause issues with sentiment analysis and so the <code>markdown</code> and <code>BeautifulSoup</code> packages were used to convert comment text to plaintext.</p>
+</div>
+<div id="comment-flair" class="section level4">
+<h4>Comment Flair</h4>
+<p>I wanted to classify comments using their flair and Pushshift allowed me to access the flair the user had set at the time of posting, however the Reddit flair system seems to be somewhat convoluted and combined with the fact that <code>/r/rugbyunion</code> allows users to customise their flair text it turned out to be a little more convoluted process than expected.</p>
+<p>Using <code>PRAW</code> and introspecting the flairs available in browser I compiled a list of possible “flair identifiers” which allow easy and reliable determination of the “base” flair the user has selected. This id value is the css-class if the flair has one otherwise it defaults to the “emoji” text.</p>
+<p>For each flair id I classified the country, league, and club where possible. For example a “Harlequins” flair is classified as “England”, “Premiership”, “Harlequins”. In this way I hope to be able to classify a large number of comments by country, although this is obviously imperfect as some people have flairs for club teams from countries other than their own. Often people use custom flair text to highlight their support i.e. <code>Ospreys/Wales</code> and it may be possible to better classify people’s supported country by analysing that text, however it comes with more issues such as spelling mistakes, foreign spellings, slang etc.</p>
+<p>N.B. As an aside this process made me realise that the <code>/r/rugbyunion</code> flair system is a mess and that some of the flairs even appear to be broken!</p>
+</div>
+<div id="timeline-data" class="section level4">
+<h4>Timeline Data</h4>
+<p>All match timeline data was scraped from the official Rugby World Cup website using Python and then curated by hand to decide what to plot.</p>
+</div>
+<div id="sentiment-analysis" class="section level4">
+<h4>Sentiment Analysis</h4>
+<p>For his NFL Draft analysis Caio used <a href="https://github.com/cjhutto/vaderSentiment">VADER</a> for sentiment analysis. This free and open source tool is supposed to be specifically geared towards social media texts and is easy to set up and use with Python so it seemed like a good place to start. It works by scoring the percentage of the given text that is positive, neutral, and negative and providing a “compound” score of <code>positive - negative</code> which will range between <code>-1</code> (extreme negative) and <code>1</code> (extreme positive). After cleaning up the comment data from pushshift I ran every comment through VADER, which is a relatively quick process, and decided to check out the most extreme comments by sentiment.</p>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+VADER Sentiment
+</th>
+<th style="text-align:left;">
+Comment
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+0.9883
+</td>
+<td style="text-align:left;background-color: #d6e9c6 !important;">
+On balance so far in the tournament, I think England have been the best team but obviously whoever wins on the day is the deserved winner. Rooting for England today. Fabulous team. Massive respect for your boys. I wouldn’t begrudge a SA win but I’ve become endeared to this England team. Good luck all. Can only imagine that you lot have no fingernails left!
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+0.9815
+</td>
+<td style="text-align:left;background-color: #d6e9c6 !important;">
+Born in South Africa. Raised in England, where I learnt to play rugby. In former world cups I’ve cheered on both teams, but I’m England all the way today. Either way I just hope we get a fantastic, clean game where we get to see some awesome rugby. Have fun everyone and drink responsibly. Just kidding.
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+0.9806
+</td>
+<td style="text-align:left;background-color: #d6e9c6 !important;">
+Frustratingly poor show from England but that’s largely due to just how well SA have played. Congratulations, I’m glad it’s you over the other potential winners, and it’s a great result for the neutrals who dislike us. Well done the bokke. For England, we need to question Young’s position in the team and our flexibility when playing to the ref.
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+0.9753
+</td>
+<td style="text-align:left;background-color: #d6e9c6 !important;">
+Happy World Cup Final everybody! Two great teams, loads of brilliant players, I hope it’s going to be a great match. I love rugby
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+0.9751
+</td>
+<td style="text-align:left;background-color: #d6e9c6 !important;">
+This is hard as an England supporter. But South Africa absolutely deserve this. They didn’t play boring rugby, they played better rugby. They out muscled and out played us. I am gutted watching this, but have to respect the opposition and say well played. Good on you. Now I’m going to wallow and feel rubbish for the rest of the day.
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+-0.9507
+</td>
+<td style="text-align:left;background-color: #ebccd1 !important;">
+See what happens when you keep kicked the ball away? Stop giving away possession of the ball or you’re going to give up a try. Absolute disgrace from every England player. Utterly embarrassing, they should all be ashamed. Absolutely pathetic. Biggest stage in rugby and you completely shit the bed.
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+-0.9509
+</td>
+<td style="text-align:left;background-color: #ebccd1 !important;">
+Cole should go off injured, go to uncontested scrums. It’s cheating but … Its going to get ugly soon if he doesn’t. Garces has been poor, England had been worse.
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+-0.9539
+</td>
+<td style="text-align:left;background-color: #ebccd1 !important;">
+Not saying the calls have been right or wrong in this game, but why no cards if every scrum has been so clear cut? it killed this first 60 minutes of the game, absolutely killed it.
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+-0.9776
+</td>
+<td style="text-align:left;background-color: #ebccd1 !important;">
+I find this depressing. What the hell happened today? We just couldn’t deal with the pressure applied by the occasion or by the oppo. South Africa nearly got turned over by a poor Wales side which was broken. And this England team has been completely ruined by them. I’m heartbroken and confused.
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+-0.9907
+</td>
+<td style="text-align:left;background-color: #ebccd1 !important;">
+There are documentaries about how actually the world is flat, or the Holocaust never happened. Just because there’s a documentary about something doesn’t make it fact. Yes, crimes and robberies on farmlands are a problem, but the whole racialisation of it is literal white nationalist propaganda, and you should be fucking ashamed of yourself for falling for it and repeating it to others. &gt;Unsubstantiated claims that such attacks on farmers disproportionately target whites are a key element of the white genocide conspiracy theory and have become a common talking point among white nationalists worldwide. However, there are no reliable figures that suggest that white farmers are being targeted in particular or that they are at a disproportionate risk of being killed. The Government of South Africa, other analysts, and the right-wing Afrikaner rights group AfriForum maintain that farm attacks are part of a broader crime problem in South Africa and do not have a racial motivation. <a href="https://en.m.wikipedia.org/wiki/South_African_farm_attacks" class="uri">https://en.m.wikipedia.org/wiki/South_African_farm_attacks</a>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Hmmm. Some of this looks reasonable, certainly the “negative” comments all seem pretty negative however looking at “positive” comments I am a little unconvinced. Is a comment that expresses frustration at the way England played (albeit alongside congratulations for South Africa) really the third most positive comment from a thread in which one team just won the sport’s showpiece event?</p>
+<p>One reason for this could be that VADER is optimised for tweet-like social media content i.e. limited to a relatively low number of characters, whereas Reddit comments can be much longer than this even if most of the ones in the quickfire match threads are short. Therefore one solution might be to split up each comment into sentences and gather the scores on a per-sentence basis. Although generating these scores would be simple enough I could not decide on what would be the best way to handle sentence level sentiment in relation to the overall analysis - for example should I recombine the sentences of a comment and generate an average score with some weighting? If so how should I determine the weighting? Instead I decided to look for a different option for sentiment analysis.</p>
+<p>Natural Language Processing (NLP) is something the big tech giants have a keen interest in (more for deciding what they want to sell you than for telling people who the most toxic rugby fans on Reddit are) and the major cloud services (Google Cloud Platform, Amazon Web Service, Microsoft Azure) all have sentiment analysis offerings. Obviously they have a wealth of data and plenty of machine learning wizardry at their disposal, but unlike VADER that comes at cost. It was at this point I remembered I had £250 in Google Cloud credits!</p>
+<p>The Python client libraries made it easy to knock together some code to make API requests for each comment and fetch the sentiment score, although there is no batch method and making ~12,000 calls synchronously took a little over 90 minutes. The code could be optimised to use multiple threads but for now I was not overly concerned with the wait time and it kept the code nice and simple.</p>
+<p>Unlike VADER Google returns two numbers for sentiment analysis; like VADER a score of the sentiment ranging from <code>-1</code> to <code>1</code> but also a “magnitude” value ranging from <code>0</code> to <code>inf</code> which indicates how much text was considered emotive. It should be noted that it is not about proportion of the text that is emotive so shorter comments can have lower scores than longer ones even if they are considered 100% emotive, something we can see if plot the magnitudes against the number of characters in the comment.</p>
+<p><img src="wc19_final_mt_files/figure-html/mag-v-len-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Effectively this allows us to tell if a comment with a sentiment score of <code>0</code> is truly neutral or actually a result of mixed sentiments within the comment. For example a comment such as “This was a really fun match but the referee was bad” might have an overall sentiment of <code>0</code> but a magnitude &gt; <code>1</code> which would indicate there is emotional content in the comment. This isn’t possible with VADER as a score of <code>0</code> could be the result of <code>0</code> positive and negative or <code>0.5</code> positive and negative cancelling each other out. For more detail on these numbers you can visit <a href="https://cloud.google.com/natural-language/docs/basics#interpreting_sentiment_analysis_values">the docs</a>.</p>
+<p>So how do the most positive and negative comments look with the Google classification? (I sorted first by the score and then the magnitude - so a sentiment of -0.9 with a magnitude of 1 is considered more negative than of -0.8 with a magnitude of 1.5)</p>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+Google Sentiment
+</th>
+<th style="text-align:right;">
+Google Magnitude
+</th>
+<th style="text-align:left;">
+Comment
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+0.9
+</td>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+1.9
+</td>
+<td style="text-align:left;background-color: #d6e9c6 !important;">
+Really impressed by the phase defence in this area. It’s just excellent organisation and structures, the defence coach should take a bow tbh
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+0.9
+</td>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+1.8
+</td>
+<td style="text-align:left;background-color: #d6e9c6 !important;">
+The song is kind of about making England into a new Jerusalem, realy good stirring lyrics that (for me) actually get you pumped up. Good to properly shout when you’ve had a few beers at a sports game too!
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+0.9
+</td>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+1.8
+</td>
+<td style="text-align:left;background-color: #d6e9c6 !important;">
+Wonderful. Wonderfully wonderful.
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+0.9
+</td>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+1.8
+</td>
+<td style="text-align:left;background-color: #d6e9c6 !important;">
+The phenomenal SA scrum and that 5 minute incredible defence in the first half made the difference. Brilliant performance from the Boks.
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+0.9
+</td>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+0.9
+</td>
+<td style="text-align:left;background-color: #d6e9c6 !important;">
+Finally a final I can just sit and back and enjoy without getting nervous about the result!
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+-0.9
+</td>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+1.8
+</td>
+<td style="text-align:left;background-color: #ebccd1 !important;">
+I dont know whats worse. The fact I knew the ABEs would be out in force for this one, or the fact England collapsing has made them completely insufferable.
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+-0.9
+</td>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+1.8
+</td>
+<td style="text-align:left;background-color: #ebccd1 !important;">
+Bullshit. Stop trying to justify a horrible performance from an england team that was outclassed from the kickoff
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+-0.9
+</td>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+1.9
+</td>
+<td style="text-align:left;background-color: #ebccd1 !important;">
+Fucking useless Garces. Useless.
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+-0.9
+</td>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+1.9
+</td>
+<td style="text-align:left;background-color: #ebccd1 !important;">
+Fair play I guess, it doesn’t help when Garces is being utter shite and not calling SA’s offences, so they look more cynical than they are. That lack of holding on call when Itoje was trying to steal was disgraceful.
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+-0.9
+</td>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+1.9
+</td>
+<td style="text-align:left;background-color: #ebccd1 !important;">
+Nonsense. The semi final was orders of magnitude worse.
+</td>
+</tr>
+</tbody>
+</table>
+<p>Although we are talking about small sample sizes here - 10 comments out of 12,000+ - and there is a level of subjectivity to what is considered positive or negative I feel that these positive comments seem much more fitting of being the most positive than the ones selected by VADER. I particularly enjoy</p>
+<blockquote>
+Wonderful. Wonderfully wonderful.<br />
+<span style="display: block; text-align: right;"> <em>/u/Open-Collar</em> </span>
+</blockquote>
+<p>How about we look at the comments which VADER and Google scored the most differently?</p>
+<table class="table table-striped" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:right;">
+Difference
+</th>
+<th style="text-align:right;">
+Google Sentiment
+</th>
+<th style="text-align:right;">
+Vader Sentiment
+</th>
+<th style="text-align:left;">
+Comment
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+-1.7074
+</td>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+-0.9
+</td>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+0.8074
+</td>
+<td style="text-align:left;background-color: #ebccd1 !important;">
+What an absolute shite match.. congrats SA, comfortably deserved to win, even if the reffing has been shocking
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+-1.6302
+</td>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+-0.7
+</td>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+0.9302
+</td>
+<td style="text-align:left;background-color: #ebccd1 !important;">
+If England win this my English friends are going to be absolutely insufferable so please South Africa give me something to cheer for!
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+-1.6248
+</td>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+-0.8
+</td>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+0.8248
+</td>
+<td style="text-align:left;background-color: #ebccd1 !important;">
+Isn’t it a horrible moment, you watch the try being scored but then it goes to TMO and you have to pray “LORD, don’t let Skeen fuck up this try.”
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+-1.6176
+</td>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+-0.8
+</td>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+0.8176
+</td>
+<td style="text-align:left;background-color: #ebccd1 !important;">
+The call on the itoje steal was atrocious. SA might be winning the scrums but they are taking huge liberties with them and garces is letting it slide.
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+-1.6176
+</td>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+-0.8
+</td>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+0.8176
+</td>
+<td style="text-align:left;background-color: #ebccd1 !important;">
+I was counting his success rate defending kicks and he literally has a 0% win rate against the kick and chase today.
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+1.3316
+</td>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+0.5
+</td>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+-0.8316
+</td>
+<td style="text-align:left;background-color: #d6e9c6 !important;">
+England beaten at their own game: scrum… penalty, scrum… penalty, etc
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+1.3423
+</td>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+0.8
+</td>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+-0.5423
+</td>
+<td style="text-align:left;background-color: #d6e9c6 !important;">
+My five year old nephew is learning all the bad habits
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+1.3587
+</td>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+0.6
+</td>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+-0.7587
+</td>
+<td style="text-align:left;background-color: #d6e9c6 !important;">
+I dont remember who said this but it’s one of my favourite quotes of the world cup - “Faf is in every possible way- a little fucker”.
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+1.3612
+</td>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+0.5
+</td>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+-0.8612
+</td>
+<td style="text-align:left;background-color: #d6e9c6 !important;">
+Nothing more beautiful than England fans crying about garces after the saffers have been crying about him all tournament
+</td>
+</tr>
+<tr>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+1.4783
+</td>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+0.7
+</td>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+-0.7783
+</td>
+<td style="text-align:left;background-color: #d6e9c6 !important;">
+Beast is one scary man, and he’s fired up
+</td>
+</tr>
+</tbody>
+</table>
+<p>Again this is somewhat subjective but I feel comfortable in saying that comments Google has scored much more negatively than VADER (negative difference) are more negative in reality. However when we look at the comments that google scored more positively I think that it is less clear. Perhaps most perplexing is the comment “My five year old nephew is learning bad habits”, which VADER scored <code>-0.54</code> and Google scored <code>0.8</code>; I would personally regard the comment as more neutral than either of those scores and certainly not significantly positive as Google did.</p>
+<p>Although we have just looked at the extremes in detail we can get an idea of how much VADER and Google NLP differed by comparing their sentiment scores for every comment.</p>
+<p><img src="wc19_final_mt_files/figure-html/vader-v-google-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>About half of all comments are classified similarly (scores ±0.25) by both VADER and Google and only 1644 comments which were strongly strongly emotive by both Google and VADER (<code>score &gt;= 0.25</code> or <code>score &lt;= -0.25</code> ) were classified as having differing sentiment. This graph also clearly shows the difference between the granularity of scoring between VADER and Google, with Google NLP returning only 19 unique scores roughly steps of <code>0.1</code> between <code>-1</code>and <code>1</code> whilst VADER returned 1972 unqiue scores.</p>
+<p>For this project I decided to proceed using the Google NLP scores.</p>
+</div>
+</div>
+<div id="the-results" class="section level2">
+<h2>The Results</h2>
+<p><em><strong>N.B.</strong> If you haven’t read the section on the data, sentiment scores are generated using the Google Natural Language API document sentiment analysis.</em></p>
+<p>Ok, let’s start by looking at how the number of comments submitted fluctuated during the match.</p>
+<p><img src="wc19_final_mt_files/figure-html/all-comms-hist-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Oh dear, it seems the match thread received some comments more than a week after the game finished, which really skews the data on a datetime scale. Let’s try limiting to comments from 30 minutes before kickoff to 30 minutes after the final whistle - roughly 8.30am - 11.30am 2 Nov 2019 in UTC time.</p>
+<p><img src="wc19_final_mt_files/figure-html/match-comms-hist-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Ah, that’s much better! There is a fairly steady flow of comments throughout the match with a slight increase towards the final whistle. There are two noticeable dips midway through the match but it is not apparent that there is any particular reason for them; the second one aligns reasonably with the kickoff of the second half, but the first is less aligned to any particular event. All following graphs will be limited to this time range.</p>
+<p>Let’s take a look at how the overall sentiment of the thread progressed through the course of the match.</p>
+<p><img src="wc19_final_mt_files/figure-html/cumsum-sentiment-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Wow. So during the build up to the game the thread was actually reasonably positive but that quickly turned after kickoff, roughly coinciding with Kyle Sinckler departing the field after a serious head-knock. The overall sentiment continued getting progressively more negative throughout the course of the game before slight bumps in positivity when South Africa scored their tries and after the final whistle. This would seem to reaffirm the common wisdom that match threads are not exactly pleasant places.</p>
+<p>Whilst total sentiment is an easy measure to understand it might not be the best at actually capturing the mood; a heavily negative total could be the result of very negative comments but it may also be the result of a very large number of only slightly negative comments.</p>
+<p><img src="wc19_final_mt_files/figure-html/cummean-sentiment-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>The average obviously takes a little while to accrue enough comments to become stable but once it does it mirrors what we saw with the totals - a slight upwards trend before kickoff followed by a sharp decline roughly coinciding with the Sinckler injury and another large drop after South Africa kicked their first points. It is worth noting that outside the initial large variability caused by a low comment count the average never gets outside ±0.1.</p>
+<p>Can we improve at all on using the average? Match Threads are fast flowing posts in which people are reacting to a live event that often contains many ups and downs for fans on either side, as well as lulls in the action so do comments from before kickoff really bear relevance to comments made in the throes of a second half comeback? What if we were to look at a rolling average of the sentiment, considering only comments made in the previous 2 minutes?</p>
+<p><img src="wc19_final_mt_files/figure-html/rollmean-2min-sentiment-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>This plot is a little more up and down with less smooth trends however we can see clear upward spikes in sentiment following the two South Africa tries as well as a fairly big rise in positivity after England drew level at 3-3, followed by another drop as South Africa quickly regained a lead.</p>
+<p>But what if the Match Thread is mostly English fans? Obviously the overall sentiment and even the average the would likely be negative, considering the result.</p>
+<p>Perhaps we can use the Reddit user flair system to help allocate comments to supporters of one nation or another? Now there are some caveats to this data, which you can find in the <a href="#comment-flair">comment flair</a> section about the data above, but essentially anyone with a club or country flair is deemed a supporter of the respective nation. First let’s take a look at which supporters submitted most comments in the Match Thread.</p>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Country
+</th>
+<th style="text-align:right;">
+Number of Comments
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Unknown
+</td>
+<td style="text-align:right;">
+4735
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+England
+</td>
+<td style="text-align:right;">
+2652
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+New Zealand
+</td>
+<td style="text-align:right;">
+1538
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Australia
+</td>
+<td style="text-align:right;">
+819
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ireland
+</td>
+<td style="text-align:right;">
+733
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South Africa
+</td>
+<td style="text-align:right;">
+699
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Wales
+</td>
+<td style="text-align:right;">
+664
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Scotland
+</td>
+<td style="text-align:right;">
+195
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+France
+</td>
+<td style="text-align:right;">
+192
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Canada
+</td>
+<td style="text-align:right;">
+105
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+USA
+</td>
+<td style="text-align:right;">
+85
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Japan
+</td>
+<td style="text-align:right;">
+49
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Fiji
+</td>
+<td style="text-align:right;">
+49
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Malawi
+</td>
+<td style="text-align:right;">
+43
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Italy
+</td>
+<td style="text-align:right;">
+27
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Samoa
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Brazil
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Argentina
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Namibia
+</td>
+<td style="text-align:right;">
+7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Kenya
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Uruguay
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Spain
+</td>
+<td style="text-align:right;">
+5
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Switzerland
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hong Kong
+</td>
+<td style="text-align:right;">
+3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Chile
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Georgia
+</td>
+<td style="text-align:right;">
+2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Netherlands
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mexico
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+</tbody>
+</table>
+<p>Unfortunately flair is not mandatory and the match threads tend to attract a lot of more casual users who are less likely to have set their flair, so it is not entirely surprising to see that around 1 in 3 comments cannot be attributed to any nation. England supporters do indeed make up the bulk of the flaired comments, whilst South Africa lags behind with the 6th most.</p>
+<p>If we consider anyone not supporting England or South Africa as neutral (but let’s be honest we all know that real neutrals are few and far between) then do we see any difference in the sentiment across the match?</p>
+<p><img src="wc19_final_mt_files/figure-html/rollmean-2min-flair-sentiment-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>There are definitely differences between the fanbases; South African fans understandably were far more positive as they closed out the game with two tries in the last 10 minutes, whilst England fans positivity rose as they pulled the game back to 15-9 early in the second half. Interestingly though it is clear that partisans and neutrals alike were generally negative during the course of the match, with more positivity coming through following the final whistle.</p>
+<p>If you frequent <code>/r/rugbyunion</code> you will know that despite the stereotype of referees being respected in rugby they come in for much criticism and abuse, perhaps nowhere more than in match threads. The referee for the 2019 showpiece event was Jérôme Garcès, a 9 year international level veteran with more than 50 tests under his belt. He was also the first frenchman to take charge of a World Cup Final and in recent years he and his fellow french referees have come under a lot of fire from fans of certain other nations for perceived differences in the way they referee games. So how did the match thread feel about the man with the whistle?</p>
+<p><img src="wc19_final_mt_files/figure-html/ref-sentiment-1.png" width="672" style="display: block; margin: auto;" /></p>
+<p>Poor old Jérôme. Once the whistle went and comments started flowing in, the average of those related to the referee was almost always more negative than the average of other comments. There are two brief spikes where Garcès receives more positivity than the average comment which seem to somewhat align with England’s last success on the scoreboard when the game was pulled to within a converted try but it is not entirely clear if it is anything more than random coincidence.</p>
+<p>Intersestingly if we look at the average sentiment of comments relating to the referee by the allegiance of the commentor we see that neutrals were less negative than those with a horse in the race. Perhaps the referee is really just an easy target for frustrated fans?</p>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Country
+</th>
+<th style="text-align:right;">
+Average Sentiment
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+England
+</td>
+<td style="text-align:right;">
+-0.2185535
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+South Africa
+</td>
+<td style="text-align:right;">
+-0.1978723
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Neutral
+</td>
+<td style="text-align:right;">
+-0.1646982
+</td>
+</tr>
+</tbody>
+</table>
+<div id="standout-users" class="section level4">
+<h4>Standout Users</h4>
+<p>The data also allows us to take a look at the comments by user. So let’s start by seeing who the most active users were.</p>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+User
+</th>
+<th style="text-align:right;">
+Total Comments
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+[deleted]
+</td>
+<td style="text-align:right;">
+363
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+boatswain1025
+</td>
+<td style="text-align:right;">
+106
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+tchiseen
+</td>
+<td style="text-align:right;">
+88
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+WallopyJoe
+</td>
+<td style="text-align:right;">
+86
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+RafiHouse
+</td>
+<td style="text-align:right;">
+79
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+SloetSteenkamp
+</td>
+<td style="text-align:right;">
+70
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+maxmynameismax
+</td>
+<td style="text-align:right;">
+66
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+yyc_123
+</td>
+<td style="text-align:right;">
+63
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+AJV1Beta
+</td>
+<td style="text-align:right;">
+63
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+contrafuckinband
+</td>
+<td style="text-align:right;">
+63
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Giveitawaygiveitaw4y
+</td>
+<td style="text-align:right;">
+53
+</td>
+</tr>
+</tbody>
+</table>
+<p>So the top user is… <code>[deleted]</code>. Obviously that is not just one user, any comments which are moderator removed will show up with that user. So congratulations <code>/u/boatswain1025</code>! But who were the most extreme commentors on the day?</p>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+User
+</th>
+<th style="text-align:right;">
+Average Sentiment
+</th>
+<th style="text-align:right;">
+Comments
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;background-color: #d6e9c6 !important;">
+ViolatingBadgers
+</td>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+0.2217391
+</td>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+23
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #d6e9c6 !important;">
+Halfcaste_brown
+</td>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+0.2166667
+</td>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+12
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #d6e9c6 !important;">
+zeusoid
+</td>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+0.2125000
+</td>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+24
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #d6e9c6 !important;">
+c12022
+</td>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+0.2055556
+</td>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #d6e9c6 !important;">
+weareallscum
+</td>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+0.1923077
+</td>
+<td style="text-align:right;background-color: #d6e9c6 !important;">
+13
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #ebccd1 !important;">
+MyTeaJustWentCold
+</td>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+-0.3000000
+</td>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #ebccd1 !important;">
+milesvtaylor
+</td>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+-0.3055556
+</td>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+18
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #ebccd1 !important;">
+LogicKennedy
+</td>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+-0.3500000
+</td>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+16
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #ebccd1 !important;">
+Wheynweed
+</td>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+-0.3909091
+</td>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;background-color: #ebccd1 !important;">
+JustAPigeon
+</td>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+-0.4333333
+</td>
+<td style="text-align:right;background-color: #ebccd1 !important;">
+12
+</td>
+</tr>
+</tbody>
+<tfoot>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<span style="font-style: italic;">Note: </span>
+</td>
+</tr>
+<tr>
+<td style="padding: 0; border: 0;" colspan="100%">
+<sup></sup> Minimum 10 comments
+</td>
+</tr>
+</tfoot>
+</table>
+<p>There were at least some users who bucked the overall trend of the thread and had reasonably positive averages of <code>0.2</code> or more, but at the negative end commentors were even more extreme, reaching averages of below <code>-0.3</code>.</p>
+</div>
+<div id="emojis" class="section level4">
+<h4>Emojis</h4>
+<p>Finally, we can take a look at which emojis were the most used in the match thread. This comes with a small caveat that I find working working with unicode in R a pain in the backside and I am still not entirely sure I have got it 100% correct.</p>
+<table class="table table-striped" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+Emoji
+</th>
+<th style="text-align:right;">
+Count
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+😂
+</td>
+<td style="text-align:right;">
+87
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+🇿🇦
+</td>
+<td style="text-align:right;">
+46
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+🤣
+</td>
+<td style="text-align:right;">
+29
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+😁
+</td>
+<td style="text-align:right;">
+20
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+❤️
+</td>
+<td style="text-align:right;">
+15
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+👍
+</td>
+<td style="text-align:right;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+🧂
+</td>
+<td style="text-align:right;">
+11
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+👏
+</td>
+<td style="text-align:right;">
+10
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+✅
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+👉
+</td>
+<td style="text-align:right;">
+8
+</td>
+</tr>
+</tbody>
+</table>
+<p>There were 74 unique emojis used a total of 365 times. Looking at the top 10 shows that they most commonly appear to be used for positive emotions - laughing, smiling, a love heart, thumbs up - with the South African flag also getting heavy usage. The outlier is perhaps the salt shaker emoji which is most likely used to indicate that someone else is <a href="https://www.urbandictionary.com/define.php?term=salty">“salty”</a>.</p>
+<p><strong>Thanks for reading!</strong></p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open')
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

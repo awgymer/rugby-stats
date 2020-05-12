@@ -1,0 +1,393 @@
+phase,match_time,event,label,team_id,player_id,points,x_pos,y_pos,ex_pos,ey_pos,m_pos,info,millis,gmt_offset,score0,score1,plot,manual_label
+U,0,Teams Out,Teams Out,39,,0,50,50,,,,"",1572652569000,9,0,0,FALSE,Teams Out
+L1,8,Restart,Restart,39,46392,0,50,50,,,,Opp Player,1572652983000,9,0,0,FALSE,Restart
+L1,23,Ruck,Ruck,34,,0,14.6,85.8,,,,Ruck won,1572652998000,9,0,0,FALSE,Ruck
+L1,24,Kick,Kick,34,34189,0,14.6,85.8,40.35,94.6,25.71,Ball into play,1572653000000,9,0,0,FALSE,Kick
+L1,31,Ruck,Ruck,39,,0,39.6,95.9,,,,Ruck won,1572653007000,9,0,0,FALSE,Ruck
+L1,42,Penalty conceded,Penalty conceded,34,34184,0,40.2,74.5,,,,"Killing ruck,Defence",1572653018000,9,0,0,FALSE,Penalty conceded
+L1,43,Ruck,Ruck,39,,0,40.7,76.3,,,,Ruck won,1572653018000,9,0,0,FALSE,Ruck
+L1,105,Miss Pen,Missed Penalty,39,46392,0,42.9,76,-10,58.24,52.85,Missed right,1572653080000,9,0,0,FALSE,Missed Penalty
+L1,135,Restart,Restart,34,43574,0,19.3,53.9,,,,Opp Player,1572653110000,9,0,0,FALSE,Restart
+L1,142,Kick,Kick,39,46392,0,57.1,55.2,28.03,53.86,29.1,Ball into play,1572653118000,9,0,0,FALSE,Kick
+L1,148,Ruck,Ruck,34,,0,28.4,45.9,,,,Ruck won,1572653124000,9,0,0,FALSE,Ruck
+L1,155,Kick,Kick,34,34189,0,27.7,36.3,54.64,21.36,26.96,Ball into play,1572653131000,9,0,0,FALSE,Kick
+L1,155,Ruck,Ruck,34,,0,27.7,36.3,,,,Ruck won,1572653130000,9,0,0,FALSE,Ruck
+L1,167,Ruck,Ruck,39,,0,43,23.4,,,,Ruck won,1572653143000,9,0,0,FALSE,Ruck
+L1,171,Ruck,Ruck,39,,0,45.2,35.3,,,,Ruck won,1572653147000,9,0,0,FALSE,Ruck
+L1,173,IR,Replacement On - Injury Replacement,34,29161,0,,,,,,"",1572653147002,9,0,0,FALSE,Replacement On - Injury Replacement
+L1,173,IR,Replacement Off - Injury Replacement,34,45662,0,,,,,,"",1572653147002,9,0,0,TRUE,Kyle Sinckler Off
+L1,197,Scrum,Scrum,39,,0,44.5,44.1,,,,"Pass,Ball into play,Stable,Won Out Right",1572653452000,9,0,0,FALSE,Scrum
+L1,219,Ruck,Ruck,39,,0,32.5,12.9,,,,Ruck won,1572653475000,9,0,0,FALSE,Ruck
+L1,224,Defender beaten,Defender beaten,39,49080,0,39.3,62.4,,,,"",1572653607000,9,0,0,FALSE,Defender beaten
+L1,227,Linebreak,Linebreak,39,49080,0,36.3,81.7,,,,"",1572653483000,9,0,0,FALSE,Linebreak
+L1,233,Ruck,Ruck,39,,0,27.1,82.5,,,,Ruck won,1572653489000,9,0,0,FALSE,Ruck
+L1,244,Ruck,Ruck,39,,0,22,46.4,,,,Ruck won,1572653500000,9,0,0,FALSE,Ruck
+L1,267,Ruck,Ruck,34,,0,9.8,3.8,,,,Ruck won,1572653522000,9,0,0,FALSE,Ruck
+L1,267,Turnover,Turnover,39,,0,6.6,5.4,,,,"Knock On,Opp Half",1572653523000,9,0,0,FALSE,Turnover
+L1,291,Ruck,Ruck,34,,0,9.8,3.8,,,,Ruck won,1572653547000,9,0,0,FALSE,Ruck
+L1,301,Linebreak,Linebreak,34,38906,0,-0.9,85.1,,,,"",1572653556000,9,0,0,FALSE,Linebreak
+L1,305,Ruck,Ruck,34,,0,20.5,90.2,,,,Ruck won,1572653561000,9,0,0,FALSE,Ruck
+L1,310,Ruck,Ruck,34,,0,22.3,75.3,,,,Ruck won,1572653565000,9,0,0,FALSE,Ruck
+L1,313,Kick,Kick,34,43574,0,22.3,75.3,59.99,22.39,37.67,Ball into play,1572653569000,9,0,0,FALSE,Kick
+L1,319,Kick,Kick,39,46392,0,52.3,24.2,22.5,20.59,29.82,"",1572653574000,9,0,0,FALSE,Kick
+L1,324,Linebreak,Linebreak,39,46392,0,22.5,20.6,,,,"",1572653579000,9,0,0,FALSE,Linebreak
+L1,327,Ruck,Ruck,39,,0,12.3,19,,,,Ruck won,1572653583000,9,0,0,FALSE,Ruck
+L1,331,Ruck,Ruck,39,,0,11.3,34.8,,,,Ruck won,1572653587000,9,0,0,FALSE,Ruck
+L1,336,Ruck,Ruck,39,,0,12.9,47.4,,,,Ruck won,1572653592000,9,0,0,FALSE,Ruck
+L1,342,Turnover,Turnover,39,,0,13.8,63.9,,,,"Knock On,Opp Half",1572653598000,9,0,0,FALSE,Turnover
+L1,412,Scrum,Scrum,34,,0,14.8,78.1,,,,"Pass,Stable,Reset",1572653703000,9,0,0,FALSE,Scrum
+L1,468,Scrum,Scrum,34,,0,14.8,78.1,,,,"Pass,Ball into play,Stable,Won Out Right",1572653751000,9,0,0,FALSE,Scrum
+L1,482,Ruck,Ruck,34,,0,11.1,52.6,,,,Ruck lost,1572653766000,9,0,0,FALSE,Ruck
+L1,482,Penalty conceded,Penalty conceded,34,43573,0,11.1,52.6,,,,"Ball into play,Handling in ruck,Offence",1572653766000,9,0,0,FALSE,Penalty conceded
+L1,542,P3,Penalty,39,46392,3,12.9,45.1,-6.25,51.28,19.1,Middle,1572653829000,9,0,3,TRUE,Penalty
+L1,570,Restart,Restart,34,43574,0,49.6,49.7,,,,Opp Player,1572653854000,9,0,3,FALSE,Restart
+L1,571,Ruck,Ruck,39,,0,80.5,54.1,,,,Ruck won,1572653857000,9,0,3,FALSE,Ruck
+L1,577,Ruck,Ruck,39,,0,80.2,43.5,,,,Ruck won,1572653864000,9,0,3,FALSE,Ruck
+L1,583,Kick,Kick,39,56104,0,80.2,43.5,62.32,0.99,17.85,Ball into play,1572653870000,9,0,3,FALSE,Kick
+L1,607,Lineout,Lineout throw,34,36524,0,60.7,-0.3,,,,"Ball into play,Won clean",1572653891000,9,0,3,FALSE,Lineout throw
+L1,614,Defender beaten,Defender beaten,34,44193,0,63,33,,,,"",1572653897000,9,0,3,FALSE,Defender beaten
+L1,617,Ruck,Ruck,34,,0,63,33,,,,Ruck won,1572653900000,9,0,3,FALSE,Ruck
+L1,620,Turnover,Turnover,34,,0,63,33,,,,"Bad Pass,Opp Half",1572653904000,9,0,3,FALSE,Turnover
+L1,651,Lineout,Lineout throw,39,43544,0,54.3,-0.6,,,,"Ball into play,Won clean",1572653937000,9,0,3,FALSE,Lineout throw
+L1,664,Ruck,Ruck,39,,0,51.4,4.3,,,,Ruck won,1572653951000,9,0,3,FALSE,Ruck
+L1,667,Turnover,Turnover,34,,0,54.8,3.3,,,,"Knock On,Opp Half",1572653951000,9,0,3,FALSE,Turnover
+L1,784,Scrum,Scrum,39,,0,51.1,6.7,,,,"Pass,Ball into play,Stable,Won Out Right",1572654071000,9,0,3,FALSE,Scrum
+L1,805,Ruck,Ruck,39,,0,43.4,30.6,,,,Ruck won,1572654092000,9,0,3,FALSE,Ruck
+L1,806,Kick,Kick,39,56104,0,43.4,30.6,26.78,28.58,16.6,Ball into play,1572654093000,9,0,3,FALSE,Kick
+L1,814,Ruck,Ruck,34,,0,29.1,27,,,,Ruck won,1572654098000,9,0,3,FALSE,Ruck
+L1,817,Kick,Kick,34,43574,0,26.6,42.8,82.85,71.39,56.24,Ball into play,1572654101000,9,0,3,FALSE,Kick
+L1,820,Kick,Kick,39,49080,0,83.7,72.2,62.49,101.83,21.24,Ball into play,1572654107000,9,0,3,FALSE,Kick
+L1,860,Lineout,Lineout throw,34,36524,0,61.4,101.1,,,,Lost Outright,1572654144000,9,0,3,FALSE,Lineout throw
+L1,875,Turnover,Turnover,34,,0,60.7,88.9,,,,"Knock On,Opp Half",1572654158000,9,0,3,FALSE,Turnover
+L1,894,Ruck,Ruck,39,,0,63.4,95.4,,,,Ruck won,1572654181000,9,0,3,FALSE,Ruck
+L1,935,Scrum,Scrum,39,,0,60.5,81.2,,,,"Pass,Stable,Reset",1572654310000,9,0,3,FALSE,Scrum
+L1,982,Scrum,Scrum,39,,0,60.5,81.2,,,,"Pass,Stable,Won Penalty",1572654287000,9,0,3,FALSE,Scrum
+L1,988,Penalty conceded,Penalty conceded,34,38888,0,61.1,78.9,,,,"Scrum,Defence",1572654293000,9,0,3,FALSE,Penalty conceded
+L1,1008,Kick,Kick,39,46392,0,60.5,81.2,10.35,99.25,50.17,Ball into play,1572654314000,9,0,3,FALSE,Kick
+L1,1015,Kick,Kick,34,43571,0,12,85.6,45,100.54,33.03,Ball into play,1572654319000,9,0,3,FALSE,Kick
+L1,1017,Turnover,Turnover,39,,0,60.5,80.7,,,,Own Half,1572654323000,9,0,3,FALSE,Turnover
+L1,1042,Lineout,Lineout throw,39,43544,0,45.4,100,,,,"Ball into play,Won clean",1572654348000,9,0,3,FALSE,Lineout throw
+L1,1046,Maul,Maul,39,,0,45.4,88.2,,,,Ruck won,1572654352000,9,0,3,FALSE,Maul
+L1,1064,Defender beaten,Defender beaten,39,50681,0,47.3,75,,,,"",1572654370000,9,0,3,FALSE,Defender beaten
+L1,1071,Ruck,Ruck,39,,0,44.5,88.9,,,,Ruck won,1572654377000,9,0,3,FALSE,Ruck
+L1,1079,Ruck,Ruck,39,,0,41.1,79.9,,,,Ruck won,1572654385000,9,0,3,FALSE,Ruck
+L1,1080,Kick,Kick,39,56104,0,41.1,79.9,20.71,96.15,20.35,Ball into play,1572654386000,9,0,3,FALSE,Kick
+L1,1101,Ruck,Ruck,34,,0,25,80.4,,,,Ruck won,1572654406000,9,0,3,FALSE,Ruck
+L1,1102,Kick,Kick,34,34189,0,25,80.4,45.17,81.45,20.17,"",1572654407000,9,0,3,FALSE,Kick
+L1,1114,Turnover,Turnover,39,,0,43.9,81.2,,,,"Knock On,Opp Half",1572654420000,9,0,3,FALSE,Turnover
+L1,1120,Penalty conceded,Penalty conceded,39,45550,0,43.9,81.2,,,,"Ball into play,Offside,Offence",1572654425000,9,0,3,FALSE,Penalty conceded
+L1,1142,Kick,Kick,34,43573,0,45.2,81.5,76.78,101.57,31.6,Ball into play,1572654447000,9,0,3,FALSE,Kick
+L1,1164,Lineout,Lineout throw,34,36524,0,76.8,101.6,,,,"Ball into play,Won clean",1572654468000,9,0,3,FALSE,Lineout throw
+L1,1170,Defender beaten,Defender beaten,34,38906,0,81.2,86.1,,,,"",1572654475000,9,0,3,FALSE,Defender beaten
+L1,1173,Ruck,Ruck,34,,0,81.2,86.1,,,,Ruck won,1572654477000,9,0,3,FALSE,Ruck
+L1,1177,Ruck,Ruck,34,,0,81.6,71.9,,,,Ruck won,1572654482000,9,0,3,FALSE,Ruck
+L1,1183,Ruck,Ruck,34,,0,81.4,59.3,,,,Ruck won,1572654488000,9,0,3,FALSE,Ruck
+L1,1192,Ruck,Ruck,34,,0,80.9,87.9,,,,Ruck won,1572654497000,9,0,3,FALSE,Ruck
+L1,1197,Ruck,Ruck,34,,0,78.6,72.4,,,,Ruck won,1572654502000,9,0,3,FALSE,Ruck
+L1,1207,Ruck,Ruck,34,,0,79.6,53.3,,,,Ruck won,1572654512000,9,0,3,FALSE,Ruck
+L1,1216,Ruck,Ruck,34,,0,80,8,,,,Ruck won,1572654521000,9,0,3,FALSE,Ruck
+L1,1226,Ruck,Ruck,34,,0,80.9,38.9,,,,Ruck won,1572654531000,9,0,3,FALSE,Ruck
+L1,1232,Ruck,Ruck,34,,0,79.8,81.2,,,,Ruck won,1572654536000,9,0,3,FALSE,Ruck
+L1,1235,Penalty conceded,Penalty conceded,39,48565,0,78.6,81.7,,,,"Killing ruck,Defence",1572654541000,9,0,3,FALSE,Penalty conceded
+L1,1309,IR,Replacement On - Injury Replacement,39,58426,0,,,,,,"",1572654541074,9,0,3,FALSE,Replacement On - Injury Replacement
+L1,1309,IR,Replacement Off - Injury Replacement,39,50682,0,,,,,,"",1572654541074,9,0,3,FALSE,Replacement Off - Injury Replacement
+L1,1310,IR,Replacement On - Injury Replacement,39,50452,0,,,,,,"",1572654541075,9,0,3,FALSE,Replacement On - Injury Replacement
+L1,1310,IR,Replacement Off - Injury Replacement,39,43544,0,,,,,,"",1572654541075,9,0,3,FALSE,Replacement Off - Injury Replacement
+L1,1326,P3,Penalty,34,43573,3,81.6,76.8,101.06,50.5,19.46,Middle,1572654766000,9,3,3,TRUE,Penalty
+L1,1361,Turnover,Turnover,34,,0,23.4,86.1,,,,"Own Half,Knock On",1572654800000,9,3,3,FALSE,Turnover
+L1,1366,Restart,Restart,39,46392,0,49.6,50.8,,,,Opp Error,1572654805000,9,3,3,FALSE,Restart
+L1,1404,Scrum,Scrum,39,,0,19.1,88.7,,,,"Pass,Ball into play,Stable,Won Out Right",1572654843000,9,3,3,FALSE,Scrum
+L1,1423,Ruck,Ruck,39,,0,11.4,90.2,,,,Ruck won,1572654863000,9,3,3,FALSE,Ruck
+L1,1430,Ruck,Ruck,39,,0,11.6,81.5,,,,Ruck won,1572654870000,9,3,3,FALSE,Ruck
+L1,1449,Penalty conceded,Penalty conceded,34,29161,0,15.4,86.9,,,,"Scrum,Defence",1572654888000,9,3,3,FALSE,Penalty conceded
+L1,1516,P3,Penalty,39,46392,3,26.4,88.2,-3.57,49.47,29.99,Middle,1572654955000,9,3,6,TRUE,Penalty
+L1,1550,Restart,Restart,34,43574,0,49.3,51.3,,,,Opp Player,1572654989000,9,3,6,FALSE,Restart
+L1,1550,Ruck,Ruck,39,,0,78.4,54.9,,,,Ruck won,1572654989000,9,3,6,FALSE,Ruck
+L1,1555,Kick,Kick,39,56104,0,78.4,54.9,46.25,-1.07,32.14,Ball into play,1572654995000,9,3,6,FALSE,Kick
+L1,1591,Lineout,Lineout throw,34,36524,0,53.9,0.5,,,,"Ball into play,Won clean",1572655030000,9,3,6,FALSE,Lineout throw
+L1,1601,Ruck,Ruck,34,,0,45.9,40.7,,,,Ruck won,1572655040000,9,3,6,FALSE,Ruck
+L1,1604,Kick,Kick,34,43574,0,41.6,52.1,,,,"Ball into play,Error Out Of Play",1572655043000,9,3,6,FALSE,Kick
+L1,1611,Turnover,Turnover,34,,0,42.3,-3.4,,,,Own Half,1572655051000,9,3,6,FALSE,Turnover
+L1,1635,Lineout,Lineout throw,39,50452,0,40.7,1,,,,"Ball into play,Won clean",1572655135000,9,3,6,FALSE,Lineout throw
+L1,1638,Maul,Maul,39,,0,42.7,12.1,,,,Ruck won,1572655139000,9,3,6,FALSE,Maul
+L1,1655,Ruck,Ruck,39,,0,44.8,36.6,,,,Ruck won,1572655155000,9,3,6,FALSE,Ruck
+L1,1661,Ruck,Ruck,39,,0,45.2,51.5,,,,Ruck won,1572655162000,9,3,6,FALSE,Ruck
+L1,1668,Turnover,Turnover,39,,0,43.4,14.9,,,,"Knock On,Opp Half",1572655169000,9,3,6,FALSE,Turnover
+L1,1670,Ruck,Ruck,34,,0,45,19.6,,,,Ruck won,1572655174000,9,3,6,FALSE,Ruck
+L1,1676,Penalty conceded,Penalty conceded,39,56104,0,43.4,14.9,,,,"Offside,Defence",1572655177000,9,3,6,FALSE,Penalty conceded
+L1,1705,Kick,Kick,34,43571,0,43.6,9.8,76.42,-0.81,32.85,Ball into play,1572655208000,9,3,6,FALSE,Kick
+L1,1742,Lineout,Lineout throw,34,36524,0,74.5,-0.3,,,,"Ball into play,Won clean",1572655257000,9,3,6,FALSE,Lineout throw
+L1,1751,Ruck,Ruck,34,,0,72.7,33.2,,,,Ruck won,1572655267000,9,3,6,FALSE,Ruck
+L1,1762,Ruck,Ruck,34,,0,80,42.8,,,,Ruck won,1572655277000,9,3,6,FALSE,Ruck
+L1,1768,Ruck,Ruck,34,,0,84.3,49.7,,,,Ruck won,1572655284000,9,3,6,FALSE,Ruck
+L1,1771,Defender beaten,Defender beaten,34,59731,0,84.3,49.7,,,,"",1572655286000,9,3,6,FALSE,Defender beaten
+L1,1776,Ruck,Ruck,34,,0,86.4,80.2,,,,Ruck won,1572655291000,9,3,6,FALSE,Ruck
+L1,1782,Ruck,Ruck,34,,0,84.5,66,,,,Ruck won,1572655297000,9,3,6,FALSE,Ruck
+L1,1787,Ruck,Ruck,34,,0,84.5,66,,,,Ruck won,1572655302000,9,3,6,FALSE,Ruck
+L1,1794,Ruck,Ruck,34,,0,87.7,78.9,,,,Ruck won,1572655310000,9,3,6,FALSE,Ruck
+L1,1801,Ruck,Ruck,34,,0,91.2,87.9,,,,Ruck won,1572655317000,9,3,6,FALSE,Ruck
+L1,1809,Ruck,Ruck,34,,0,90.5,81.2,,,,Ruck won,1572655324000,9,3,6,FALSE,Ruck
+L1,1815,Ruck,Ruck,34,,0,89.5,70.9,,,,Ruck won,1572655331000,9,3,6,FALSE,Ruck
+L1,1824,Ruck,Ruck,34,,0,90,75.3,,,,Ruck won,1572655339000,9,3,6,FALSE,Ruck
+L1,1831,Ruck,Ruck,34,,0,90.2,66.8,,,,Ruck won,1572655346000,9,3,6,FALSE,Ruck
+L1,1836,Ruck,Ruck,34,,0,96.8,54.4,,,,Ruck won,1572655351000,9,3,6,FALSE,Ruck
+L1,1846,Ruck,Ruck,34,,0,96.8,61.9,,,,Ruck won,1572655361000,9,3,6,FALSE,Ruck
+L1,1851,Defender beaten,Defender beaten,34,34189,0,96.8,61.9,,,,"",1572655366000,9,3,6,FALSE,Defender beaten
+L1,1854,Ruck,Ruck,34,,0,96.8,61.9,,,,Ruck won,1572655369000,9,3,6,FALSE,Ruck
+L1,1864,Ruck,Ruck,34,,0,93.9,92.8,,,,Ruck won,1572655379000,9,3,6,FALSE,Ruck
+L1,1872,Ruck,Ruck,34,,0,92.1,76.6,,,,Ruck won,1572655387000,9,3,6,FALSE,Ruck
+L1,1880,Ruck,Ruck,34,,0,92.1,76.6,,,,Ruck won,1572655395000,9,3,6,FALSE,Ruck
+L1,1889,Ruck,Ruck,34,,0,92.3,89.5,,,,Ruck won,1572655404000,9,3,6,FALSE,Ruck
+L1,1894,Ruck,Ruck,34,,0,93,83,,,,Ruck won,1572655409000,9,3,6,FALSE,Ruck
+L1,1902,Ruck,Ruck,34,,0,95.5,72.7,,,,Ruck won,1572655417000,9,3,6,FALSE,Ruck
+L1,1920,Ruck,Ruck,34,,0,97.1,77.3,,,,Ruck won,1572655435000,9,3,6,FALSE,Ruck
+L1,1926,Ruck,Ruck,34,,0,97.1,77.3,,,,Ruck won,1572655441000,9,3,6,FALSE,Ruck
+L1,1940,Ruck,Ruck,34,,0,88.2,5.6,,,,Ruck won,1572655455000,9,3,6,FALSE,Ruck
+L1,1951,Ruck,Ruck,34,,0,88.2,5.6,,,,Ruck won,1572655466000,9,3,6,FALSE,Ruck
+L1,1960,Ruck,Ruck,34,,0,80.7,9.5,,,,Ruck won,1572655475000,9,3,6,FALSE,Ruck
+L1,1961,Defender beaten,Defender beaten,34,34189,0,80.7,9.5,,,,"",1572655476000,9,3,6,FALSE,Defender beaten
+L1,1979,Ruck,Ruck,34,,0,85,96.4,,,,Ruck won,1572655494000,9,3,6,FALSE,Ruck
+L1,2027,Penalty conceded,Penalty conceded,39,34362,0,95,68.3,,,,"Killing ruck,Defence",1572655552000,9,3,6,FALSE,Penalty conceded
+L1,2068,P3,Penalty,34,43573,3,89.1,59.3,103.21,50.5,14.1,Middle,1572655583000,9,6,6,TRUE,Penalty
+L1,2087,Restart,Restart,39,46392,0,49.5,50,,,,Opp Player,1572655611000,9,6,6,FALSE,Restart
+L1,2108,Ruck,Ruck,34,,0,17,87.1,,,,Ruck won,1572655623000,9,6,6,FALSE,Ruck
+L1,2109,Kick,Kick,34,34189,0,17,87.1,45.35,94.35,28.39,Ball into play,1572655624000,9,6,6,FALSE,Kick
+L1,2109,Ruck,Ruck,39,,0,41.3,87.4,,,,Ruck won,1572655634000,9,6,6,FALSE,Ruck
+L1,2116,Ruck,Ruck,39,,0,44.8,74,,,,Ruck won,1572655640000,9,6,6,FALSE,Ruck
+L1,2121,Kick,Kick,39,49080,0,52.7,56.7,30.53,8.21,22.14,"",1572655645000,9,6,6,FALSE,Kick
+L1,2131,Ruck,Ruck,39,,0,30.5,8.2,,,,Ruck won,1572655655000,9,6,6,FALSE,Ruck
+L1,2135,Ruck,Ruck,39,,0,38.6,37.4,,,,Ruck won,1572655660000,9,6,6,FALSE,Ruck
+L1,2148,Ruck,Ruck,39,,0,41.1,57.2,,,,Ruck won,1572655672000,9,6,6,FALSE,Ruck
+L1,2152,Defender beaten,Defender beaten,39,46392,0,44.8,87.4,,,,"",1572655677000,9,6,6,FALSE,Defender beaten
+L1,2156,Turnover,Turnover,39,,0,36.8,81.5,,,,"Bad Pass,Opp Half",1572655681000,9,6,6,FALSE,Turnover
+L1,2165,Ruck,Ruck,39,,0,43,86.1,,,,Ruck won,1572655689000,9,6,6,FALSE,Ruck
+L1,2172,Ruck,Ruck,34,,0,41.6,83.3,,,,Ruck lost,1572655687000,9,6,6,FALSE,Ruck
+L1,2187,Ruck,Ruck,39,,0,42.3,8,,,,Ruck won,1572655712000,9,6,6,FALSE,Ruck
+L1,2195,Penalty conceded,Penalty conceded,34,46112,0,42.5,79.4,,,,"Ball into play,Handling in ruck,Offence",1572655711000,9,6,6,FALSE,Penalty conceded
+L1,2296,P3,Penalty,39,46392,3,42.5,85.6,-4.28,49.73,46.78,Middle,1572655810000,9,6,9,TRUE,Penalty
+L1,2322,Restart,Restart,34,43574,0,49.6,50.3,,,,Opp Player,1572655840000,9,6,9,FALSE,Restart
+L1,2336,Ruck,Ruck,39,,0,71.1,75,,,,Ruck won,1572655850000,9,6,9,FALSE,Ruck
+L1,2354,Ruck,Ruck,39,,0,72.7,81.5,,,,Ruck won,1572655868000,9,6,9,FALSE,Ruck
+L1,2369,Linebreak,Linebreak,39,58707,0,63.6,8,,,,"",1572655883000,9,6,9,FALSE,Linebreak
+L1,2369,Defender beaten,Defender beaten,39,58707,0,63.6,8,,,,"",1572655882000,9,6,9,FALSE,Defender beaten
+L1,2370,Turnover,Turnover,34,,0,37.1,44.6,,,,"Own Half,Knock On",1572655888000,9,6,9,FALSE,Turnover
+L1,2395,Kick,Kick,39,58707,0,42.3,26,30.71,39.67,11.6,"",1572655908000,9,6,9,FALSE,Kick
+L1,2437,Scrum,Scrum,39,,0,37.5,48.4,,,,"Pass,Ball into play,Stable,Won Out Right",1572655951000,9,6,9,FALSE,Scrum
+L1,2458,Ruck,Ruck,39,,0,19.3,87.9,,,,Ruck won,1572655972000,9,6,9,FALSE,Ruck
+L1,2493,Penalty conceded,Penalty conceded,34,29161,0,38.4,45.6,,,,"Scrum,Defence",1572656010000,9,6,9,FALSE,Penalty conceded
+L1,2529,P3,Penalty,39,46392,3,36.4,43.5,-5.35,52.05,41.78,Middle,1572656042000,9,6,12,TRUE,Penalty
+LHT,2400,MS,Change Match Status,,,0,0,0,,,,"",1572656067000,9,6,12,TRUE,End First Half
+LHT,2400,Teams Out,Teams Out,39,,0,38.4,45.6,,,,"",1572656863000,9,6,12,FALSE,Teams Out
+L2,2400,MS,Change Match Status,,,0,0,0,,,,Left to Right/Right to Left,1572656952000,9,6,12,TRUE,Start Second Half
+L2,2403,TS,Replacement On - Tactical Substitution,34,38948,0,,,,,,"",1572656952003,9,6,12,FALSE,Replacement On - Tactical Substitution
+L2,2403,TS,Replacement Off - Tactical Substitution,34,34184,0,,,,,,"",1572656952003,9,6,12,FALSE,Replacement Off - Tactical Substitution
+L2,2407,Restart,Restart,34,43574,0,50,50.5,,,,Opp Player,1572656960000,9,6,12,FALSE,Restart
+L2,2407,Kick,Kick,39,46392,0,8.8,33.2,51.42,2.02,42.67,Ball into play,1572656960000,9,6,12,FALSE,Kick
+L2,2418,Kick,Kick,34,43574,0,56.2,21.9,13.75,24.71,42.49,Ball into play,1572656970000,9,6,12,FALSE,Kick
+L2,2437,Kick,Kick,39,46392,0,13.4,29.4,49.28,0.21,35.89,Ball into play,1572656990000,9,6,12,FALSE,Kick
+L2,2458,Lineout,Lineout throw,34,36524,0,49.5,0,,,,"Ball into play,Won clean",1572657010000,9,6,12,FALSE,Lineout throw
+L2,2467,Ruck,Ruck,34,,0,50.4,49,,,,Ruck won,1572657020000,9,6,12,FALSE,Ruck
+L2,2475,Ruck,Ruck,34,,0,50.2,71.7,,,,Ruck won,1572657027000,9,6,12,FALSE,Ruck
+L2,2477,Kick,Kick,34,43571,0,50.2,71.7,43.75,70.62,6.42,"Ball into play,Charged down",1572657030000,9,6,12,FALSE,Kick
+L2,2486,Ruck,Ruck,34,,0,60.9,65.5,,,,Ruck won,1572657038000,9,6,12,FALSE,Ruck
+L2,2495,Ruck,Ruck,34,,0,51.8,17.8,,,,Ruck won,1572657047000,9,6,12,FALSE,Ruck
+L2,2503,Ruck,Ruck,34,,0,54.6,39.4,,,,Ruck won,1572657055000,9,6,12,FALSE,Ruck
+L2,2504,Kick,Kick,34,43574,0,54.6,39.4,31.07,77.07,23.57,Ball into play,1572657056000,9,6,12,FALSE,Kick
+L2,2512,Ruck,Ruck,39,,0,33.6,75,,,,Ruck won,1572657065000,9,6,12,FALSE,Ruck
+L2,2515,Kick,Kick,39,56104,0,33.6,75,64.82,94.35,31.24,Ball into play,1572657068000,9,6,12,FALSE,Kick
+L2,2535,Ruck,Ruck,34,,0,56.6,17.2,,,,Ruck won,1572657087000,9,6,12,FALSE,Ruck
+L2,2552,Ruck,Ruck,34,,0,48.9,96.9,,,,Ruck won,1572657104000,9,6,12,FALSE,Ruck
+L2,2555,Defender beaten,Defender beaten,34,43573,0,50.7,68.6,,,,"",1572657107000,9,6,12,FALSE,Defender beaten
+L2,2561,Ruck,Ruck,34,,0,50.7,68.6,,,,Ruck won,1572657113000,9,6,12,FALSE,Ruck
+L2,2565,Defender beaten,Defender beaten,34,43571,0,50,11.8,,,,"",1572657176000,9,6,12,FALSE,Defender beaten
+L2,2566,Defender beaten,Defender beaten,34,60898,0,50.7,68.6,,,,"",1572657118000,9,6,12,FALSE,Defender beaten
+L2,2567,Ruck,Ruck,34,,0,50.7,68.6,,,,Ruck won,1572657120000,9,6,12,FALSE,Ruck
+L2,2573,Ruck,Ruck,34,,0,49.8,15.2,,,,Ruck won,1572657126000,9,6,12,FALSE,Ruck
+L2,2579,Ruck,Ruck,34,,0,49.8,15.2,,,,Ruck won,1572657131000,9,6,12,FALSE,Ruck
+L2,2591,Turnover,Turnover,34,,0,55.5,87.9,,,,"Own Half,Bad Pass",1572657143000,9,6,12,FALSE,Turnover
+L2,2627,TS,Replacement On - Tactical Substitution,39,45555,0,,,,,,"",1572657143036,9,6,12,FALSE,Replacement On - Tactical Substitution
+L2,2627,TS,Replacement Off - Tactical Substitution,39,34362,0,,,,,,"",1572657143036,9,6,12,FALSE,Replacement Off - Tactical Substitution
+L2,2628,TS,Replacement On - Tactical Substitution,39,49037,0,,,,,,"",1572657143037,9,6,12,FALSE,Replacement On - Tactical Substitution
+L2,2628,TS,Replacement Off - Tactical Substitution,39,47012,0,,,,,,"",1572657143037,9,6,12,FALSE,Replacement Off - Tactical Substitution
+L2,2649,Scrum,Scrum,39,,0,51.6,89.2,,,,"Pass,Stable,Won Penalty",1572657233000,9,6,12,FALSE,Scrum
+L2,2710,Penalty conceded,Penalty conceded,34,29161,0,53,86.4,,,,"Scrum,Defence",1572657294000,9,6,12,FALSE,Penalty conceded
+L2,2731,P3,Penalty,39,46392,3,52.9,82,102.49,50.25,49.64,Middle,1572657315000,9,6,15,TRUE,Penalty
+L2,2752,TS,Replacement On - Tactical Substitution,34,36527,0,,,,,,"",1572657315021,9,6,15,FALSE,Replacement On - Tactical Substitution
+L2,2752,TS,Replacement Off - Tactical Substitution,34,38888,0,,,,,,"",1572657315021,9,6,15,FALSE,Replacement Off - Tactical Substitution
+L2,2763,Restart,Restart,34,43574,0,50.7,50,,,,Opp Player,1572657348000,9,6,15,FALSE,Restart
+L2,2768,Ruck,Ruck,39,,0,23.8,20.1,,,,Ruck won,1572657359000,9,6,15,FALSE,Ruck
+L2,2769,Kick,Kick,39,56104,0,23.8,20.1,30.89,7.43,7.14,Ball into play,1572657360000,9,6,15,FALSE,Kick
+L2,2783,Ruck,Ruck,34,,0,31.4,9.5,,,,Ruck won,1572657368000,9,6,15,FALSE,Ruck
+L2,2793,Ruck,Ruck,34,,0,28.8,15.9,,,,Ruck won,1572657378000,9,6,15,FALSE,Ruck
+L2,2799,Ruck,Ruck,34,,0,26.6,23.7,,,,Ruck won,1572657383000,9,6,15,FALSE,Ruck
+L2,2804,Ruck,Ruck,34,,0,27.3,45.3,,,,Ruck won,1572657389000,9,6,15,FALSE,Ruck
+L2,2815,Maul,Maul,34,,0,27.5,67.3,,,,Lost Outright,1572657399000,9,6,15,FALSE,Maul
+L2,2820,Turnover,Turnover,34,,0,27.5,67.3,,,,"Lost In Ruck Or Maul,Opp Half",1572657405000,9,6,15,FALSE,Turnover
+L2,2861,Scrum,Scrum,39,,0,24.1,65.2,,,,"Pass,Stable,Won Penalty",1572657452000,9,6,15,FALSE,Scrum
+L2,2870,Penalty conceded,Penalty conceded,34,29161,0,26.6,64.7,,,,"Scrum,Defence",1572657498000,9,6,15,FALSE,Penalty conceded
+L2,2900,Kick,Kick,39,46392,0,24.1,65.2,47.5,102.08,23.39,Ball into play,1572657492000,9,6,15,FALSE,Kick
+L2,2924,Lineout,Lineout throw,39,50452,0,42.7,101.3,,,,"Ball into play,Won clean",1572657515000,9,6,15,FALSE,Lineout throw
+L2,2932,Maul,Maul,39,,0,43.4,90.5,,,,Lost Outright,1572657523000,9,6,15,FALSE,Maul
+L2,2939,Turnover,Turnover,39,,0,43.4,90.5,,,,"Own Half,Lost In Ruck Or Maul",1572657531000,9,6,15,FALSE,Turnover
+L2,2962,TS,Replacement On - Tactical Substitution,34,45664,0,,,,,,"",1572657531023,9,6,15,FALSE,Replacement On - Tactical Substitution
+L2,2962,TS,Replacement Off - Tactical Substitution,34,43574,0,,,,,,"",1572657531023,9,6,15,FALSE,Replacement Off - Tactical Substitution
+L2,2972,Scrum,Scrum,34,,0,42,80.7,,,,"Pass,Stable,Won Penalty",1572657600000,9,6,15,FALSE,Scrum
+L2,3009,Penalty conceded,Penalty conceded,39,50452,0,37.1,77.1,,,,"Scrum,Defence",1572657630000,9,6,15,FALSE,Penalty conceded
+L2,3061,P3,Penalty,34,43573,3,40,76.3,-3.21,50.25,43.21,Middle,1572657689000,9,9,15,TRUE,Penalty
+L2,3095,Restart,Restart,39,46392,0,50.2,51.8,,,,Opp Player,1572657717000,9,9,15,FALSE,Restart
+L2,3108,Ruck,Ruck,34,,0,75.2,13.9,,,,Ruck won,1572657730000,9,9,15,FALSE,Ruck
+L2,3109,Kick,Kick,34,34189,0,75.2,13.9,45.53,5.63,29.64,Ball into play,1572657732000,9,9,15,FALSE,Kick
+L2,3119,Ruck,Ruck,39,,0,51.4,11.3,,,,Ruck won,1572657741000,9,9,15,FALSE,Ruck
+L2,3125,Ruck,Ruck,39,,0,47.9,30.6,,,,Ruck won,1572657746000,9,9,15,FALSE,Ruck
+L2,3129,Kick,Kick,39,49080,0,40.4,45.6,64.99,81.97,24.64,Ball into play,1572657751000,9,9,15,FALSE,Kick
+L2,3138,Ruck,Ruck,34,,0,61.4,88.9,,,,Ruck won,1572657760000,9,9,15,FALSE,Ruck
+L2,3146,Ruck,Ruck,34,,0,62,68,,,,Ruck won,1572657768000,9,9,15,FALSE,Ruck
+L2,3149,Kick,Kick,34,43573,0,62,68,19.82,85.32,42.14,Ball into play,1572657771000,9,9,15,FALSE,Kick
+L2,3164,Ruck,Ruck,39,,0,37.7,90.7,,,,Ruck lost,1572657785000,9,9,15,FALSE,Ruck
+L2,3164,Penalty conceded,Penalty conceded,39,46392,0,37.7,90.7,,,,"Ball into play,Handling in ruck,Offence",1572657785000,9,9,15,FALSE,Penalty conceded
+L2,3258,Miss Pen,Missed Penalty,34,43573,0,35.7,85.8,-1.25,57.47,36.96,Missed right,1572657880000,9,9,15,FALSE,Missed Penalty
+L2,3289,Restart,Restart,39,46392,0,12.1,57.2,,,,Own Player,1572657911000,9,9,15,FALSE,Restart
+L2,3291,Turnover,Turnover,34,,0,38.9,10.3,,,,"Knock On,Opp Half",1572657914000,9,9,15,FALSE,Turnover
+L2,3299,Ruck,Ruck,39,,0,50.9,13.6,,,,Ruck won,1572657920000,9,9,15,FALSE,Ruck
+L2,3304,Ruck,Ruck,39,,0,47.9,30.4,,,,Ruck won,1572657926000,9,9,15,FALSE,Ruck
+L2,3306,Kick,Kick,39,49080,0,41.4,40.7,94.81,89.19,53.39,Ball into play,1572657928000,9,9,15,FALSE,Kick
+L2,3311,Kick,Kick,34,43571,0,86.4,85.8,74.1,101.57,12.32,Ball into play,1572657933000,9,9,15,FALSE,Kick
+L2,3338,Linebreak,Linebreak,39,50681,0,47.1,4.6,,,,"",1572657960000,9,9,15,FALSE,Linebreak
+L2,3344,Ruck,Ruck,39,,0,73.7,77.8,,,,Ruck won,1572657966000,9,9,15,FALSE,Ruck
+L2,3367,Defender beaten,Defender beaten,39,48565,0,78.6,2.5,,,,"",1572657989000,9,9,15,FALSE,Defender beaten
+L2,3374,Maul,Maul,39,,0,77.5,83.8,,,,Ruck won,1572657995000,9,9,15,FALSE,Maul
+L2,3383,Lineout,Lineout throw,39,50452,0,72.1,101.6,,,,"Ball into play,Won clean",1572658005000,9,9,15,FALSE,Lineout throw
+L2,3412,Penalty conceded,Penalty conceded,34,44193,0,72.5,43,,,,"Offside,Defence",1572658035000,9,9,15,FALSE,Penalty conceded
+L2,3431,P3,Penalty,39,46392,3,74.8,51,104.28,50.5,29.46,Middle,1572658052000,9,9,18,TRUE,Penalty
+L2,3452,Restart,Restart,34,43573,0,49.6,50.5,,,,Opp Player,1572658074000,9,9,18,FALSE,Restart
+L2,3460,Ruck,Ruck,39,,0,21.8,20.3,,,,Ruck lost,1572658082000,9,9,18,FALSE,Ruck
+L2,3467,Penalty conceded,Penalty conceded,39,50452,0,21.8,20.3,,,,"Ball into play,Offence",1572658089000,9,9,18,FALSE,Penalty conceded
+L2,3541,P3,Penalty,34,43573,3,21.3,20.3,,,,Middle,1572658162000,9,12,18,TRUE,Penalty
+L2,3554,TS,Replacement On - Tactical Substitution,34,45651,0,,,,,,"",1572658162013,9,12,18,FALSE,Replacement On - Tactical Substitution
+L2,3554,TS,Replacement On - Tactical Substitution,39,55747,0,,,,,,"",1572658162013,9,12,18,FALSE,Replacement On - Tactical Substitution
+L2,3554,TS,Replacement Off - Tactical Substitution,34,36524,0,,,,,,"",1572658162013,9,12,18,FALSE,Replacement Off - Tactical Substitution
+L2,3554,TS,Replacement Off - Tactical Substitution,39,43559,0,,,,,,"",1572658162013,9,12,18,FALSE,Replacement Off - Tactical Substitution
+L2,3555,Restart,Restart,39,46392,0,50.2,50,,,,Opp Player,1572658203000,9,12,18,FALSE,Restart
+L2,3561,TS,Replacement On - Tactical Substitution,34,60902,0,,,,,,"",1572658203006,9,12,18,FALSE,Replacement On - Tactical Substitution
+L2,3561,TS,Replacement Off - Tactical Substitution,34,60898,0,,,,,,"",1572658203006,9,12,18,FALSE,Replacement Off - Tactical Substitution
+L2,3568,Ruck,Ruck,34,,0,81.2,12.9,,,,Ruck won,1572658215000,9,12,18,FALSE,Ruck
+L2,3576,Turnover,Turnover,39,,0,58.4,1.2,,,,"Carried In Touch,Opp Half",1572658224000,9,12,18,FALSE,Turnover
+L2,3577,Ruck,Ruck,34,,0,80.2,12.9,,,,Ruck won,1572658224000,9,12,18,FALSE,Ruck
+L2,3578,Kick,Kick,34,34189,0,80.2,12.9,61.07,11.82,19.1,"",1572658225000,9,12,18,FALSE,Kick
+L2,3599,Lineout,Lineout throw,34,45651,0,62.1,0.2,,,,"Ball into play,Won clean",1572658246000,9,12,18,FALSE,Lineout throw
+L2,3606,Maul,Maul,34,,0,61.4,12.6,,,,Ruck won,1572658253000,9,12,18,FALSE,Maul
+L2,3609,Kick,Kick,34,34189,0,61.4,12.6,28.03,6.92,33.39,Ball into play,1572658256000,9,12,18,FALSE,Kick
+L2,3614,Defender beaten,Defender beaten,39,48565,0,27.3,18.8,,,,"",1572658262000,9,12,18,FALSE,Defender beaten
+L2,3618,Ruck,Ruck,39,,0,27.3,18.8,,,,Ruck won,1572658266000,9,12,18,FALSE,Ruck
+L2,3624,Ruck,Ruck,39,,0,27.7,34.8,,,,Ruck won,1572658271000,9,12,18,FALSE,Ruck
+L2,3636,Kick,Kick,39,56104,0,27.7,34.8,51.78,6.92,24.1,Ball into play,1572658283000,9,12,18,FALSE,Kick
+L2,3649,Ruck,Ruck,34,,0,50.5,13.4,,,,Ruck won,1572658295000,9,12,18,FALSE,Ruck
+L2,3654,Ruck,Ruck,34,,0,53.7,25.2,,,,Ruck won,1572658301000,9,12,18,FALSE,Ruck
+L2,3661,Ruck,Ruck,34,,0,55.5,57.5,,,,Ruck won,1572658307000,9,12,18,FALSE,Ruck
+L2,3664,Kick,Kick,34,43573,0,57.7,65.5,31.25,95.64,26.42,Ball into play,1572658311000,9,12,18,FALSE,Kick
+L2,3671,Ruck,Ruck,39,,0,30.2,92.8,,,,Ruck won,1572658319000,9,12,18,FALSE,Ruck
+L2,3681,Ruck,Ruck,39,,0,29.3,73.2,,,,Ruck won,1572658329000,9,12,18,FALSE,Ruck
+L2,3683,Kick,Kick,39,56104,0,29.3,73.2,45.17,86.09,15.89,Ball into play,1572658331000,9,12,18,FALSE,Kick
+L2,3705,Penalty conceded,Penalty conceded,34,48706,0,44.3,80.7,,,,"Obstruction,Defence",1572658361000,9,12,18,FALSE,Penalty conceded
+L2,3781,Miss Pen,Missed Penalty,39,46392,0,47.7,80.4,98.03,45.34,50.35,Dropped short,1572658441000,9,12,18,FALSE,Missed Penalty
+L2,3796,Kick,Kick,34,45664,0,96.1,44.8,49.82,-0.56,46.24,Ball into play,1572658454000,9,12,18,FALSE,Kick
+L2,3798,TS,Replacement On - Tactical Substitution,39,39965,0,,,,,,"",1572658454002,9,12,18,FALSE,Replacement On - Tactical Substitution
+L2,3798,TS,Replacement Off - Tactical Substitution,39,39774,0,,,,,,"",1572658454002,9,12,18,FALSE,Replacement Off - Tactical Substitution
+L2,3803,Lineout,Lineout throw,39,50452,0,44.3,-3.4,,,,"Ball into play,Won clean",1572658486000,9,12,18,FALSE,Lineout throw
+L2,3810,Kick,Kick,39,46392,0,44.6,27.3,58.57,94.35,13.92,"",1572658493000,9,12,18,FALSE,Kick
+L2,3823,Ruck,Ruck,39,,0,58.6,94.4,,,,Ruck won,1572658506000,9,12,18,FALSE,Ruck
+L2,3871,Scrum,Scrum,39,,0,60.2,88.7,,,,"Pass,Ball into play,Stable,Won Out Right",1572658554000,9,12,18,FALSE,Scrum
+L2,3883,Ruck,Ruck,39,,0,67.3,71.1,,,,Ruck won,1572658566000,9,12,18,FALSE,Ruck
+L2,3888,Ruck,Ruck,39,,0,64.8,56.7,,,,Ruck won,1572658571000,9,12,18,FALSE,Ruck
+L2,3895,Ruck,Ruck,39,,0,66.2,16.7,,,,Ruck won,1572658578000,9,12,18,FALSE,Ruck
+L2,3901,Ruck,Ruck,39,,0,66.1,31.4,,,,Ruck won,1572658584000,9,12,18,FALSE,Ruck
+L2,3910,Ruck,Ruck,39,,0,70.5,50,,,,Ruck won,1572658593000,9,12,18,FALSE,Ruck
+L2,3913,Kick,Kick,39,49080,0,65.5,63.9,81.96,94.35,16.42,Ball into play,1572658596000,9,12,18,FALSE,Kick
+L2,3922,Ruck,Ruck,34,,0,83.7,94.9,,,,Ruck won,1572658608000,9,12,18,FALSE,Ruck
+L2,3932,Ruck,Ruck,34,,0,83,87.6,,,,Ruck won,1572658618000,9,12,18,FALSE,Ruck
+L2,3933,Kick,Kick,34,34189,0,83,87.6,56.6,90.48,26.42,Ball into play,1572658618000,9,12,18,FALSE,Kick
+L2,3945,Ruck,Ruck,39,,0,54.8,83.5,,,,Ruck won,1572658628000,9,12,18,FALSE,Ruck
+L2,3951,T5,Try,39,60865,5,102.3,95.9,,,,"Ball into play,Passing Move",1572658658000,9,12,23,TRUE,Try
+L2,3952,Linebreak,Linebreak,39,60865,0,56.1,96.4,,,,"",1572658635000,9,12,23,FALSE,Linebreak
+L2,3954,Defender beaten,Defender beaten,39,60865,0,87.5,90.5,,,,"",1572658787000,9,12,23,FALSE,Defender beaten
+L2,3956,Kick,Kick,39,60865,0,67.9,91.8,84.1,89.7,16.24,"",1572658639000,9,12,23,FALSE,Kick
+L2,4018,C2,Conversion,39,46392,2,76.4,79.7,,,,Middle,1572658778000,9,12,25,TRUE,Conversion
+L2,4040,Restart,Restart,34,43573,0,50.9,49,,,,Own Player,1572658798000,9,12,25,FALSE,Restart
+L2,4044,Defender beaten,Defender beaten,34,50344,0,39.3,11.8,,,,"",1572658802000,9,12,25,FALSE,Defender beaten
+L2,4046,Ruck,Ruck,34,,0,39.5,34.3,,,,Ruck won,1572658804000,9,12,25,FALSE,Ruck
+L2,4047,Defender beaten,Defender beaten,34,34189,0,39.8,19.8,,,,"",1572658852000,9,12,25,FALSE,Defender beaten
+L2,4049,Defender beaten,Defender beaten,34,45651,0,41.3,46.9,,,,"",1572658807000,9,12,25,FALSE,Defender beaten
+L2,4052,Ruck,Ruck,34,,0,41.3,46.9,,,,Ruck won,1572658810000,9,12,25,FALSE,Ruck
+L2,4061,Turnover,Turnover,39,,0,38.9,34.5,,,,"Own Half,Knock On",1572658818000,9,12,25,FALSE,Turnover
+L2,4071,IR,Replacement On - Injury Replacement,39,29126,0,,,,,,"",1572658818010,9,12,25,FALSE,Replacement On - Injury Replacement
+L2,4071,IR,Replacement Off - Injury Replacement,39,49080,0,,,,,,"",1572658818010,9,12,25,FALSE,Replacement Off - Injury Replacement
+L2,4109,Scrum,Scrum,34,,0,39.8,19.8,,,,"Pass,Ball into play,Stable,Won Out Right",1572658867000,9,12,25,FALSE,Scrum
+L2,4115,Ruck,Ruck,34,,0,35.4,33,,,,Ruck won,1572658873000,9,12,25,FALSE,Ruck
+L2,4124,Ruck,Ruck,34,,0,32.9,51.8,,,,Ruck won,1572658882000,9,12,25,FALSE,Ruck
+L2,4136,Ruck,Ruck,34,,0,30.7,64.2,,,,Ruck won,1572658894000,9,12,25,FALSE,Ruck
+L2,4143,Linebreak,Linebreak,34,48706,0,6.3,96.2,,,,"",1572658901000,9,12,25,FALSE,Linebreak
+L2,4143,Defender beaten,Defender beaten,34,48706,0,6.3,96.2,,,,"",1572658901000,9,12,25,FALSE,Defender beaten
+L2,4149,Ruck,Ruck,34,,0,6.3,96.2,,,,Ruck won,1572658907000,9,12,25,FALSE,Ruck
+L2,4151,Penalty conceded,Penalty conceded,39,49037,0,23,80.2,,,,"Handling in ruck,Defence",1572658908000,9,12,25,FALSE,Penalty conceded
+L2,4155,Ruck,Ruck,34,,0,6.4,86.6,,,,Ruck won,1572658913000,9,12,25,FALSE,Ruck
+L2,4161,Ruck,Ruck,34,,0,5.4,74.8,,,,Ruck won,1572658919000,9,12,25,FALSE,Ruck
+L2,4184,Turnover,Turnover,34,,0,6.6,90.7,,,,"Knock On,Opp Half",1572658942000,9,12,25,FALSE,Turnover
+L2,4199,TS,Replacement On - Tactical Substitution,34,38907,0,,,,,,"",1572658942015,9,12,25,FALSE,Replacement On - Tactical Substitution
+L2,4199,TS,Replacement Off - Tactical Substitution,34,38906,0,,,,,,"",1572658942015,9,12,25,FALSE,Replacement Off - Tactical Substitution
+L2,4219,Scrum,Scrum,39,,0,8,94.6,,,,"Pass,Stable,Reset",1572659052000,9,12,25,FALSE,Scrum
+L2,4261,Scrum,Scrum,39,,0,8,94.6,,,,"Pass,Ball into play,Stable,Won Out Right",1572659093000,9,12,25,FALSE,Scrum
+L2,4274,Ruck,Ruck,39,,0,10.9,80.4,,,,Ruck won,1572659107000,9,12,25,FALSE,Ruck
+L2,4278,Kick,Kick,39,56104,0,10.9,80.4,27.67,101.31,16.78,Ball into play,1572659110000,9,12,25,FALSE,Kick
+L2,4299,Lineout,Lineout throw,34,45651,0,26.8,101.1,,,,"Ball into play,Won clean",1572659133000,9,12,25,FALSE,Lineout throw
+L2,4308,Ruck,Ruck,34,,0,27.7,51.8,,,,Ruck won,1572659141000,9,12,25,FALSE,Ruck
+L2,4313,Ruck,Ruck,34,,0,27.7,51.8,,,,Ruck won,1572659146000,9,12,25,FALSE,Ruck
+L2,4321,Turnover,Turnover,34,,0,27,6.1,,,,"Knock On,Opp Half",1572659155000,9,12,25,FALSE,Turnover
+L2,4328,Ruck,Ruck,39,,0,29.8,5.6,,,,Ruck won,1572659160000,9,12,25,FALSE,Ruck
+L2,4332,Kick,Kick,39,29126,0,22.3,12.9,66.78,8.98,44.46,Ball into play,1572659164000,9,12,25,FALSE,Kick
+L2,4345,Ruck,Ruck,34,,0,53.7,5.4,,,,Ruck won,1572659178000,9,12,25,FALSE,Ruck
+L2,4354,Ruck,Ruck,34,,0,53.9,20.1,,,,Ruck won,1572659187000,9,12,25,FALSE,Ruck
+L2,4363,Ruck,Ruck,34,,0,59.8,55.2,,,,Ruck won,1572659196000,9,12,25,FALSE,Ruck
+L2,4370,Ruck,Ruck,34,,0,60.2,32.7,,,,Ruck won,1572659203000,9,12,25,FALSE,Ruck
+L2,4374,Ruck,Ruck,34,,0,58,44.6,,,,Ruck won,1572659207000,9,12,25,FALSE,Ruck
+L2,4388,Ruck,Ruck,34,,0,57.1,72.9,,,,Ruck won,1572659221000,9,12,25,FALSE,Ruck
+L2,4393,Turnover,Turnover,34,,0,60.7,10.3,,,,"Own Half,Knock On",1572659226000,9,12,25,FALSE,Turnover
+L2,4397,Linebreak,Linebreak,39,48565,0,88.7,9.8,,,,"",1572659230000,9,12,25,FALSE,Linebreak
+L2,4397,Defender beaten,Defender beaten,39,48565,0,88.7,9.8,,,,"",1572659229000,9,12,25,FALSE,Defender beaten
+L2,4399,T5,Try,39,48565,5,104.1,22.4,,,,"Individual Effort,Ball into play",1572659232000,9,12,30,TRUE,Try
+L2,4432,Defender beaten,Defender beaten,39,48565,0,76.8,9,,,,"",1572659264000,9,12,30,FALSE,Defender beaten
+L2,4439,Defender beaten,Defender beaten,39,48565,0,76.8,9,,,,"",1572659272000,9,12,30,FALSE,Defender beaten
+L2,4491,C2,Conversion,39,46392,2,72.9,14.4,102.85,51.79,29.99,Middle,1572659323000,9,12,32,TRUE,Conversion
+L2,4518,TS,Replacement On - Tactical Substitution,34,45665,0,,,,,,"",1572659323027,9,12,32,FALSE,Replacement On - Tactical Substitution
+L2,4518,TS,Replacement Off - Tactical Substitution,34,34189,0,,,,,,"",1572659323027,9,12,32,FALSE,Replacement Off - Tactical Substitution
+L2,4520,Linebreak,Linebreak,39,58707,0,65.7,46.1,,,,"",1572659353000,9,12,32,FALSE,Linebreak
+L2,4520,Defender beaten,Defender beaten,39,58707,0,65.7,46.1,,,,"",1572659352000,9,12,32,FALSE,Defender beaten
+L2,4526,Ruck,Ruck,39,,0,73.2,20.1,,,,Ruck won,1572659358000,9,12,32,FALSE,Ruck
+L2,4529,Kick,Kick,39,46392,0,65.4,38.9,84.64,95.64,19.28,Ball into play,1572659362000,9,12,32,FALSE,Kick
+L2,4543,Ruck,Ruck,34,,0,82.9,94.6,,,,Ruck won,1572659376000,9,12,32,FALSE,Ruck
+L2,4549,Ruck,Ruck,34,,0,84.5,86.4,,,,Ruck won,1572659383000,9,12,32,FALSE,Ruck
+L2,4556,Defender beaten,Defender beaten,34,38907,0,82.3,58,,,,"",1572659389000,9,12,32,FALSE,Defender beaten
+L2,4559,Ruck,Ruck,34,,0,82.3,58,,,,Ruck won,1572659392000,9,12,32,FALSE,Ruck
+L2,4565,Ruck,Ruck,34,,0,80.7,43,,,,Ruck won,1572659398000,9,12,32,FALSE,Ruck
+L2,4572,Ruck,Ruck,34,,0,80.7,43,,,,Ruck won,1572659405000,9,12,32,FALSE,Ruck
+L2,4580,Turnover,Turnover,34,,0,82.9,88.2,,,,"Own Half,Knock On",1572659413000,9,12,32,FALSE,Turnover
+L2,4594,Defender beaten,Defender beaten,39,58707,0,51.4,45.9,,,,"",1572659426000,9,12,32,FALSE,Defender beaten
+L2,4607,TS,Replacement On - Tactical Substitution,39,67397,0,,,,,,"",1572659426013,9,12,32,FALSE,Replacement On - Tactical Substitution
+L2,4607,TS,Replacement Off - Tactical Substitution,39,56104,0,,,,,,"",1572659426013,9,12,32,FALSE,Replacement Off - Tactical Substitution
+L2,4623,Restart,Restart,34,43573,0,49.5,50.8,,,,Own Player,1572659456000,9,12,32,FALSE,Restart
+L2,4632,Scrum,Scrum,39,,0,83,93.3,,,,"Pass,Ball into play,Stable,Won Out Right",1572659494000,9,12,32,FALSE,Scrum
+L2,4638,Ruck,Ruck,39,,0,85,78.1,,,,Ruck won,1572659500000,9,12,32,FALSE,Ruck
+L2,4644,Ruck,Ruck,39,,0,84.3,68.8,,,,Ruck won,1572659506000,9,12,32,FALSE,Ruck
+L2,4650,Ruck,Ruck,39,,0,83.4,57.5,,,,Ruck won,1572659512000,9,12,32,FALSE,Ruck
+L2,4655,Miss DG,Missed Drop Goal,39,46392,0,70,55.7,,,,"Ball into play,Missed right",1572659517000,9,12,32,FALSE,Missed Drop Goal
+L2,4682,Turnover,Turnover,34,,0,77.9,-0.6,,,,Own Half,1572659545000,9,12,32,FALSE,Turnover
+L2,4704,Restart,Restart,34,43573,0,81.2,41.7,,,,Error Out Of Play,1572659537000,9,12,32,FALSE,Restart
+L2,4729,Scrum,Scrum,39,,0,78.6,48.7,,,,"Pass,Ball into play,Stable,Won Out Right",1572659591000,9,12,32,FALSE,Scrum
+L2,4742,Ruck,Ruck,39,,0,84.3,37.1,,,,Ruck won,1572659603000,9,12,32,FALSE,Ruck
+L2,4754,Ruck,Ruck,39,,0,87,65.5,,,,Ruck won,1572659616000,9,12,32,FALSE,Ruck
+L2,4758,Ruck,Ruck,39,,0,84.6,76,,,,Ruck won,1572659620000,9,12,32,FALSE,Ruck
+L2,4765,Ruck,Ruck,39,,0,84.8,94.1,,,,Ruck won,1572659627000,9,12,32,FALSE,Ruck
+L2,4779,Ruck,Ruck,39,,0,82.3,80.4,,,,Ruck won,1572659641000,9,12,32,FALSE,Ruck
+L2,4789,Ruck,Ruck,39,,0,85.4,92.8,,,,Ruck won,1572659651000,9,12,32,FALSE,Ruck
+L2,4798,Ruck,Ruck,39,,0,83.4,84.8,,,,Ruck won,1572659660000,9,12,32,FALSE,Ruck
+L2,4803,Kick,Kick,39,46392,0,69.8,83.8,72.14,101.57,2.32,Ball into play,1572659665000,9,12,32,FALSE,Kick
+LFT,4800,MS,Change Match Status,39,,0,0,0,,,,"",1572659714000,9,12,32,FALSE,Change Match Status

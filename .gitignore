@@ -42,3 +42,6 @@ __pycache__/
 *.pyc
 .DS_Store
 .Rproj.user
+
+# Google Cloud
+cloud-auth
