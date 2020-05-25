@@ -20,7 +20,7 @@ source('../r-code/rugby_plots.R')
 
 
 ```{r "data-prep"}
-mt_comms <- fread('wc_mt_google.csv', encoding = 'UTF-8')
+mt_comms <- fread('reddit-match-threads/dqcos5.csv', encoding = 'UTF-8')
 timeline <- fread('wc_final_timeline.csv')
 score_events <- c("T5", "C2", "P3")
 
