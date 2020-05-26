@@ -1,3 +1,4 @@
+library(glue)
 legend_bottom <- theme(legend.position = "bottom")
 
 x_axis_angled <- function(x=305) {
@@ -21,4 +22,37 @@ titleize_ <- function(x) {
 titleize <- function(x) {
   s <- strsplit(x, " ")
   lapply(s, titleize_)
+}
+
+sigfig <- function(vec, digits=3) {
+  return(
+    gsub("\\.$", "", 
+      formatC(signif(vec,digits=digits), digits=digits, format="fg", flag="#")
+    )
+  )
+}
+
+hex_to_rgba <- function(hex, opacity=1) {
+  glue("rgba({paste(col2rgb(hex), collapse=',')},{opacity})")
+}
+
+get_team_colour_no_white <- function(team, team_cols){
+  team_cols[country==team, ifelse(primary!='#ffffff', primary, secondary)]
+}
+
+get_team_border_col <- function(team, team_cols){
+  team_cols[country==team, ifelse(secondary=='#ffffff', primary, secondary)]
+}
+
+get_team_bg_col <- function(team, team_cols){
+  team_cols[country==team, primary]
+}
+
+get_team_text_col <- function(team, team_cols){
+  team_cols[country==team, secondary]
+}
+
+get_team_logo <- function(team, path='') {
+  team_u <- gsub(" ", "_", team)
+  return(file.path(path, glue('{team_u}_logo.svg')))
 }
