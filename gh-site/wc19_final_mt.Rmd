@@ -20,7 +20,7 @@ source('../r-code/rugby_plots.R')
 
 
 ```{r "data-prep"}
-mt_comms <- fread('reddit-match-threads/dqcos5.csv', encoding = 'UTF-8')
+mt_comms <- fread('reddit-match-threads/dqcos5_old.csv', encoding = 'UTF-8')
 timeline <- fread('wc_final_timeline.csv')
 score_events <- c("T5", "C2", "P3")
 
@@ -88,6 +88,8 @@ combodt[
   on=c(allegiance="country")
 ]
 ```
+
+**NB: Due to changes in the Google Cloud Natural Language API the sentiment scores in this report are no longer exactly the same as what is returned by the Natural Language API. However I consider the analysis is still valid.**
 
 With the 2019/20 novel coronavirus outbreak wreaking havoc on sport across the world I had been trying to come up with something new to look at with rugby data. Then along came the NFL Draft and I got inspiration from a [really cool project by Caio Brighenti](https://github.com/CaioBrighenti/nfl-draft-sentiment) that involved using sentiment analysis on Reddit comments to track the mood of fans.
 
