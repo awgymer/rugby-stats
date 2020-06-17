@@ -1,0 +1,16 @@
+---
+title: "Reddit Match Thread Dashboards"
+author: "Arthur Gymer"
+date: "2020-05-12"
+output: html_document
+---
+
+Using the [`Flexdashboard`](https://rmarkdown.rstudio.com/flexdashboard/index.html) package I created a template to produce dashboards from Reddit `/r/rugbyunion` Match Thread comments and match data scraped from the official RWC site. 
+
+For more information on the analysis which underpins the graphics on the dashboards see [this article](wc19_final_mt.html)
+
+*N.B. Due to changes to Google Natural Language API the sentiment scores shown may not be exactly reproducible at any given time.*
+
+- [RWC Final: ENG v RSA](wc-final-eng-sa-dash.html)
+- [RWC Semi-final: NZ v ENG](nz-eng-rwc-dash.html)
+

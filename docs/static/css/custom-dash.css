@@ -20,8 +20,9 @@
 	text-align: center;
 }
 .flag {
-	border-style: ridge;
+	border-style: solid;
 	border-width: 1px;
+	border-color: #ECECEC; 
 }
 .table-flag {
 	height: 30px;

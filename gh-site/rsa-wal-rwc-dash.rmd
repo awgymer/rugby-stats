@@ -1,0 +1,951 @@
+---
+title: "RWC Semi Final: RSA v WAL"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: rows
+    vertical_layout: scroll
+    theme: bootstrap
+    css: static/css/custom-dash.css
+---
+
+<!-- Custom JS to help with formatting non-standard content -->
+<script src="static/js/custom-flexdashboard-components.js"></script> 
+
+```{r "setup", include=FALSE}
+knitr::opts_chunk$set(echo = F, warning = F, message = F, fig.align = 'center')
+library(flexdashboard)
+library(htmltools)
+library(data.table)
+library(plotly)
+library(glue)
+library(gt)
+library(paletteer)
+library(emo)
+library(kableExtra)
+source('../r-code/rugby_plots.R')
+```
+
+
+```{r "data-source", include=FALSE}
+### SET THESE VALUES TO CUSTOMISE
+logos_pth <- 'static/imgs/team-colours'
+score_events <- c("T5", "C2", "P3")
+posix_KO <- as.POSIXct("2019-10-27 08:30:00", tz="UTC")
+posix_FT <- as.POSIXct("2019-10-27 11:30:00", tz="UTC")
+ref_regex <- '( ref|Garces|garces|jerome|Jerome|Jérôme|Garcès|jérôme|garcès)'
+match_data <- jsonlite::fromJSON('../data/reddit-match-threads/dnmxzg_matchdata.json')
+mt_comms <- fread('../data/reddit-match-threads/dnmxzg_final.csv', encoding = 'UTF-8')
+timeline <- fread('../data/reddit-match-threads/dnmxzg_timeline.csv')
+TEAM_0_NAME <- tolower(match_data$teams[1, 'name'])
+TEAM_1_NAME <- tolower(match_data$teams[2, 'name'])
+TEAM_0_ID <- match_data$teams[1, 'id']
+TEAM_1_ID <- match_data$teams[2, 'id']
+```
+
+
+```{r "data-prep"}
+# Add R POSIXct type datetime columns
+mt_comms[,posix_dt := as.POSIXct(created_utc, origin='1970-01-01', tz='UTC')]
+timeline[,posix_dt := as.POSIXct((millis/1000)+(gmt_offset*60*60), origin='1970-01-01', tz='UTC')]
+timeline[,posix_dt := as.POSIXct(unlist(lapply(posix_dt, wr_timestamp_bst)), origin='1970-01-01', tz='UTC')]
+timeline[is.na(team_id), event_team := 'neutral']
+
+# Clean up mt_comms
+mt_comms[flair_country=='', flair_country := 'unknown']
+
+# Clean up the timeline info
+timeline[team_id == TEAM_0_ID, event_team:=TEAM_0_NAME]
+timeline[team_id == TEAM_1_ID, event_team:=TEAM_1_NAME]
+timeline[is.na(event_team), event_team:='']
+timeline[,graph_lab := glue_data(.SD, '{sprintf("%02d", match_time%/%60)}:{sprintf("%02d", match_time%%60)}<br>{label} {titleize(event_team)}<br>{score0} - {score1}')]
+
+# Merge timeline into comment data
+combodt <- rbindlist(list(mt_comms, timeline), fill = T)
+setorder(combodt, posix_dt)
+combodt[is.na(score_praw), score_praw:=0]
+combodt[is.na(score), score:=0]
+combodt[is.na(vader_score), vader_score:=0]
+combodt[is.na(google_score), google_score:=0]
+combodt[is.na(google_magnitude), google_magnitude:=0]
+combodt[,allegiance := ifelse(flair_country %in% c(TEAM_0_NAME, TEAM_1_NAME), tolower(flair_country), 'neutral')]
+combodt[,ref:=grepl(ref_regex, plaintext)]
+combodt[, c("cum_google", "cum_vader") := .(cumsum(google_score), cumsum(vader_score))]
+combodt[, c("cum_google_ref", "cum_vader_ref") := .(cumsum(google_score), cumsum(vader_score)), by=ref]
+combodt[, c("pre_2", "pre_5", "end") := .(posix_dt - 2*60, posix_dt - 5*60, posix_dt)]
+
+# Add rolling mean columns
+combodt[, c("rm_2mins_google", "rm_2mins_vader") := 
+          .SD[.SD, on=.(posix_dt>=pre_2, posix_dt<=end), 
+              by=.EACHI, lapply(.SD, mean), .SDcols=c("google_score", "vader_score")
+              ][,(1L:2L) := NULL]
+]
+combodt[, c("rm_2mins_google_flair", "rm_2mins_vader_flair") := 
+          .SD[.SD, on=.(posix_dt>=pre_2, posix_dt<=end), 
+              by=.EACHI, lapply(.SD, mean), .SDcols=c("google_score", "vader_score")
+              ][,(1L:2L) := NULL],
+        by=allegiance
+]
+combodt[, c("rm_2mins_google_ref", "rm_2mins_vader_ref") := 
+          .SD[.SD, on=.(posix_dt>=pre_2, posix_dt<=end), 
+              by=.EACHI, lapply(.SD, mean), .SDcols=c("google_score", "vader_score")
+              ][,(1L:2L) := NULL],
+        by=ref
+]
+combodt[, c("rm_5mins_google", "rm_5mins_vader") := 
+          .SD[.SD, on=.(posix_dt>=pre_5, posix_dt<=end), 
+              by=.EACHI, lapply(.SD, mean), .SDcols=c("google_score", "vader_score")
+              ][,(1L:2L) := NULL]
+]
+combodt[, c("rm_5mins_google_flair", "rm_5mins_vader_flair") := 
+          .SD[.SD, on=.(posix_dt>=pre_5, posix_dt<=end), 
+              by=.EACHI, lapply(.SD, mean), .SDcols=c("google_score", "vader_score")
+              ][,(1L:2L) := NULL],
+        by=allegiance
+]
+combodt[, c("rm_5mins_google_ref", "rm_5mins_vader_ref") := 
+          .SD[.SD, on=.(posix_dt>=pre_5, posix_dt<=end), 
+              by=.EACHI, lapply(.SD, mean), .SDcols=c("google_score", "vader_score")
+              ][,(1L:2L) := NULL],
+        by=ref
+]
+
+# Add team colors
+team_cols <- fread(paste(logos_pth, 'team-colours.csv', sep='/'))
+timeline[,event_bg_col:=sapply(event_team, get_team_bg_col, team_cols=team_cols)]
+timeline[,event_text_col:=sapply(event_team, get_team_text_col, team_cols=team_cols)]
+timeline[,event_border_col:=sapply(event_team, get_team_border_col, team_cols=team_cols)]
+score_data <- timeline[event %in% score_events]
+```
+
+
+```{r "helper-funcs", include=FALSE}
+
+get_sentiment_icon <- function(x){
+  dplyr::case_when(
+    x > 0.25 ~ "- far fa-smile", 
+    x < -0.25 ~ "- far fa-frown", 
+    TRUE ~ "- far fa-meh"
+  )
+}
+
+get_sentiment_col <- function(x){
+  dplyr::case_when(
+    x > 0.25 ~ "success", 
+    x < -0.25 ~ "danger", 
+    TRUE ~ "warning"
+  )
+}
+
+get_score_col <- function(x){
+  dplyr::case_when(
+    x > 0 ~ "success", 
+    x < 0 ~ "danger", 
+    TRUE ~ "warning"
+  )
+}
+
+get_score_icon <- function(x){
+  dplyr::case_when(
+    x > 0 ~ "far fa-arrow-alt-circle-up", 
+    x < 0 ~ "far fa-arrow-alt-circle-down", 
+    TRUE ~ "far fa-minus-square"
+  )
+}
+
+get_comment_context <- function(comment, all_comments) {
+  context <- vector("list", length=(comment$depth+1))
+  context[[1]] <- comment
+  last_comm <- comment
+  i <- 2
+  while(TRUE){
+    pids <- strsplit(last_comm$parent_id, '_')[[1]]
+    if(pids[1] == 't1'){
+      last_comm <- as.list(all_comments[id==pids[2],.(id, author, plaintext, score_praw, parent_id, depth)]) 
+    }
+    else{break}
+    context[[i]] <- last_comm
+    i <- i+1
+  }
+  return(Filter(Negate(is.null), rev(context)))
+}
+
+get_reddit_link <- function(permalink) {
+  return(glue("https://reddit.com{permalink}"))
+}
+
+reddit_comment <- function(comment, sentiment = F) {
+  if(sentiment) {
+    score <- as.numeric(sigfig(comment$google_score))
+    score_status <- get_score_col(score)
+    score_icon <- get_sentiment_icon(score)
+  }
+  else {
+    score <- comment$score_praw
+    score_status <- get_score_col(score)
+    score_icon <- get_score_icon(score)
+  }
+  return (
+    div(class = "reddit-comment",
+     div(class = glue("reddit-comment-meta-outer bg-{score_status}"),
+      div(class = "reddit-comment-meta-inner",
+        p(class = "reddit-comment-icon", 
+          span(class = glue("{score_icon} text-{score_status}"))
+        ),
+        p(class = "reddit-comment-score", tags$b(score))
+      )
+     ),
+     div(class = "reddit-comment-content",
+       p(class = "reddit-comment-author", 
+         tags$b(comment$author), 
+         a(class = "reddit-comment-link", 
+           href = get_reddit_link(comment$permalink), 
+           title = "View on Reddit", 
+           span(class = "fab fa-reddit")
+          )
+        ), 
+       p(class = "reddit-comment-body", comment$plaintext)
+     )
+   )
+  )
+}
+
+```
+
+Row
+-----------------------------------------------------------------------
+
+### Match Facts {.no-title}
+```{r "Match Facts"}
+div(
+  class = "match-facts",
+  p(class = "match-facts-datetime", 
+    format(as.POSIXct((match_data$time$millis/1000), origin = "1970-01-01", tz='UTC'), "%d %b %Y | %H:%M:%S %Z")
+  ),
+  span(class = "match-facts-header",
+    span(class = "match-facts-team0",
+      glue('{match_data$teams[1, "name"]}'), 
+      img(
+        src=get_team_flag(tolower(TEAM_0_NAME), team_cols=team_cols, path=logos_pth), 
+        title=glue("{titleize(TEAM_0_NAME)}"), class="flag match-facts-flag"
+      ),
+    ),
+    span(class = "match-facts-v", 'v'),
+    span(class = "match-facts-team1",
+      img(
+        src=get_team_flag(tolower(TEAM_1_NAME), team_cols=team_cols, path=logos_pth), 
+        title=glue("{titleize(TEAM_1_NAME)}"), class="flag match-facts-flag"
+      ),
+      glue('{match_data$teams[2, "name"]}')
+    )
+  ),
+  p(tags$b(glue('{match_data$venue$name}')), br(), glue("{match_data$venue$city}, {match_data$venue$country}")),
+  p(glue("{match_data$scores[1]} - {match_data$scores[2]}"), style=css(font_size="3em"))
+)
+```
+
+Row
+-----------------------------------------------------------------------
+
+### Comments
+```{r}
+ncomments <- nrow(mt_comms) 
+valueBox(ncomments, icon = "fa-comments")
+```
+
+### Commenters
+```{r}
+nauthors <- nrow(mt_comms[author!='[deleted]', .N,by=author]) 
+valueBox(nauthors, icon = "fa-users")
+```
+
+### Average Sentiment
+```{r}
+avg_sent <- mt_comms[,mean(google_score)] 
+valueBox(
+  sigfig(avg_sent, 2), 
+  icon = get_sentiment_icon(avg_sent),
+  color = get_sentiment_col(avg_sent)
+)
+```
+
+Row
+-----------------------------------------------------------------------
+### Comment Flow {.no-title .plotly-chart data-width=2}
+
+```{r "comment-flow"}
+comment_hist <- plot_ly() %>% 
+  add_trace(
+      data = combodt, 
+      x = ~posix_dt, 
+      xbins = list(size = 60000),
+      type = 'histogram',
+      hoverinfo = 'y',
+      marker = list(
+        color = get_team_border_col('neutral', team_cols),
+        line = list(color = get_team_bg_col('neutral', team_cols), width = 1)
+      )
+  ) %>% 
+  add_trace(
+      data = score_data,
+      type = 'scatter',
+      mode = 'markers',
+      marker = list(
+        symbol = 'diamond', 
+        color = ~event_bg_col, 
+        size = 10, 
+        line = list(color = ~event_border_col, width=2)
+      ),
+      x = ~posix_dt, 
+      y = 0,
+      text = ~graph_lab,
+      hoverinfo = "text",
+      hoverlabel = list(font = list(color = ~event_text_col), bordercolor = ~event_border_col)
+  ) %>%
+  layout(
+    showlegend = F,
+    margin = list(pad = 20),
+    title = list(text = "Comments Submitted Every Minute", yanchor = "bottom"),
+    xaxis = list(title = "Time", range = c(posix_KO, posix_FT)),
+    yaxis = list(title = "Comments", fixedrange = T),
+    modebar = list(orientation = 'v'),
+    updatemenus = list(
+      list(
+        type = "buttons",
+        y = -0.2,
+        x= 0.5,
+        xanchor = 'center',
+        direction = 'left',
+        buttons = list(
+          list(method = "restyle",
+               args = list("cumulative.enabled", FALSE),
+               label = "Standard"), 
+          list(method = "restyle",
+               args = list("cumulative.enabled", TRUE),
+               label = "Cumulative")
+        )
+      )
+    )
+  ) %>% 
+  config(
+    modeBarButtonsToRemove = c(
+      'hoverCompareCartesian', 
+      'hoverClosestCartesian', 
+      'lasso2d', 
+      'select2d', 
+      'toggleSpikelines'
+    )
+  )
+
+comment_hist
+```
+
+### Where In The World {.no-title data-width=1}
+
+```{r "where-in-the-world"}
+mt_comms[,
+  .(
+    users=length(unique(author)), 
+    tot_comments=.N, 
+    flag=glue_data(.SD, '<img src="{sapply(tolower(flair_country), get_team_flag, team_cols=team_cols, path=logos_pth)}" title="{titleize(flair_country)}" class="flag table-flag">')),
+  by=flair_country
+][order(-tot_comments)] %>% 
+  gt(id='user-by-flair-tab') %>%
+  text_transform(
+    locations = cells_body(vars(flair_country)),
+    fn = titleize
+  ) %>% 
+  fmt_passthrough(
+    columns = vars(flag),
+    escape = F
+  ) %>% 
+  tab_header(
+    title = md("**Where In The World?**"),
+    subtitle = md("Users and comments by flair")
+  ) %>% 
+  cols_label(
+    flag = "",
+    flair_country = "",
+    users = "Users",
+    tot_comments = "Total Comments"
+  ) %>% 
+  cols_move_to_start(
+    columns = vars(flag)
+  ) %>% 
+  cols_align(
+    align = 'right',
+    columns = vars(flag)
+  ) %>% 
+  tab_options(
+    # Remove the top border from the table
+    table.border.top.width = 0,
+    container.height = pct(100)
+  )
+```
+
+Row
+-----------------------------------------------------------------------
+
+### Most Positive {.flex-chart}
+```{r "positive"}
+reddit_comment(as.list(mt_comms[order(-google_score, google_magnitude)][1]), sentiment = T)
+```
+
+### Most Negative {.flex-chart}
+```{r "negative"}
+reddit_comment(as.list(mt_comms[order(google_score, google_magnitude)][1]), sentiment = T)
+```
+
+### Highest Score {.flex-chart}
+```{r "high"}
+reddit_comment(as.list(mt_comms[which.max(score_praw),][1]))
+```
+
+### Lowest Score {.flex-chart}
+```{r "low"}
+reddit_comment(as.list(mt_comms[which.min(score_praw),][1]))
+```
+
+
+Row {data-height=700}
+-----------------------------------------------------------------------
+
+### Sentiment: 2 Minute Rolling Average {.no-title .plotly-chart}
+
+```{r "sent-plot"}
+flair_match_data <- combodt[
+  posix_dt > posix_KO & 
+  posix_dt < posix_FT,
+  .(posix_dt, rm_2mins_google_flair, allegiance)
+]
+
+rolling_sent_plt <- function(TEAM, comment_data, score_data, team_cols) {
+  plot_ly() %>% 
+    add_trace(
+      data = comment_data[allegiance==TEAM], 
+      x = ~posix_dt, 
+      y = ~rm_2mins_google_flair, 
+      type = 'scatter',
+      mode = 'lines', 
+      fill = "tozeroy", 
+      line = list(color=hex_to_rgba(get_team_colour_no_white(TEAM, team_cols))),
+      fillcolor = hex_to_rgba(get_team_colour_no_white(TEAM, team_cols), 0.5), 
+      hoverinfo = "y"
+  ) %>% 
+    add_trace(
+      data = score_data,
+      type = 'scatter',
+      mode = 'markers',
+      marker = list(
+        symbol = 'diamond', 
+        color = ~event_bg_col, 
+        size = 10, 
+        line = list(color = ~event_border_col, width=2)
+      ),
+      x = ~posix_dt, 
+      y = 0,
+      text = ~graph_lab,
+      hoverinfo = "text",
+      hoverlabel = list(font = list(color = ~event_text_col), bordercolor = ~event_border_col)
+  ) %>% 
+    layout(
+      yaxis = list(range = c(-1, 1)),
+      annotations = list(
+        x = 1,
+        showarrow = F,
+        text = titleize(TEAM),
+        xref = "paper",
+        yref = "paper",
+        xanchor = "left",
+        yanchor = "middle",
+        y = 0.5,
+        textangle = 90,
+        font = list(
+          color = get_team_text_col(TEAM, team_cols)
+        ),
+        bgcolor = get_team_bg_col(TEAM, team_cols),
+        bordercolor = get_team_border_col(TEAM, team_cols)
+      ),
+      images = list(
+        source = get_team_logo(TEAM, team_cols, logos_pth),
+        xref = 'paper',
+        yref = 'paper',
+        x = 0,
+        y = 0.95,
+        xanchor = 'middle',
+        yanchor = 'middle',
+        sizex = 0.3,
+        sizey = 0.3
+      )
+    ) %>% 
+  config(
+    modeBarButtonsToRemove = c(
+      'hoverCompareCartesian', 
+      'hoverClosestCartesian', 
+      'lasso2d', 
+      'select2d', 
+      'toggleSpikelines'
+    )
+  )
+}
+
+TEAM_0_NAME_plt <- rolling_sent_plt(TEAM_0_NAME, flair_match_data, score_data, team_cols)
+
+TEAM_1_NAME_plt <- rolling_sent_plt(TEAM_1_NAME, flair_match_data, score_data, team_cols)
+
+neutral_plt <- rolling_sent_plt('neutral', flair_match_data, score_data, team_cols)
+
+subplot(
+  TEAM_0_NAME_plt, 
+  neutral_plt, 
+  TEAM_1_NAME_plt, 
+  nrows = 3, 
+  shareX = T
+) %>% 
+  layout(
+    title = list(text = "Fanbase Sentiment: 2 Minute Rolling Average", yanchor = "bottom"),
+    xaxis = list(title = "Time"),
+    yaxis2 = list(matches="y", title = "Average Sentiment"), 
+    yaxis3 = list(matches="y"),
+    showlegend = FALSE,
+    margin = list(r = 30),
+    modebar = list(orientation = 'v')
+  ) %>% 
+  config(
+    responsive = TRUE,
+    modeBarButtonsToRemove = c(
+      'hoverCompareCartesian', 
+      'hoverClosestCartesian', 
+      'lasso2d', 
+      'select2d', 
+      'toggleSpikelines'
+    )
+  )
+```
+
+Row
+-----------------------------------------------------------------------
+### Positive Pauls {.no-title}
+```{r "positive-pauls"}
+pos_paul <- mt_comms[,
+  .(tot_comments=.N, avg_sent=mean(google_score))
+  ,by=author
+][tot_comments>10][order(-avg_sent)][1:10] %>% 
+  gt(rowname_col="author", id='pos-pauls-tab') %>% 
+  tab_header(
+    title = md("**Positive Pauls**"),
+    subtitle = md("The 10 most positive commenters | *Min 10 comments*")
+  ) %>% 
+  cols_label(
+    avg_sent = "Average Sentiment",
+    tot_comments = "Comments"
+  ) %>% 
+  data_color(
+    columns = vars(avg_sent),
+    colors = scales::col_numeric(
+      palette = as.character(paletteer_d("ggsci::light-green_material")),
+      domain = NULL
+    )
+  ) %>% 
+  tab_options(
+    # Remove the top border from the table
+    table.border.top.width = 0
+  )
+
+div(pos_paul, class='gt-no-scroll')
+```
+
+### Negative Nigels {.no-title}
+```{r "negative-nigels"}
+neg_nige <- mt_comms[,
+  .(tot_comments=.N, avg_sent=mean(google_score))
+  ,by=author
+][tot_comments>10][order(avg_sent)][1:10] %>% 
+  gt(rowname_col="author", id='neg-nigels-tab') %>% 
+  tab_header(
+    title = md("**Negative Nigels**"),
+    subtitle = md("The 10 most negative commenters | *Min 10 comments*")
+  ) %>% 
+  cols_label(
+    avg_sent = "Average Sentiment",
+    tot_comments = "Comments"
+  ) %>% 
+  data_color(
+    columns = vars(avg_sent),
+    colors = scales::col_numeric(
+      palette = as.character(paletteer_d("ggsci::red_material", direction = -1)),
+      domain = NULL
+    )
+  ) %>% 
+  tab_options(
+    table.border.top.width = 0
+  )
+div(neg_nige, class='gt-no-scroll')
+```
+
+### Frequent Freddies {.no-title}
+```{r "frequent-freddies"}
+freq_fred <- mt_comms[
+  author != "[deleted]", 
+  .(tot_comments=.N), 
+  by=author
+][order(-tot_comments)][1:10] %>% 
+  gt(rowname_col="author", id='freq-freddies-tab') %>% 
+  tab_header(
+    title = md("**Frequent Freddies**"),
+    subtitle = md("The 10 most frequent commenters")
+  ) %>% 
+  cols_label(
+    tot_comments = "Total Comments"
+  ) %>% 
+  data_color(
+    columns = vars(tot_comments),
+    colors = scales::col_numeric(
+      palette = as.character(paletteer_d("ggsci::light-blue_material")),
+      domain = NULL
+    )
+  ) %>% 
+  tab_options(
+    table.border.top.width = 0
+  )
+
+div(freq_fred, class='gt-no-scroll')
+```
+
+
+Row
+-----------------------------------------------------------------------
+### Ref Sentiment {.no-title .plotly-chart data-width=2}
+
+```{r "ref-sent-plot"}
+ref_data <- combodt[,.(posix_dt, rm_2mins_google_ref, cum_google_ref, google_score, ref)]
+
+ref_data[,ref := ifelse(ref, 'Ref Comments', 'General Comments')]
+
+refplot <- plot_ly(
+  data = ref_data, 
+  x = ~posix_dt, 
+  colors = c(tier_cols$dark[[1]], tier_cols$dark[[2]])
+) %>%
+  add_trace(
+    y = ~cum_google_ref,
+    color = ~ref,
+    name = ~ref,
+    type = 'scatter',
+    mode = 'lines',
+    hoverinfo = 'y',
+    visible = F
+  ) %>%
+  add_trace(
+    y = ~rm_2mins_google_ref,
+    color = ~ref,
+    name = ~ref,
+    type = 'scatter',
+    mode = 'lines',
+    hoverinfo = 'y'
+  ) %>% 
+  add_trace(
+    data = score_data,
+    type = 'scatter',
+    mode = 'markers',
+    marker = list(
+      symbol = 'diamond', 
+      color = ~event_bg_col, 
+      size = 10, 
+      line = list(color = ~event_border_col, width=2)
+    ),
+    x = ~posix_dt, 
+    y = 0,
+    text = ~graph_lab,
+    hoverinfo = "text",
+    hoverlabel = list(font = list(color = ~event_text_col), bordercolor = ~event_border_col)
+  ) %>%
+  layout(
+    title = list(text = 'Referee Sentiment: 2 Minute Rolling Average'),
+    yaxis = list(title = 'Average Sentiment'),
+    xaxis = list(
+      title = "Time",
+      range = c(posix_KO, posix_FT),
+      showspikes = T,
+      spikemode = 'across',
+      spikethickness = 2,
+      spikecolor = 'black'
+    ),
+    hovermode = 'x',
+    hoverdistance = 1,
+    modebar = list(orientation = 'v'),
+    legend = list(
+      itemclick = F, 
+      itemdoubleclick = F,
+      y = -0.3,
+      x = 0.5,
+      xanchor = 'center',
+      orientation = 'h'
+    ),
+    updatemenus = list(
+      list(
+        type = 'buttons',
+        label = 'Category',
+        y = -0.2,
+        x = 0.5,
+        xanchor = 'center',
+        direction = 'left',
+        buttons = list(
+          list(
+            method = "update",
+            args = list(
+              list('visible' = c(FALSE, FALSE, TRUE, TRUE)),
+              list('yaxis.title' = 'Average Sentiment')
+            ),
+            label = "2 Min Rolling Avg"
+          ),
+          list(
+            method = "update",
+            args = list(
+              list(visible=c(TRUE, TRUE, FALSE, FALSE)),
+              list('yaxis.title' = 'Cumulative Sentiment')
+            ),
+            label = "Cumulative")
+        )
+      )
+    )
+  ) %>% 
+  config(
+    responsive = TRUE,
+    modeBarButtonsToRemove = c(
+      'hoverCompareCartesian', 
+      'hoverClosestCartesian', 
+      'lasso2d', 
+      'select2d', 
+      'toggleSpikelines'
+    )
+  )
+
+refplot
+```
+
+### Ref Comment Stats {.no-title data-width=1}
+
+```{r "ref-stats"}
+ref_stats <- transpose(
+  combodt[,.(
+    total_comments = .N, 
+    average_sentiment = mean(google_score), 
+    negative_comment_pct = (sum(google_score < -0.25)/.N), 
+    average_reddit_score = mean(score_praw)
+    ), by=ref][, ref := ifelse(ref, 'Ref', 'General')][],
+  keep.names = 'rn', 
+  make.names = 'ref'
+)
+
+# Format rownames because gt doesn't :(
+ref_stats[, rn := titleize(gsub('_', ' ', rn))]
+
+ref_stats %>% 
+  gt(rowname_col = 'rn') %>% 
+  fmt(rows = 1, fns = as.numeric) %>% 
+  fmt_number(columns = everything(), rows = 1, decimals = 0) %>%
+  fmt_percent(columns = everything(), rows = 3, decimals = 1) %>% 
+  fmt(rows = c(2, 4), fns = function(x){ sigfig(x, 3) })  %>% 
+  tab_options(
+    row.striping.include_stub = TRUE,
+    row.striping.include_table_body = TRUE,
+    table.border.top.width = 0
+  ) %>% 
+  tab_header(
+    title = md("**Ref Comments v General Comments**")
+  )
+```
+
+#### Ref by Fanbase {.header-central}
+```{r "ref-fanbase"}
+ref_rating <- combodt[
+  ref == T, 
+  .(rating = as.numeric(sigfig(mean(google_score)))),
+  by=allegiance
+]
+
+ref_rating_html <- function(team_name, sentiment, team_cols, logos_pth) {
+  team_0_sent_css = get_sentiment_col(sentiment) 
+  return(list(
+    div(class = 'ref-fanbase-logo-wrapper', 
+      img(class = "ref-fanbase-logo", src=get_team_logo(team_name, team_cols, logos_pth)),
+      p(
+        titleize(team_name), 
+        style = css(
+          "padding" = "0px 5px",
+          "border-width" = "1px", 
+          "border-style" = "solid", 
+          "border-radius" = "5px",
+          "border-color" = get_team_border_col(team_name, team_cols),
+          "color" = get_team_text_col(team_name, team_cols),
+          "background-color" = get_team_bg_col(team_name, team_cols)
+        )
+      )
+    ),
+    div(class = 'ref-fanbase-rating-wrapper',
+      p(class = glue("ref-fanbase-rating text-{team_0_sent_css} bg-{team_0_sent_css}"),
+        sentiment,
+        span(class = get_sentiment_icon(sentiment)),
+        style = css(
+          "border-width" = "1px", 
+          "border-style" = "solid", 
+          "border-radius" = "5px",
+          "border-color" = glue("var(--{team_0_sent_css})")
+        )
+      )
+    )
+  ))
+}
+
+
+div(class = 'ref-fanbase-grid',
+  ref_rating_html(TEAM_0_NAME, ref_rating[allegiance==TEAM_0_NAME, rating], team_cols, logos_pth),
+  ref_rating_html('neutral', ref_rating[allegiance=='neutral', rating], team_cols, logos_pth),
+  ref_rating_html(TEAM_1_NAME, ref_rating[allegiance==TEAM_1_NAME, rating], team_cols, logos_pth)
+)
+
+```
+
+Row
+-----------------------------------------------------------------------
+### Emojis {.no-title .plotly-chart}
+```{r "emojis"}
+emojis <- unlist(sapply(mt_comms[['plaintext']], emo::ji_extract_all, USE.NAMES = F))
+emojis <- data.table(table(emojis))
+setorder(emojis, -N)
+emojis[1:20, scaled := (N/min(N))/10]
+emojis[as.data.table(emo::jis), on=c(emojis="emoji"), desc := i.name]
+plot_ly(
+  data = emojis, 
+  x = ~N, y = ~emojis,
+  text = ~desc, 
+  hovertemplate = '<span style="text-shadow: 0px 0px 4px black">%{y}</span> | %{text} | Used: %{x} <extra></extra>'
+) %>% 
+  add_bars(marker = list(color = hex_to_rgba("#FFCC22")), hoverlabel = list(font = list(size = 17))) %>% 
+  layout(
+    title = list(text = 'Emoji Popularity'),
+    yaxis = list(
+      title = list(text = NULL),
+      tickfont = list(size = 25),
+      ticklen = 5,
+      tickcolor = 'white',
+      categoryorder = "total ascending", range = c(nrow(emojis)-10.5, nrow(emojis)-0.5)
+    ),
+    xaxis = list(title = 'Times Used'),
+    modebar = list(orientation = 'v')
+  ) %>% 
+  config(
+    responsive = TRUE,
+    modeBarButtonsToRemove = c(
+      'hoverCompareCartesian', 
+      'hoverClosestCartesian', 
+      'lasso2d', 
+      'select2d', 
+      'toggleSpikelines'
+    )
+  )
+```
+
+Row
+-----------------------------------------------------------------------
+```{r "swear-jar"}
+mt_comms[,swears := strsplit(swears, ",")]
+mt_comms[,swears_root := strsplit(swears_root, ",")]
+author_swears_tab <- mt_comms[, 
+  {n_swears=sum(sapply(swears, length))
+   n_words=sum(words) 
+   .(n_swears=n_swears, n_words=n_words, pct_swears=(n_swears/n_words)) },
+  by=author
+][n_words > 10,]
+tot_swears_tab <- mt_comms[,.(swear=unlist(titleize(unlist(swears_root))))][, .(used=.N), by=swear][order(-used)]
+```
+
+### Total Swears {.no-title}
+```{r "tot-swears"}
+tot_swears_gt <- tot_swears_tab[1:10] %>% 
+  gt(rowname_col="swear", id='tot-swears-tab') %>% 
+  tab_header(
+    title = md("**Most Common Swear Words**"),
+    subtitle = md("The 10 most frequent swear words by root")
+  ) %>% 
+  cols_label(
+    used = "Times Used"
+  ) %>% 
+  data_color(
+    columns = vars(used),
+    colors = scales::col_numeric(
+      palette = as.character(paletteer_d("ggsci::orange_material")),
+      domain = NULL
+    )
+  ) %>% 
+  tab_options(
+    table.border.top.width = 0
+  )
+
+div(tot_swears_gt, class='gt-no-scroll')
+```
+
+> The swear words covered and their "roots" can be found in <a href="https://github.com/awgymer/pyrugby/blob/master/reddit_profanities.json">this json</a>
+
+### Author Swears Pct {.no-title}
+```{r "author-swears-pct"}
+author_swears_pct_gt <- author_swears_tab[order(-pct_swears)][1:10] %>% 
+  gt(rowname_col="author", id='author-pct-swears-tab') %>% 
+    tab_header(
+      title = md("**Sweariest Commenters by Percent**"),
+      subtitle = md("The 10 commenters with highest % of words as swear words | Min 10 words")
+    ) %>% 
+    fmt_percent(
+      columns = vars(pct_swears),
+      decimals = 2
+    ) %>% 
+    cols_label(
+      n_swears = "Total Swears",
+      n_words = "Total Words",
+      pct_swears = "Swear Percentage"
+    ) %>% 
+    data_color(
+      columns = vars(n_swears, n_words, pct_swears),
+      colors = scales::col_numeric(
+        palette = as.character(paletteer_d("ggsci::orange_material")),
+        domain = NULL
+      )
+    ) %>% 
+    tab_options(
+      table.border.top.width = 0
+    )
+
+div(author_swears_pct_gt, class='gt-no-scroll')
+```
+
+### Author Swears Num {.no-title}
+```{r "author-swears-num"}
+author_swears_num_gt <- author_swears_tab[order(-n_swears)][1:10] %>% 
+  gt(rowname_col="author", id='author-num-swears-tab') %>% 
+    tab_header(
+      title = md("**Sweariest Commenters by Volume**"),
+      subtitle = md("The 10 commenters with highest number of swear words | Min 10 words")
+    ) %>% 
+    fmt_percent(
+      columns = vars(pct_swears),
+      decimals = 2
+    ) %>% 
+    cols_label(
+      n_swears = "Total Swears",
+      n_words = "Total Words",
+      pct_swears = "Swear Percentage"
+    ) %>% 
+    data_color(
+      columns = vars(n_swears, n_words, pct_swears),
+      colors = scales::col_numeric(
+        palette = as.character(paletteer_d("ggsci::orange_material")),
+        domain = NULL
+      )
+    ) %>% 
+    tab_options(
+      table.border.top.width = 0
+    )
+
+div(author_swears_num_gt, class='gt-no-scroll')
+```
+

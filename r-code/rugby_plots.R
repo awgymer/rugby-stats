@@ -67,3 +67,10 @@ get_team_flag <- function(team, team_cols, path='') {
   }
   return(file.path(path, flag))
 }
+
+wr_timestamp_bst <- function(posix_ct) {
+  if(as.POSIXlt(posix_ct, tz='Europe/London')$isdst > 0){
+    return(posix_ct - 60*60)
+  }
+  return(posix_ct)
+}

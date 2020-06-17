@@ -29,16 +29,17 @@ source('../r-code/rugby_plots.R')
 ```{r "data-prep"}
 logos_pth <- 'static/imgs/team-colours'
 score_events <- c("T5", "C2", "P3")
-TEAM_0_NAME <- 'england'
-TEAM_1_NAME <- 'south africa'
 posix_KO <- as.POSIXct("2019-11-02 08:30:00", tz="UTC")
 posix_FT <- as.POSIXct("2019-11-02 11:30:00", tz="UTC")
 ref_regex <- '( ref|Garces|garces|jerome|Jerome|Jérôme|Garcès|jérôme|garcès)'
 match_data <- jsonlite::fromJSON('../data/wc_final_match.json')
-
 mt_comms <- fread('../data/reddit-match-threads/dqcos5_final.csv', encoding = 'UTF-8')
 timeline <- fread('../data/wc_final_timeline.csv')
 
+TEAM_0_NAME <- tolower(match_data$teams[1, 'name'])
+TEAM_1_NAME <- tolower(match_data$teams[2, 'name'])
+TEAM_0_ID <- match_data$teams[1, 'id']
+TEAM_1_ID <- match_data$teams[2, 'id']
 
 # Add R POSIXct type datetime columns
 mt_comms[,posix_dt := as.POSIXct(created_utc, origin='1970-01-01', tz='UTC')]
@@ -49,8 +50,8 @@ timeline[is.na(team_id), event_team := 'neutral']
 mt_comms[flair_country=='', flair_country := 'unknown']
 
 # Clean up the timeline info
-timeline[team_id == 34, event_team:=TEAM_0_NAME]
-timeline[team_id == 39, event_team:=TEAM_1_NAME]
+timeline[team_id == TEAM_0_ID, event_team:=TEAM_0_NAME]
+timeline[team_id == TEAM_1_ID, event_team:=TEAM_1_NAME]
 timeline[is.na(event_team), event_team:='']
 timeline[,graph_lab := glue_data(.SD, '{sprintf("%02d", match_time%/%60)}:{sprintf("%02d", match_time%%60)}<br>{manual_label} {titleize(event_team)}<br>{score0} - {score1}')]
 
@@ -827,9 +828,18 @@ plot_ly(
       tickcolor = 'white',
       categoryorder = "total ascending", range = c(nrow(emojis)-10.5, nrow(emojis)-0.5)
     ),
-    xaxis = list(title = 'Times Used', fixedrange = T),
-    dragmode = 'pan',
+    xaxis = list(title = 'Times Used'),
     modebar = list(orientation = 'v')
+  ) %>% 
+  config(
+    responsive = TRUE,
+    modeBarButtonsToRemove = c(
+      'hoverCompareCartesian', 
+      'hoverClosestCartesian', 
+      'lasso2d', 
+      'select2d', 
+      'toggleSpikelines'
+    )
   )
 ```
 
