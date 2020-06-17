@@ -13,5 +13,5 @@ For more information on the analysis which underpins the graphics on the dashboa
 
 - [RWC Final: ENG v RSA](wc-final-eng-sa-dash.html)
 - [RWC Semi-final: NZ v ENG](nz-eng-rwc-dash.html)
-- [RWC Semi-final: NZ v ENG](rsa-wal-rwc-dash.html)
+- [RWC Semi-final: RSA v WAL](rsa-wal-rwc-dash.html)
 
