@@ -52,7 +52,18 @@ get_team_text_col <- function(team, team_cols){
   team_cols[country==team, secondary]
 }
 
-get_team_logo <- function(team, path='') {
-  team_u <- gsub(" ", "_", team)
-  return(file.path(path, glue('{team_u}_logo.svg')))
+get_team_logo <- function(team, team_cols, path='') {
+  logo <- team_cols[country==team, logo]
+  if(!(length(logo) > 0)){
+    logo <- team_cols[country=='unknown', logo]
+  }
+  return(file.path(path, logo))
+}
+
+get_team_flag <- function(team, team_cols, path='') {
+  flag <- team_cols[country==team, flag]
+  if(!(length(flag) > 0)){
+    flag <- team_cols[country=='unknown', flag]
+  }
+  return(file.path(path, flag))
 }
