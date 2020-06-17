@@ -9,9 +9,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
+<meta name="author" content="Arthur Gymer" />
 
+<meta name="date" content="2020-05-12" />
 
-<title>Rugby Analysis by AWGymer</title>
+<title>Reddit Match Thread Dashboards</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -286,21 +288,19 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">Rugby Analysis by AWGymer</h1>
+<h1 class="title toc-ignore">Reddit Match Thread Dashboards</h1>
+<h4 class="author">Arthur Gymer</h4>
+<h4 class="date">2020-05-12</h4>
 
 </div>
 
 
-<p>This is my R-Markdown based website where I host short reports I create about rugby.</p>
-<div id="analyses" class="section level4">
-<h4>Analyses</h4>
-<ol style="list-style-type: decimal">
-<li><a href="wc-squads.html">World Cup Squads</a></li>
-<li><a href="wc-capts.html">World Cup Captains</a></li>
-<li><a href="wc19_final_mt.html">Reddit Match Thread: SA v ENG 2019 RWC Final</a></li>
-<li><a href="match-thread-dashboards.html">Reddit Match Thread Dashboards</a></li>
-</ol>
-</div>
+<p>Using the <a href="https://rmarkdown.rstudio.com/flexdashboard/index.html"><code>Flexdashboard</code></a> package I created a template to produce dashboards from Reddit <code>/r/rugbyunion</code> Match Thread comments and match data scraped from the official RWC site.</p>
+<p>For more information on the analysis which underpins the graphics on the dashboards see <a href="wc19_final_mt.html">this article</a></p>
+<p><em>N.B. Due to changes to Google Natural Language API the sentiment scores shown may not be exactly reproducible at any given time.</em></p>
+<pre><code>- [RWC Final: ENG v RSA](wc-final-eng-sa-dash.html)
+- [RWC Semi-final: NZ v ENG](nz-eng-rwc-dash.html)
+- [RWC Semi-final: NZ v ENG](rsa-wal-rwc-dash.html)</code></pre>
 
 
 
