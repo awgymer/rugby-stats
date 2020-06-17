@@ -1,0 +1,122 @@
+.flex-chart {
+	display: flex;
+	flex-direction: column;
+}
+.flex-chart .chart-stage {
+	display: flex;
+	flex-grow: 1;
+}
+.plotly-chart .chart-shim{
+	padding-top: 10px;
+}
+.no-shim .chart-shim{
+	position: initial;
+	left: initial;
+	right: initial;
+	top: initial;
+	bottom: initial;
+}
+.header-central {
+	text-align: center;
+}
+.flag {
+	border-style: ridge;
+	border-width: 1px;
+}
+.table-flag {
+	height: 30px;
+}
+.match-facts {
+	text-align: center;
+}
+.match-facts-header {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: 2em;
+	font-weight: bold;
+}
+.match-facts-team0 {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	flex: 1;
+}
+.match-facts-team1 {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	flex: 1;
+}
+.match-facts-v {
+	margin: 0px 10px;
+}
+.match-facts-flag {
+	height: 1em;
+	margin: 0px 5px;
+}
+.reddit-comment {
+	display: flex;
+	flex-grow: 1;
+	border-width: 1px;
+	border-style: solid;
+	border-radius: 5px;
+}
+.reddit-comment-meta-outer {
+	display: flex;
+	text-align: center;
+	align-items: center;
+	flex-wrap: wrap;
+	float: left;
+	margin-left: 5px;
+	margin-top: 5px;
+	margin-bottom: 5px;
+	padding-left: 5px;
+	padding-right: 5px;
+	border-right-width: 3px;
+	border-right-style: solid;
+	border-top-left-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+.reddit-comment-icon {
+	font-size: 55px;
+}
+.reddit-comment-score {
+	font-size: 2em;
+}
+.reddit-comment-content {
+	overflow-x: hidden;
+	width: 100%;
+	margin-left: 10px;
+	margin-right: 10px;
+}
+.reddit-comment-author {
+	font-size: 2em;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+.reddit-comment-link {
+	float: right;
+}
+.reddit-comment-body {
+	overflow-y: scroll;
+}
+.ref-fanbase-grid {
+	display: grid;
+	grid-template-columns: 1fr 2fr;
+	align-items: center;
+	justify-content: center;
+}
+.ref-fanbase-logo-wrapper {
+	padding: 0px 10px;
+}
+.ref-fanbase-logo {
+	height: 6rem;
+}
+.ref-fanbase-rating-wrapper {
+	padding: 0px 10px;
+}
+.ref-fanbase-rating {
+	font-size: 4rem;
+	padding: 0 5px;
+}
