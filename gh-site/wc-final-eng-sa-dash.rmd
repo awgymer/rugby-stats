@@ -64,7 +64,7 @@ combodt[is.na(vader_score), vader_score:=0]
 combodt[is.na(google_score), google_score:=0]
 combodt[is.na(google_magnitude), google_magnitude:=0]
 combodt[,allegiance := ifelse(flair_country %in% c(TEAM_0_NAME, TEAM_1_NAME), tolower(flair_country), 'neutral')]
-combodt[,ref:=grepl(ref_regex, plaintext)]
+combodt[,ref:=grepl(ref_regex, plaintext, ignore.case = T)]
 combodt[, c("cum_google", "cum_vader") := .(cumsum(google_score), cumsum(vader_score))]
 combodt[, c("cum_google_ref", "cum_vader_ref") := .(cumsum(google_score), cumsum(vader_score)), by=ref]
 combodt[, c("pre_2", "pre_5", "end") := .(posix_dt - 2*60, posix_dt - 5*60, posix_dt)]
@@ -641,6 +641,7 @@ refplot <- plot_ly(
   ) %>% 
   add_trace(
     data = score_data,
+    name = 'scoretrace',
     type = 'scatter',
     mode = 'markers',
     marker = list(
@@ -653,7 +654,8 @@ refplot <- plot_ly(
     y = 0,
     text = ~graph_lab,
     hoverinfo = "text",
-    hoverlabel = list(font = list(color = ~event_text_col), bordercolor = ~event_border_col)
+    hoverlabel = list(font = list(color = ~event_text_col), bordercolor = ~event_border_col),
+    showlegend = F
   ) %>%
   layout(
     title = list(text = 'Referee Sentiment: 2 Minute Rolling Average'),
@@ -689,7 +691,7 @@ refplot <- plot_ly(
           list(
             method = "update",
             args = list(
-              list('visible' = c(FALSE, FALSE, TRUE, TRUE)),
+              list('visible' = c(FALSE, FALSE, TRUE, TRUE, TRUE)),
               list('yaxis.title' = 'Average Sentiment')
             ),
             label = "2 Min Rolling Avg"
@@ -697,7 +699,7 @@ refplot <- plot_ly(
           list(
             method = "update",
             args = list(
-              list(visible=c(TRUE, TRUE, FALSE, FALSE)),
+              list(visible=c(TRUE, TRUE, FALSE, FALSE, TRUE)),
               list('yaxis.title' = 'Cumulative Sentiment')
             ),
             label = "Cumulative")
