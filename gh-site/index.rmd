@@ -9,4 +9,4 @@ This is my R-Markdown based website where I host short reports I create about ru
 1. [World Cup Squads](wc-squads.html)
 2. [World Cup Captains](wc-capts.html)
 3. [Reddit Match Thread: SA v ENG 2019 RWC Final](wc19_final_mt.html)
-4. [Reddit Match Thread Dashboards](match-thread-dashboards.html)
+4. [Reddit Match Thread Dashboards](reddit-match-thread-dashboards.html)
