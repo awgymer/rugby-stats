@@ -220,14 +220,14 @@ div(
     span(class = "match-facts-team0",
       glue('{match_data$teams[1, "name"]}'), 
       img(
-        src=get_team_flag(tolower(TEAM_0_NAME), team_cols=team_cols, path="team-colours"), 
+        src=get_team_flag(tolower(TEAM_0_NAME), team_cols=team_cols, path=logos_pth), 
         title=glue("{titleize(TEAM_0_NAME)}"), class="flag match-facts-flag"
       ),
     ),
     span(class = "match-facts-v", 'v'),
     span(class = "match-facts-team1",
       img(
-        src=get_team_flag(tolower(TEAM_1_NAME), team_cols=team_cols, path="team-colours"), 
+        src=get_team_flag(tolower(TEAM_1_NAME), team_cols=team_cols, path=logos_pth), 
         title=glue("{titleize(TEAM_1_NAME)}"), class="flag match-facts-flag"
       ),
       glue('{match_data$teams[2, "name"]}')
@@ -341,7 +341,7 @@ mt_comms[,
   .(
     users=length(unique(author)), 
     tot_comments=.N, 
-    flag=glue_data(.SD, '<img src="{sapply(tolower(flair_country), get_team_flag, team_cols=team_cols, path="team-colours")}" title="{titleize(flair_country)}" class="flag table-flag">')),
+    flag=glue_data(.SD, '<img src="{sapply(tolower(flair_country), get_team_flag, team_cols=team_cols, path=logos_pth)}" title="{titleize(flair_country)}" class="flag table-flag">')),
   by=flair_country
 ][order(-tot_comments)] %>% 
   gt(id='user-by-flair-tab') %>%
