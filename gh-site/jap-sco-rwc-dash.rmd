@@ -6,6 +6,8 @@ output:
     vertical_layout: scroll
     theme: bootstrap
     css: static/css/custom-dash.css
+    navbar:
+      - { title: "All Dashboards", href: "reddit-match-thread-dashboards.html", align: left }
 ---
 
 <!-- Custom JS to help with formatting non-standard content -->
