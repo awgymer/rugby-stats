@@ -1,0 +1,163 @@
+team_id,team_name,ko_time,oppname,tm_score,oppscore,outcome,country_id,name,geo_id
+33,Wales,-2804544000000,England,0,0,B,22,Wales,Wales
+34,England,-3116793600000,Scotland,0,0,B,4,England,England
+35,Scotland,-3116793600000,England,0,0,A,16,Scotland,Scotland
+36,Ireland,-2994019200000,England,0,0,B,9,Ireland,Ireland
+37,New Zealand,-2094854400000,Australia,22,3,A,13,New Zealand,New Zealand
+38,Australia,-2225491200000,British & Irish Lions,13,3,A,2,Australia,Australia
+39,South Africa,-2474841600000,British & Irish Lions,0,4,B,17,South Africa,South Africa
+40,Argentina,-1879459200000,British XV,3,27,B,1,Argentina,Argentina
+41,Italy,-1281830400000,Spain,0,9,B,10,Italy,Italy
+42,France,-2019686400000,New Zealand,8,38,B,6,France,France
+43,Spain,-1344405600000,France,6,66,B,18,Spain,Spain
+44,Portugal,-1095724800000,Spain,5,6,B,24,Portugal,Portugal
+45,Samoa,-1431820800000,Fiji,0,6,B,15,Samoa,Samoa
+46,Fiji,-1431820800000,Samoa,6,0,A,5,Fiji,Fiji
+47,Tonga,-1431216000000,Fiji,9,6,A,19,Tonga,Tonga
+49,Japan,-1239321600000,British Columbia,3,3,,11,Japan,Japan
+50,Canada,-1196640000000,Japan,8,9,B,3,Canada,Canada
+51,USA,-1802736000000,Australia,8,12,B,21,United States,United States of America
+52,Romania,-1596412800000,US Army,0,21,B,14,Romania,Romania
+57,Zimbabwe,347155200000,Kenya,34,24,A,23,Zimbabwe,Zimbabwe
+58,Namibia,637977600000,Zimbabwe,33,18,A,12,Namibia,Namibia
+64,Netherlands,-1193011200000,Belgium,6,6,D,8,Netherlands,Netherlands
+68,Uruguay,-672883200000,Chile,3,21,B,20,Uruguay,Uruguay
+578,Rhodesia,-1433980800000,British & Irish Lions,3,16,B,23,Zimbabwe,Zimbabwe
+681,Cote D'Ivoire,189302400000,Tunisia,22,6,A,95,Cote D'Ivoire,Ivory Coast
+692,Andorra,552096000000,Bulgaria,6,30,B,52,Andorra,Andorra
+693,Arabian Gulf,741744000000,Namibia,20,64,B,50,Arabian Gulf,Arabian Gulf
+696,Austria,704851200000,Hungary,9,23,B,58,Austria,Austria
+697,Bahamas,858988800000,Bermuda,3,24,B,68,Bahamas,The Bahamas
+698,Barbados,347155200000,Trinidad & Tobago,0,51,B,71,Barbados,Barbados
+699,Belgium,-1193011200000,Netherlands,6,6,,28,Belgium,Belgium
+700,Bermuda,157766400000,Jamaica,16,10,A,56,Bermuda,Bermuda
+701,Bosnia & Herzegovina,874800000000,Croatia,5,62,B,74,Bosnia and Herzegovina,Bosnia and Herzegovina
+702,Botswana,842054400000,Zimbabwe,10,130,B,66,Botswana,Botswana
+703,Brazil,-1052006400000,British & Irish Lions,0,81,B,72,Brazil,Brazil
+704,Bulgaria,-208915200000,Romania,3,70,B,59,Bulgaria,Bulgaria
+705,Cameroon,996336000000,Zambia,24,25,B,87,Cameroon,Cameroon
+707,Cayman Islands,881971200000,Trinidad & Tobago,14,31,B,79,Cayman Islands,Cayman Islands
+708,Chile,-1050278400000,Argentina,0,29,B,27,Chile,Chile
+709,China,878342400000,Singapore,3,33,B,78,People's Republic of China,China
+710,Chinese Taipei,-25228800000,Japan,0,62,B,31,Chinese Taipei,Taiwan
+711,Colombia,1002386700000,Venezuela,0,55,B,88,Colombia,Colombia
+712,Cook Islands,331689600000,Italy,15,6,A,69,Cook Islands,Cook Islands
+713,Croatia,738028800000,Hungary,78,3,A,60,Croatia,Croatia
+714,Czechia,582681600000,USSR,4,36,B,32,Czech Republic,Czechia
+715,Denmark,-637200000000,Sweden,0,6,B,33,Denmark,Denmark
+720,Georgia,621561600000,Zimbabwe,16,3,A,55,Georgia,Georgia
+721,Germany,-1347840000000,France,5,30,B,7,Germany,Germany
+722,Guam,1119106800000,India,8,8,D,85,Guam,Guam
+723,Guyana,725846400000,Trinidad & Tobago,7,48,B,73,Guyana,Guyana
+725,Hong Kong,-25747200000,Japan,22,24,B,34,Hong Kong,Hong Kong S.A.R.
+726,Hungary,646790400000,East Germany,3,7,B,53,Hungary,Hungary
+727,India,909360000000,Singapore,0,85,B,89,India,India
+729,Israel,359596800000,Switzerland,9,9,,35,Israel,Israel
+732,Jamaica,157766400000,Bermuda,10,16,B,75,Jamaica,Jamaica
+734,Kazakhstan,765331200000,Georgia,5,17,B,80,Kazakhstan,Kazakhstan
+735,Kenya,189302400000,Zambia,21,13,A,49,Kenya,Kenya
+736,Korea,-25142400000,Japan,5,23,B,37,Korea,South Korea
+737,Latvia,711504000000,Georgia,3,28,B,29,Latvia,Latvia
+738,Lithuania,736214400000,Germany,5,31,B,57,Lithuania,Lithuania
+739,Luxembourg,173404800000,Belgium,6,28,B,54,Luxembourg,Luxembourg
+740,Madagascar,12355200000,Italy,9,17,B,82,Madagascar,Madagascar
+741,Malaysia,-473385600000,Thailand,47,6,A,38,Malaysia,Malaysia
+743,Moldova,750211200000,Lithuania,22,6,A,64,"Moldova, Republic of",Moldova
+744,Monaco,831168000000,Luxembourg,8,8,D,83,Monaco,Monaco
+745,Morocco,-1199836800000,Spain,14,6,A,39,Morocco,Morocco
+748,Niue Island,432000000000,Fiji,4,120,B,90,Niue Island,Niue
+749,Norway,298944000000,Denmark,12,30,B,30,Norway,Norway
+750,Papua New Guinea,-11750400000,Fiji,0,79,B,63,Papua New Guinea,Papua New Guinea
+751,Paraguay,15638400000,Brazil,3,12,B,46,Paraguay,Paraguay
+752,Peru,-354240000000,Argentina,0,44,B,91,Peru,Peru
+753,Poland,-353462400000,Germany,3,11,B,40,Poland,Poland
+756,Russia,707788800000,Barbarians,27,23,A,51,Russian Federation,Russia
+759,Senegal,1065312000000,Nigeria,6,8,B,92,Senegal,Senegal
+760,Singapore,864000000,Japan,17,46,B,47,Singapore,Singapore
+761,Slovenia,707270400000,Austria,21,19,A,76,Slovenia,Slovenia
+762,Solomon Islands,-11491200000,Fiji,13,113,B,93,Solomon Islands,Solomon Islands
+766,Sri Lanka,-608688000000,British & Irish Lions,6,44,B,41,Sri Lanka,Sri Lanka
+767,St Lucia,1117297800000,St Vincent and Grenadines,36,25,A,77,Saint Lucia,Saint Lucia
+768,Swaziland,899251200000,Botswana,23,8,A,84,Swaziland,eSwatini
+769,Sweden,-637200000000,Denmark,6,0,A,42,Sweden,Sweden
+770,Switzerland,103334400000,Portugal,4,23,B,43,Switzerland,Switzerland
+771,Tahiti,283996800000,Tonga,0,74,B,65,Tahiti,French Polynesia
+772,Thailand,-473385600000,Malaysia,6,47,B,48,Thailand,Thailand
+774,Trinidad & Tobago,283996800000,Bermuda,8,42,B,61,Trinidad & Tobago,Trinidad and Tobago
+775,Tunisia,189302400000,Cote D'Ivoire,6,22,B,44,Tunisia,Tunisia
+776,Uganda,995673600000,Kenya,8,12,B,81,Uganda,Uganda
+777,Ukraine,208656000000,USSR,6,15,B,62,Ukraine,Ukraine
+780,Vanuatu,992044800000,Papua New Guinea,10,32,B,94,Vanuatu,Vanuatu
+781,Venezuela,883612800000,Trinidad & Tobago,23,26,B,86,Venezuela,Venezuela
+783,Yugoslavia,-44841600000,Romania,3,11,B,45,Yugoslavia,Yugoslavia
+784,Zambia,189302400000,Kenya,13,21,B,70,Zambia,Zambia
+1029,Finland,560908800000,Norway,4,20,B,96,Finland,Finland
+1030,Malta,974556000000,Moldova,8,58,B,97,Malta,Malta
+1031,Nigeria,586396800000,Zimbabwe,12,111,B,98,Nigeria,Nigeria
+1165,East Germany,-574246800000,Romania,26,64,B,7,Germany,East Germany
+1168,USSR,144806400000,Grivita RC,31,10,A,51,Russian Federation,USSR
+1172,New Caledonia,-11577600000,Fiji,3,113,B,107,New Caledonia,New Caledonia
+1211,Czechoslovakia,-1344816000000,Romania,5,21,B,108,Czechoslovakia,Czechoslovakia
+1247,Mexico,990230400000,Cayman Islands,14,20,B,109,Mexico,Mexico
+1250,Togo,1004227200000,Nigeria,9,15,B,110,Togo,Togo
+1784,Laos,153878400000,Malaysia,10,31,B,114,Laos People's Democratic Republic,Laos
+2233,Martinique,941414400000,Trinidad & Tobago,20,31,B,102,Martinique,Martinique
+2234,Guadeloupe,941414400000,Trinidad & Tobago,6,47,B,117,Guadeloupe,Guadeloupe
+2340,Serbia,1051315200000,Hungary,23,47,B,111,Serbia,Serbia
+2376,Armenia,1086134400000,Norway,36,6,A,126,Armenia,Armenia
+2380,Benin,1065312000000,Mali,0,56,B,134,Benin,Benin
+2382,Ghana,1065398400000,Mauritania,29,8,A,177,Ghana,Ghana
+2385,Tanzania,1083369600000,Burundi,27,3,A,302,Tanzania,Tanzania
+2386,Burundi,1083369600000,Tanzania,3,27,B,140,Burundi,Burundi
+2387,Rwanda,1086451200000,Tanzania,12,52,B,262,Rwanda,Rwanda
+2388,Mauritania,1065398400000,Ghana,8,29,B,214,Mauritania,Mauritania
+2389,Burkina Faso,1086566400000,Malaysia,12,40,B,139,Burkina Faso,Burkina Faso
+2397,Pakistan,1098900000000,Sri Lanka,3,75,B,238,Pakistan,Pakistan
+2398,Macau,1099220400000,Pakistan,55,3,A,207,Macau,Macao S.A.R
+2424,Azerbaijan,1113665400000,Bosnia & Herzegovina,17,36,B,129,Azerbaijan,Azerbaijan
+2476,St Vincent and Grenadines,1117297800000,St Lucia,25,36,B,274,St Vincent and Grenadines,Saint Vincent and the Grenadines
+2480,Mali,1065312000000,Benin,56,0,A,211,Mali,Mali
+2481,Niger,1117238400000,Benin,3,3,,232,Niger,Niger
+2529,Greece,1147564800000,Finland,12,17,B,179,Greece,Greece
+2537,Philippines,1148083200000,Guam,18,14,A,100,Philippines,Philippines
+2574,Brunei,1151424600000,Laos,32,17,A,105,Brunei Darussalam,Brunei
+2575,Cambodia,1151416800000,Indonesia,30,7,A,146,Cambodia,Cambodia
+2576,Indonesia,1150416000000,Macau,10,22,B,190,Indonesia,Indonesia
+2584,Slovakia,1160784000000,Monaco,6,0,A,269,Slovakia,Slovakia
+2585,Costa Rica,1160784000000,Venezuela,0,70,B,156,Costa Rica,Costa Rica
+2588,Réunion,1161993600000,Tanzania,10,11,B,250,Réunion,Reunion
+2742,Cyprus,1193580000000,Azerbaijan,29,0,A,158,Cyprus,Cyprus
+2744,Iran,1194307200000,Pakistan,32,3,A,191,"Iran, Islamic Republic of",Iran
+2856,Chad,1214238300000,Ghana,8,17,B,152,Chad,Chad
+2857,Mauritius,1214870400000,Mayotte,33,6,A,215,Mauritius,Mauritius
+2858,Mayotte,1214870400000,Mauritius,6,33,B,216,Mayotte,Mayotte
+2860,Kyrgyzstan,1223164800000,Iran,16,30,B,200,Kyrgyzstan,Kyrgyzstan
+2861,Uzbekistan,1223424000000,Iran,6,8,B,291,Uzbekistan,Uzbekistan
+2867,Jordan,1273780800000,Lebanon,8,27,B,194,Jordan,Jordan
+2952,Mongolia,1244649600000,Kyrgyzstan,21,38,B,112,Mongolia,Mongolia
+2984,Lebanon,1273780800000,Jordan,27,8,A,202,Lebanon,Lebanon
+3064,Congo,1279380600000,Niger,6,23,B,154,Congo,Republic of the Congo
+3200,Algeria,1288051200000,Libya,50,0,A,120,Algeria,Algeria
+3201,Egypt,1288051200000,Mauritania,10,5,A,99,Egypt,Egypt
+3202,Libya,1288051200000,Algeria,0,50,B,205,Libyan Arab Jamahiriya,Libya
+3221,Democratic Republic of Congo,1463752800000,Rwanda,12,9,A,155,"Congo, The Democratic Republic of the",Democratic Republic of the Congo
+3223,United Arab Emirates,1303552800000,Sri Lanka,13,13,,261,United Arab Emirates,United Arab Emirates
+3224,Qatar,1305140400000,Jordan,26,8,A,106,Qatar,Qatar
+3235,British Virgin Islands,1302376500000,St Vincent and Grenadines,25,13,A,138,British Virgin Islands,British Virgin Islands
+3404,Turkey,1335657600000,Slovakia,31,5,A,283,Turkey,Turkey
+3489,Estonia,1412420400000,Belarus,59,12,A,167,Estonia,Estonia
+3565,Curacao,1358015400000,St Vincent and Grenadines,37,24,A,306,Curacao,Curaçao
+3566,Turks and Caicos Islands,1358625600000,Jamaica,13,31,B,285,Turks and Caicos,Turks and Caicos Islands
+3674,American Samoa,1440212400000,Solomon Islands,30,15,A,121,American Samoa,American Samoa
+3699,Lesotho,1393027200000,Swaziland,5,3,A,203,Lesotho,Lesotho
+3999,Ecuador,1409518800000,Colombia,0,112,B,163,Ecuador,Ecuador
+4000,Belarus,1412420400000,Estonia,12,59,B,132,Belarus,Belarus
+4001,Guatemala,1412521200000,El Salvador,23,17,A,182,Guatemala,Guatemala
+4002,El Salvador,1412521200000,Guatemala,17,23,B,164,El Salvador,El Salvador
+4003,Panama,1412467200000,Costa Rica,10,18,B,241,Panama,Panama
+4009,Montenegro,1428760800000,Estonia,29,27,A,307,Montenegro,Montenegro
+4141,Saudi Arabia,1461877200000,Jordan,13,43,B,303,Saudi Arabia,Saudi Arabia
+4227,Dominican Republic,1492891200000,Curacao,32,17,A,161,Dominican Republic,Dominican Republic
+4349,Malawi,1508331600000,Swaziland,11,25,B,209,Malawi,Malawi
+4420,Honduras,1534017600000,Panama,27,39,B,188,Honduras,Honduras
+4522,Nauru,1566574200000,Papua New Guinea,5,89,B,224,Nauru,Nauru

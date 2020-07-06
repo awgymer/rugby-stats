@@ -1,0 +1,54 @@
+---
+title: "The Spread of Rugby Union"
+author: "Arthur Gymer"
+date: "2020-07-07"
+categories: ["Rugby", "R"]
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## The Data
+
+World Rugby has information on every international match available [here](https://www.world.rugby/fixtures), however a little digging reveals that they actually pull the data in from a publicly accessible but entirely undocumented API. I wrote some Python code to allow me to scrape all the information possible from that API, which you can find in my [PyRugby package](https://github.com/awgymer/pyrugby). 
+
+With all the data scraped and loaded into a local PostgreSQL database I decided to start by looking at when each nation was first represented internationally.
+
+Some points to note about this data:
+
+- "International" teams are not limited to those corresponding to sovereign nations. Several teams - including England, Wales, Scotland, Ireland, and Hong Kong - compete at international level representing smaller subdivisions of nations.
+
+- The first appearance is not necesarily a test match against another international team. Romania for example are listed as first playing against a US Army side and the USSR made their first outing against Romanian club side RC Grivita. 
+
+- Early matches were decided on goals, but in cases of no goals being scored then the winner was decided by the number of tries. These results are coded as wins/losses but the score appears as 0-0. This is noticeable on-hover when viewing the interactive map linked below.
+
+- The USSR, Yugoslavia, Czechoslovakia and Arabian Gulf teams represented combinations of current nations and their first appearances are considered twice - once as part of the combined team, and once independently.
+
+- Some constituent nations competed independently from the whole before the breakup of the overarching state - for example Georgia competed as early as the late 80s. 
+
+- Some constituent nations of those multi-nation states are yet to be represented independently and thus appear to lose representation in the video below.
+
+- The Rhodesia team is considered a distinct entity from the Zimbabwe team, although they both represent the same geographical nation.
+
+- East Germany is discounted, as rugby was played in Germany both before and after as a united Germany. 
+
+
+I took geo data from [Natural Earth](https://www.naturalearthdata.com/) and created a custom set using sovereign nations where possible but incorporating dependencies and subdivisions where necessary. I computed centroids for this data using [mapshaper](https://mapshaper.org/). You can find the geo data in my [map-data repo](https://github.com/awgymer/map-data). 
+
+
+## The Results
+
+I initially wanted to produce an interactive `Plotly` chart with a slider for each year, however I found that using the `choroplethmapbox` trace type incorporating more than a handful of years created unfeasibly large files. 
+
+As a result I decided to create `png` images of every year and stitch them together into the a short video using iMovie.
+
+I also created an interactive chart of the situation as it stands in 2020 (so no info on USSR etc) which you can find [here](plots/spread_of_rugby_2020.html)
+
+<div id="plot-video">
+<video width="800" controls>
+  <source src="plots/the_spread_of_rugby_union.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+</div>
